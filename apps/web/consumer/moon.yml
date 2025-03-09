@@ -28,4 +28,3 @@ tasks:
 
 dependsOn:
   - ui-components
-  - '@packages/ui-components'

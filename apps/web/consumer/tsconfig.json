@@ -1,50 +1,33 @@
 {
   "extends": "../../../tsconfig.options.json",
   "compilerOptions": {
-    "target": "ES2017",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
+      "@/*": ["./src/*"],
       "@packages/ui-components": [
         "../../../packages/ui-components/src/index.ts"
       ],
-      "@packages/ui-components/*": [
-        "../../../packages/ui-components/src/*"
-      ]
-    }
+      "@packages/ui-components/*": ["../../../packages/ui-components/src/*"],
+      "ui-components2": ["../../../packages/ui-components2/src/index.ts"],
+      "ui-components2/*": ["../../../packages/ui-components2/src/*"]
+    },
+    "resolveJsonModule": true,
+    "jsx": "preserve",
+    "noEmit": true
   },
   "include": [
     "next-env.d.ts",
     "../../../packages/ui-components/**/*",
+    "../../../packages/ui-components2/**/*",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ],
+  "exclude": ["node_modules"],
   "references": [
     {
       "path": "../../../packages/ui-components"
