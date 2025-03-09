@@ -1,0 +1,24 @@
+{
+  "recommendations": [
+    "moonrepo.moon-console",
+    "eliverlara.andromeda",
+    "formulahendry.auto-rename-tag",
+    "aaron-bond.better-comments",
+    "oven.bun-vscode",
+    "naumovs.color-highlight",
+    "mikestead.dotenv",
+    "editorconfig.editorconfig",
+    "dsznajder.es7-react-js-snippets",
+    "dbaeumer.vscode-eslint",
+    "eamodio.gitlens",
+    "pkief.material-icon-theme",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss",
+    "gruntfuggly.todo-tree",
+    "chakrounanas.turbo-console-log",
+    "redhat.vscode-yaml",
+    "ms-azuretools.vscode-docker",
+    "ms-vsliveshare.vsliveshare",
+    "pflannery.vscode-versionlens"
+  ]
+}

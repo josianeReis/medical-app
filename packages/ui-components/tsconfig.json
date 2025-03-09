@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.options.json",
+  "compilerOptions": {
+    "emitDeclarationOnly": true,
+    "outDir": "./lib",
+    "jsx": "react-jsx",
+    "paths": {}
+  },
+  "include": [
+    "src/**/*",
+    "tests/**/*",
+    "*.js",
+    "*.ts",
+    "*.tsx"
+  ],
+  "references": []
+}

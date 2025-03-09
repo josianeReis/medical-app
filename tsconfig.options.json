@@ -1,0 +1,29 @@
+{
+  "extends": "tsconfig-moon/tsconfig.projects.json",
+  "compilerOptions": {
+    // Your custom options
+    // "module": "NodeNext",
+    // "moduleResolution": "nodenext",
+    // "target": "es2022"
+
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "target": "esnext",
+
+    "allowJs": true,
+
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "incremental": true,
+    "noEmit": false,
+    "noEmitOnError": true,
+    "skipLibCheck": true,
+    "verbatimModuleSyntax": false
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.options.json",
+  "files": [],
+  "references": [
+    {
+      "path": "apps/web/consumer"
+    },
+    {
+      "path": "packages/ui-components"
+    },
+    {
+      "path": "packages/ui-components-2"
+    }
+  ]
+}

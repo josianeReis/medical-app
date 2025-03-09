@@ -1,0 +1,31 @@
+id: consumer
+type: application
+language: typescript
+stack: frontend
+platform: bun
+tags:
+  - frontend
+  - next
+  - app
+
+project:
+  name: 'laudos-frontend/consumer'
+  description: 'Consumer'
+  channel: '#consumer'
+
+tasks:
+  install:
+    command: bun install
+  dev:
+    command: next dev
+    # args:
+    #   - '--turbopack'
+    local: true
+  build:
+    command: next build
+  start:
+    command: next start
+
+dependsOn:
+  - ui-components
+  - '@packages/ui-components'

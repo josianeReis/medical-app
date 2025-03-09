@@ -1,0 +1,31 @@
+{
+  "name": "laudos-mono",
+  "private": true,
+  "devDependencies": {
+    "@moonrepo/cli": "^1.32.8",
+    "@types/bun": "latest",
+    "eslint-config-next": "^15.2.1",
+    "tsconfig-moon": "^1.3.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.8.2"
+  },
+  "workspaces": [
+    "apps/web/*",
+    "apps/services/*",
+    "packages/*"
+  ],
+  "engines": {
+    "node": "22.14.0"
+  },
+  "dependencies": {
+    "@radix-ui/react-slot": "^1.1.2",
+    "@tailwindcss/vite": "^4.0.12",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.479.0",
+    "tailwind-merge": "^3.0.2",
+    "tailwindcss": "^4.0.12",
+    "tailwindcss-animate": "^1.0.7"
+  }
+}

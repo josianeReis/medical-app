@@ -1,0 +1,10 @@
+id: 'ui-components'
+type: library
+language: typescript
+stack: frontend
+platform: bun
+
+project:
+  name: '@packages/ui-components'
+  description: 'UI components'
+  channel: '#ui-components'

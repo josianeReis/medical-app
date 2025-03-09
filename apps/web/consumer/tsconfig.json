@@ -1,0 +1,53 @@
+{
+  "extends": "../../../tsconfig.options.json",
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@packages/ui-components": [
+        "../../../packages/ui-components/src/index.ts"
+      ],
+      "@packages/ui-components/*": [
+        "../../../packages/ui-components/src/*"
+      ]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "../../../packages/ui-components/**/*",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "references": [
+    {
+      "path": "../../../packages/ui-components"
+    }
+  ]
+}
