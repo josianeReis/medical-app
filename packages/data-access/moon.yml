@@ -1,0 +1,68 @@
+id: data-access
+type: library
+language: typescript
+stack: backend
+platform: bun
+
+project:
+  name: '@packages/data-access'
+  description: 'Data access package to access and manage our database'
+  channel: '#data-access'
+
+tasks:
+  remove-build-files:
+    command: rm
+    args:
+      - '-fr=lib/*'
+    options:
+      internal: true
+    local: true
+  typecheck:
+    outputs:
+      - lib
+    options:
+      internal: true
+  db-studio:
+    command: dotenvx run -- drizzle-kit studio
+    args:
+      - '--port=5455'
+      - --config=./drizzle.config.ts
+    local: true
+  db-expose:
+    command: ssh -R 4345:localhost:$DB_PORT $DB_EXPOSE_SUBDOMAIN.serveo.net
+    local: true
+    options:
+      # Defaults to .env
+      envFile: true
+  db-start:
+    command: docker compose up
+    local: true
+  db-stop:
+    command: docker compose down --remove-orphans
+    local: true
+    options:
+      persistent: false
+  db-clean:
+    command: docker compose down --remove-orphans -v
+    local: true
+    options:
+      persistent: false
+  migration-create:
+    command: drizzle-kit generate
+    local: true
+    options:
+      persistent: false
+    args:
+      - --config=./drizzle.config.ts
+  migration-up:
+    command: drizzle-kit migrate
+    local: true
+    options:
+      persistent: false
+  migration-check:
+    command: drizzle-kit check
+    options:
+      runInCI: true
+
+dependsOn:
+  - utils

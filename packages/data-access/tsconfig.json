@@ -1,0 +1,24 @@
+{
+  "extends": "../../tsconfig.options.json",
+  "compilerOptions": {
+    "emitDeclarationOnly": true,
+    "outDir": "./lib",
+    "paths": {
+      "@packages/utils": [
+        "../utils/src/index.ts"
+      ],
+      "@packages/utils/*": [
+        "../utils/src/*"
+      ]
+    }
+  },
+  "include": [
+    "../utils/**/*",
+    "src/**/*"
+  ],
+  "references": [
+    {
+      "path": "../utils"
+    }
+  ]
+}

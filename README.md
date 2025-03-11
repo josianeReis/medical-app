@@ -85,6 +85,6 @@ This project is best used with VSCode/Cursor and the following extensions:
 - 🔌 Pluggable architecture for custom tooling
 - 🔧 Seamless integration with Moon's toolchain
 
-## License
 
-[Add your license here]
+
+

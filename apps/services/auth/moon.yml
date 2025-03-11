@@ -1,0 +1,28 @@
+id: auth
+type: application
+language: typescript
+stack: backend
+platform: bun
+tags:
+  - backend
+  - app
+
+project:
+  name: 'laudos-services/auth'
+  description: 'Auth'
+  channel: '#auth'
+
+tasks:
+  install:
+    command: bun install
+  dev:
+    command: bun run --watch src/index.ts
+    local: true
+  build:
+    command: bun build
+  start:
+    command: bun run src/index.ts
+
+dependsOn:
+  - data-access
+  - utils

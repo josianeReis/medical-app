@@ -3,10 +3,19 @@
   "files": [],
   "references": [
     {
+      "path": "apps/services/auth"
+    },
+    {
       "path": "apps/web/consumer"
     },
     {
+      "path": "packages/data-access"
+    },
+    {
       "path": "packages/ui-components"
+    },
+    {
+      "path": "packages/utils"
     }
   ]
 }

@@ -1,0 +1,10 @@
+id: utils
+type: library
+language: typescript
+stack: backend
+platform: bun
+
+project:
+  name: '@packages/utils'
+  description: 'Utils package'
+  channel: '#utils'
