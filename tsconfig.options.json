@@ -24,7 +24,7 @@
     "noEmit": false,
     "noEmitOnError": true,
     "skipLibCheck": true,
-    "verbatimModuleSyntax": false
+    "verbatimModuleSyntax": false,
   },
   "exclude": ["node_modules"]
 }

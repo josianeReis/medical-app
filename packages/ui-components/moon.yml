@@ -1,10 +1,18 @@
-id: 'ui-components'
+id: "ui-components"
 type: library
 language: typescript
 stack: frontend
 platform: bun
+tags:
+  - library
+  - shadcn
 
 project:
-  name: '@packages/ui-components'
-  description: 'UI components'
-  channel: '#ui-components'
+  name: "@packages/ui-components"
+  description: "UI components"
+  channel: "#ui-components"
+
+tasks:
+  add-shadcn:
+    command: "bunx shadcn@latest add"
+    local: true
