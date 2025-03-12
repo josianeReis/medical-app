@@ -4,7 +4,16 @@ This is a monorepo project managed with Moon, using Bun as the JavaScript runtim
 
 ## Prerequisites
 
-### 1. Install Bun
+### 1. Node.js
+Download and install https://nodejs.org/en
+
+### 2. HomeBrew
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+### 3. Install Bun
+
 [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime. Install it using:
 
 ```bash
@@ -15,7 +24,7 @@ curl -fsSL https://bun.sh/install | bash
 # First install WSL2, then run the command above
 ```
 
-### 2. Install Proto
+### 4. Install Proto
 [Proto](https://moonrepo.dev/docs/proto) is a pluggable version manager and unified toolchain from moonrepo. It helps manage multiple programming languages and tools through a single interface.
 
 ```bash
@@ -25,11 +34,13 @@ brew install git unzip gzip xz
 # For Linux, macOS, WSL:
 bash <(curl -fsSL https://moonrepo.dev/install/proto.sh)
 
+# select the option ZSHRC, after close the terminal and open again.
+
 # For other platforms and manual installation:
 # Visit https://moonrepo.dev/docs/proto/install
 ```
 
-### 3. Install Moon
+### 5. Install Moon
 [Moon](https://moonrepo.dev) is a build system and task runner for managing monorepos. With Proto installed, you can install Moon using:
 
 ```bash
@@ -40,25 +51,70 @@ moon --version
 ```
 
 
-1. Install dependencies:
+To install dependencies you can use:
+
+```bash
+bun install
+```
+
+### 6. Configure SSH Key
+
+##### If your SSH key is already set up on your machine and GitHub, you can skip this step.
+
+```bash
+ssh-keygen -t ed25519 -C "your_email@example.com"
+pbcopy < ~/.ssh/id_ed25519.pub
+```
+
+### 7. Clone Repository
+
+```bash
+git clone https://github.com/laudosinfra/laudos-mono.git
+```
+### 8. Change .env-example
+Create a copy of .env-example and rename to .env, then, fill out the DB_URL using the parameters in the same file.
+
+### 9. Install dependencies
+
 ```bash
 bun install
 ```
 
 ## Development
 
-The project uses Moon's task runner for managing all commands. Here are the available commands for the consumer app:
+The project uses Moon's task runner for managing all commands. 
 
+###  Run command to start docker
+```bash
+moon run data-access:db-start
+```
+### Run to run migrations
 
+```bash
+moon run data-access:migration-up
+```
 
-# Run development server with Turbopack
+### Run auth
+```bash
+moon run auth:dev
+```
+
+Here are the available commands for the consumer app:
+### Run development server with Turbopack
+
+```bash
 moon run consumer:dev
+```
 
-# Build the application
+### Build the application
+```bash
 moon run consumer:build
+```
 
-# Start production server
+### Start production server
+```bash
 moon run consumer:start
+```
 ```
 
 Note: The development server runs with Turbopack enabled for faster builds and better development experience.
