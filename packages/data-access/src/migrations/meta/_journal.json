@@ -8,6 +8,13 @@
       "when": 1741555017191,
       "tag": "0000_aspiring_madelyne_pryor",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1741735038777,
+      "tag": "0001_groovy_spirit",
+      "breakpoints": true
     }
   ]
 }

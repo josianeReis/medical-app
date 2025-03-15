@@ -5,6 +5,7 @@
       "name": "laudos-mono",
       "dependencies": {
         "@dotenvx/dotenvx": "^1.38.4",
+        "@elysiajs/swagger": "^1.2.2",
         "@radix-ui/react-slot": "^1.1.2",
         "@tailwindcss/postcss": "^4.0.12",
         "@tailwindcss/vite": "^4.0.12",
