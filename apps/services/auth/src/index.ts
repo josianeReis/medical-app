@@ -7,7 +7,7 @@ import { cors } from "@elysiajs/cors";
 import { env } from "./config/env";
 import { swagger } from "@elysiajs/swagger";
 
-const authReference = await auth.api.generateOpenAPISchema();
+const authReference = JSON.parse(fs.readFileSync("./openapi.json", "utf-8"));
 
 
 const betterAuthView = (context: Context) => {
@@ -22,14 +22,13 @@ const betterAuthView = (context: Context) => {
 
 const app = new Elysia()
   .use(cors())
-  // .use(
-  //   swagger({
-  //     documentation: authReference,
-  //     path: "/api/auth/reference",
-  //   })
-  // )
+  .use(
+    swagger({
+      documentation: authReference,
+      path: "/api/auth/reference",
+    })
+  )
   .all("/api/auth/*", betterAuthView)
-  .get("/api/auth/reference/openapi", () => authReference)
   .listen(env.API_PORT);
 
 console.log(

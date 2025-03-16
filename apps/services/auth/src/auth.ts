@@ -42,9 +42,8 @@ export const auth = betterAuth({
     }
   },
   plugins: [openAPI({
-    // disableDefaultReference: true
+    disableDefaultReference: true,
   })],
 });
 
 type Session = typeof auth.$Infer.Session;
-
