@@ -9,9 +9,11 @@
     "@elysiajs/cors": "^1.2.0",
     "@elysiajs/swagger": "^1.2.2",
     "@packages/data-access": "workspace:*",
+    "@packages/email-templates": "workspace:*",
     "@packages/utils": "workspace:*",
-    "better-auth": "^1.2.3",
-    "elysia": "latest"
+    "better-auth": "^1.2.4",
+    "elysia": "latest",
+    "resend": "^4.1.2"
   },
   "devDependencies": {
     "bun-types": "latest"

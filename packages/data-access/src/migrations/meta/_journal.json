@@ -15,6 +15,13 @@
       "when": 1741735038777,
       "tag": "0001_groovy_spirit",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1742123646330,
+      "tag": "0002_modern_mystique",
+      "breakpoints": true
     }
   ]
 }

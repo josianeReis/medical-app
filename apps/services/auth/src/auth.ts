@@ -1,14 +1,16 @@
-import { getDbClient, schema } from "@packages/data-access";
-
 import { betterAuth } from "better-auth";
+import { dbClient } from "./config/db";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { env } from "./env";
 import { openAPI } from "better-auth/plugins";
-
-const db = getDbClient(env.DB_URL);
+import { schema } from "@packages/data-access";
+import { sendEmailVerification } from './services/email/sendEmailVerification';
+import { sendRecoveryPasswordEmail } from './services/email/sendRecoveryPasswordEmail';
 
 export const auth = betterAuth({
   user: {
+    fields: {
+      name: "firstName"
+    },
     additionalFields: {
       firstName: {
         type: "string",
@@ -20,12 +22,29 @@ export const auth = betterAuth({
       },
     },
   },
-  database: drizzleAdapter(db, {
+  database: drizzleAdapter(dbClient, {
     provider: "pg",
     schema,
   }),
   emailAndPassword: {
     enabled: true,
+    requireEmailVerification: true,
+
+    sendResetPassword: async ({ user, url, token }, request) => {
+      sendRecoveryPasswordEmail(user.email, token, url, (user as Session["user"]).firstName)
+    },
   },
-  plugins: [openAPI()],
+  emailVerification: {
+    sendOnSignUp: true,
+
+    sendVerificationEmail: async ({ user, url, token }, request) => {
+      sendEmailVerification(user.email, token, url, (user as Session["user"]).firstName)
+    }
+  },
+  plugins: [openAPI({
+    // disableDefaultReference: true
+  })],
 });
+
+type Session = typeof auth.$Infer.Session;
+

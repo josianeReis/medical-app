@@ -3,6 +3,9 @@
   "files": [],
   "references": [
     {
+      "path": "apps/services/app"
+    },
+    {
       "path": "apps/services/auth"
     },
     {
@@ -10,6 +13,9 @@
     },
     {
       "path": "packages/data-access"
+    },
+    {
+      "path": "packages/email-templates"
     },
     {
       "path": "packages/ui-components"

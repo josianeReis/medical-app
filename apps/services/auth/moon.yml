@@ -13,16 +13,21 @@ project:
   channel: '#auth'
 
 tasks:
-  install:
-    command: bun install
   dev:
-    command: bun run --watch src/index.ts
+    command: bun run --watch --inspect=4011/auth src/index.ts
+    # args:
+    #   - '--inspect'
     local: true
   build:
     command: bun build
   start:
     command: bun run src/index.ts
+  migration-create:
+    command: bunx @better-auth/cli@latest generate
+  openapi-generate:
+    command: bun run src/utils/helpers/generateOpenApi.ts
 
 dependsOn:
   - data-access
   - utils
+  - email-templates

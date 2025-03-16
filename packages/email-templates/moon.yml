@@ -1,0 +1,19 @@
+id: email-templates
+type: library
+language: typescript
+stack: frontend
+platform: bun
+tags:
+  - library
+
+project:
+  name: '@packages/email-templates'
+  description: 'Email templates for our app'
+  channel: '#email-templates'
+
+tasks:
+  dev:
+    command: email dev
+    args:
+      - --dir=./src
+    local: true

@@ -1,11 +1,14 @@
+import * as fs from "fs";
+
 import { Context, Elysia } from "elysia";
 
 import { auth } from "./auth";
 import { cors } from "@elysiajs/cors";
-import { env } from "./env";
+import { env } from "./config/env";
 import { swagger } from "@elysiajs/swagger";
-import * as fs from "fs";
-const authReference = JSON.parse(fs.readFileSync("./swagger.json", "utf-8"));
+
+const authReference = await auth.api.generateOpenAPISchema();
+
 
 const betterAuthView = (context: Context) => {
   const BETTER_AUTH_ACCEPT_METHODS = ["POST", "GET"];
@@ -19,13 +22,14 @@ const betterAuthView = (context: Context) => {
 
 const app = new Elysia()
   .use(cors())
-  .use(
-    swagger({
-      documentation: authReference,
-      path: "/api/auth/reference",
-     })
-  )
+  // .use(
+  //   swagger({
+  //     documentation: authReference,
+  //     path: "/api/auth/reference",
+  //   })
+  // )
   .all("/api/auth/*", betterAuthView)
+  .get("/api/auth/reference/openapi", () => authReference)
   .listen(env.API_PORT);
 
 console.log(
