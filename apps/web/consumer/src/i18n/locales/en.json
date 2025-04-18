@@ -1,3 +1,67 @@
 {
-  "title": "Hello world!"
+  "title": "Hello world!",
+
+  "login": {
+    "login": "Login",
+    "description": "Enter your email below to login to your account.",
+    "email": "Email",
+    "password": "Password",
+    "forgotpassword": "Forgot you pasword?",
+    "submit": "Login",
+    "labelfooter": "Don't have an account?",
+    "linksignup": "Sign up"
+  },
+
+  "change-password": {
+    "title": "Password reset",
+    "descripionreset": "Your password has been sucessfully reset.",
+    "descripionclick": "Click below to log in.",
+    "backtologin": "Back to login"
+  }, 
+
+  "forgot-password": {
+    "title": "Forgot Passowrd",
+    "description": "No woorie,s we'll send you reset instructions.",
+    "email": "Email",
+    "resetpassword": "Reset password",
+    "backtologin": "Back to login"
+  },
+
+  "reset-password": {
+    "title": "Reset password",
+    "description": "Please enter your 6-digit code. Then create and confirm your new password.",
+    "code": "Code",
+    "newpassword": "New password",
+    "confirmnewpassword": "Confirm new password",
+    "resetpassword": "Reset password"
+  },
+
+  "signup": {
+    "title": "Sign up",
+    "description": "Enter your informations to create a new account",
+    "firstname": "First name",
+    "lastname": "Last name",
+    "email": "Email",
+    "password": "Password",
+    "confirmnewpassword": "Confirm password",
+    "createaccount": "Reset password",
+    "labelfooter": "Already have any account?",
+    "signin": "Sign in"
+  },
+
+  "signup/email": {
+    "title": "Send verification email",
+    "description": "It was sent you an email, please fill the code on it below or click on the link",
+    "code": "code",
+    "sendverificationemail": "Send verification email",
+    "backtologin": "Back to login"
+  },
+
+  "sendverificationemail": {
+    "title": "Account successfully created ",
+    "descriptioncreated": "Your account has been sucessfully created.",
+    "descripionclick": "Click below to log in.",
+    "backtologin": "Back to login"
+  }
 }
+ 

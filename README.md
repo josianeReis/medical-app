@@ -84,11 +84,14 @@ bun install
 
 The project uses Moon's task runner for managing all commands. 
 
-###  Run command to start docker
+### Run the docker app on your machine
+
+###  Run command to start the Postgres (PG) database
 ```bash
 moon run data-access:db-start
 ```
-### Run to run migrations
+
+### Run the migrations
 
 ```bash
 moon run data-access:migration-up

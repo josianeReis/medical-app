@@ -1,3 +1,66 @@
 {
-  "title": "Olá mundo!"
+  "title": "Olá mundo!",
+
+  "login": {
+    "login": "Iniciar sessão",
+    "description": "Introduza o seu e-mail abaixo para acessar à sua conta.",
+    "email": "Email",
+    "password": "Senha",
+    "forgotpassword": "Esqueceu sua senha?",
+    "submit": "Iniciar Sessão",
+    "labelfooter": "Não tem uma conta?",
+    "linksignup": "Cadastre-se"
+  },
+
+  "change-password": {
+    "title": "Senha redefinida com sucesso",
+    "descripionreset": "Sua senha foi redefinida com sucesso.",
+    "descripionclick": "Clique abaixo para fazer login.",
+    "backtologin": "Voltar para o login"
+  },
+
+  "forgot-password": {
+    "title": "Esqueceu a senha",
+    "description": "Não se preocupe, enviaremos instruções para redefinição.",
+    "email": "E-mail",
+    "resetpassword": "Redefinir senha",
+    "backtologin": "Voltar para o login"
+  },
+
+  "reset-password": {
+    "title": "Redefinir senha",
+    "description": "Por favor, insira seu código de 6 dígitos. Depois, crie e confirme sua nova senha.",
+    "code": "Código",
+    "newpassword": "Nova senha",
+    "confirmnewpassword": "Confirmar nova senha",
+    "resetpassword": "Redefinir senha"
+  },
+
+  "signup": {
+    "title": "Criar conta",
+    "description": "Insira suas informações para criar uma nova conta",
+    "firstname": "Nome",
+    "lastname": "Sobrenome",
+    "email": "E-mail",
+    "password": "Senha",
+    "confirmnewpassword": "Confirmar senha",
+    "createaccount": "Criar conta",
+    "labelfooter": "Já tem uma conta?",
+    "signin": "Entrar"
+  },
+
+  "signup/email": {
+    "title": "Enviar e-mail de verificação",
+    "description": "Um e-mail foi enviado para você. Insira o código abaixo ou clique no link.",
+    "code": "Código",
+    "sendverificationemail": "Enviar e-mail de verificação",
+    "backtologin": "Voltar para o login"
+  },
+
+  "send/verification/email": {
+    "title": "Conta criada com sucesso",
+    "descriptioncreated": "Sua conta foi criada com sucesso.",
+    "descriptionclick": "Clique abaixo para fazer login.",
+    "backtologin": "Voltar para o login"
+  }
 }

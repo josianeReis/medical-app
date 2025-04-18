@@ -1,6 +1,19 @@
 {
   "extends": "../../../tsconfig.options.json",
   "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
     "plugins": [
       {
         "name": "next"
@@ -14,10 +27,7 @@
       "@packages/ui-components/*": ["../../../packages/ui-components/src/*"],
       "ui-components2": ["../../../packages/ui-components2/src/index.ts"],
       "ui-components2/*": ["../../../packages/ui-components2/src/*"]
-    },
-    "resolveJsonModule": true,
-    "jsx": "preserve",
-    "noEmit": true
+    }
   },
   "include": [
     "next-env.d.ts",
