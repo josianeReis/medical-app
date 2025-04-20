@@ -1,6 +1,5 @@
 "use client";
-import { useTranslations } from "next-intl";
-import { AUTH_API_URL } from "@/utils/constants";
+import { signup } from "@/services/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Button,
@@ -19,56 +18,78 @@ import {
   Input,
   Label,
 } from "@packages/ui-components";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
-const signupSchema = z
-  .object({
-    firstName: z.string().min(1, "First name is required"),
-    lastName: z.string().min(1, "Last name is required"),
-    email: z.string().min(1, "Email is required").email("Email invalid"),
-    password: z.string().min(6, "Password should be at least 6 caracters"),
-    confirmPassword: z
-      .string()
-      .min(6, "Confirm password should be at least 6 caracters")
-      .optional(),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords don't match",
-    path: ["confirmPassword"],
-  });
-
-type SignupInputs = z.infer<typeof signupSchema>;
-
 const Signup = () => {
-   const t = useTranslations("signup");
+  const t = useTranslations("signup");
+  const tCommon = useTranslations("common.formFields");
+
+  const signupSchema = z
+    .object({
+      firstName: z.string().min(1, tCommon("firstName.fieldErrors.required")),
+      lastName: z.string().min(1, tCommon("lastName.fieldErrors.required")),
+      email: z
+        .string()
+        .min(1, tCommon("email.fieldErrors.required"))
+        .email("Email invalid"),
+      password: z
+        .string()
+        .nonempty(tCommon("password.fieldErrors.required"))
+        .min(6, tCommon("password.fieldErrors.minlength")),
+      confirmPassword: z
+        .string()
+        .nonempty(tCommon("confirmPassword.fieldErrors.required"))
+        .min(6, tCommon("confirmPassword.fieldErrors.match"))
+        .optional(),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+      message: tCommon("confirmPassword.fieldErrors.match"),
+      path: ["confirmPassword"],
+    });
+
+  type SignupInputs = z.infer<typeof signupSchema>;
+
   const form = useForm<SignupInputs>({
     resolver: zodResolver(signupSchema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
   });
 
   const onSubmit: SubmitHandler<SignupInputs> = async (data) => {
     delete data.confirmPassword;
 
-    await fetch(`${AUTH_API_URL}/sign-up/email`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
+    const { error, isEmailVerified } = await signup(data);
+    if (error) {
+      return toast.error(error, {
+        id: error,
+      });
+    }
+    if (!isEmailVerified) {
+      toast.warning(t("emailNotVerified"), {
+        id: t("emailNotVerified"),
+      });
+      redirect("/email-verification");
+    }
+    toast.success(t("success"));
+    redirect("/login");
   };
-
   return (
     <div className="flex min-h-svh w-full items-center justify-center p-6">
       <div className="w-full max-w-sm">
         <Card className="flex flex-col gap-6">
           <CardHeader>
             <CardTitle>{t("title")} </CardTitle>
-            <CardDescription>
-              {t("description")}
-            </CardDescription>
+            <CardDescription>{t("description")}</CardDescription>
           </CardHeader>
           <CardContent>
             <Form {...form}>
@@ -81,9 +102,12 @@ const Signup = () => {
                   name="firstName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t("firstname")}</FormLabel>
+                      <FormLabel>{tCommon("firstName.label")}</FormLabel>
                       <FormControl>
-                        <Input placeholder="Ex.: John" {...field} />
+                        <Input
+                          placeholder={tCommon("firstName.placeholder")}
+                          {...field}
+                        />
                       </FormControl>
 
                       <FormMessage />
@@ -95,9 +119,12 @@ const Signup = () => {
                   name="lastName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t("lastname")}</FormLabel>
+                      <FormLabel>{tCommon("lastName.label")}</FormLabel>
                       <FormControl>
-                        <Input placeholder="Ex.: Doe" {...field} />
+                        <Input
+                          placeholder={tCommon("lastName.placeholder")}
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -108,10 +135,10 @@ const Signup = () => {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t("email")}</FormLabel>
+                      <FormLabel>{tCommon("email.label")}</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Ex.: johndoe@gmail.com"
+                          placeholder={tCommon("email.placeholder")}
                           {...field}
                         />
                       </FormControl>
@@ -124,10 +151,10 @@ const Signup = () => {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t("password")}</FormLabel>
+                      <FormLabel>{tCommon("password.label")}</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Ex.: 123@.#fdscvAPamfg1234"
+                          placeholder={tCommon("password.placeholder")}
                           type="password"
                           {...field}
                         />
@@ -141,10 +168,10 @@ const Signup = () => {
                   name="confirmPassword"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t("confirmnewpassword")}</FormLabel>
+                      <FormLabel>{tCommon("confirmNewPassword.label")}</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Ex.: 123@.#fdscvAPamfg1234"
+                          placeholder={tCommon("confirmNewPassword.placeholder")}
                           type="password"
                           {...field}
                         />
@@ -155,10 +182,7 @@ const Signup = () => {
                 />
 
                 <Button type="submit" variant="default" className="w-full mt-4">
-                  
-                  <Link href="/signup/email" className="hover:underline mx-2">
                   {t("createaccount")}
-                  </Link>
                 </Button>
               </form>
             </Form>

@@ -1,10 +1,8 @@
 "use client";
-import { useTranslations } from "next-intl";
-import { AUTH_API_URL } from "@/utils/constants";
+import { forgotPassword } from "@/services/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Button,
-  buttonVariants,
   Card,
   CardContent,
   CardDescription,
@@ -17,45 +15,51 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Input
+  Input,
 } from "@packages/ui-components";
-import Link from "next/link";
-import {  SubmitHandler, useForm } from "react-hook-form";
-import { z } from "zod";
 import { ChevronLeft } from "lucide-react";
+import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
 
-const forgotPasswordSchema = z.object({
-  email: z.string().min(1, "Email is required").email("Email invalid"),
-});
+const ForgotPasswordForm = () => {
+  const t = useTranslations("forgot-password");
+  const tCommon = useTranslations("common.formFields");
+  const forgotPasswordSchema = z.object({
+    email: z
+      .string()
+      .min(1, tCommon("email.fieldErrors.required"))
+      .email(tCommon("email.fieldErrors.invalid")),
+  });
 
-type ForgotPasswordInputs = z.infer<typeof forgotPasswordSchema>;
-
-const ForgotPassword = () => {
-   const t = useTranslations("forgot-password");
+  type ForgotPasswordInputs = z.infer<typeof forgotPasswordSchema>;
   const form = useForm<ForgotPasswordInputs>({
     resolver: zodResolver(forgotPasswordSchema),
+    defaultValues: {
+      email: "",
+    },
   });
 
   const onSubmit: SubmitHandler<ForgotPasswordInputs> = async (data) => {
-
-    await fetch(`${AUTH_API_URL}/forget-password`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    const { error, success } = await forgotPassword(data.email);
+    if (error) {
+      toast.error(error);
+    }
+    if (success) {
+      redirect("/forgot-password/success");
+    }
   };
 
   return (
     <div className="flex min-h-svh w-full items-center justify-center p-6">
       <div className="w-full max-w-sm">
-        <Card className="flex flex-col gap-6">
+        <Card className="flex flex-col gap-4">
           <CardHeader>
             <CardTitle>{t("title")}</CardTitle>
-            <CardDescription>
-              {t("description")}
-            </CardDescription>
+            <CardDescription>{t("description")}</CardDescription>
           </CardHeader>
           <CardContent>
             <Form {...form}>
@@ -68,10 +72,10 @@ const ForgotPassword = () => {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t("email")}</FormLabel>
+                      <FormLabel>{tCommon("email.label")}</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Ex.: johndoe@gmail.com"
+                          placeholder={tCommon("email.placeholder")}
                           {...field}
                         />
                       </FormControl>
@@ -79,20 +83,23 @@ const ForgotPassword = () => {
                     </FormItem>
                   )}
                 />
-                <Button type="submit" variant="default" className="w-full mt-4">
-                 
-                  <Link href="/reset-password" >
-                 {t("resetpassword")}
-            </Link>
+                <Button
+                  type="submit"
+                  variant="default"
+                  className="w-full mt-6 self-center"
+                >
+                  {t("forgotPasswordButton")}
                 </Button>
               </form>
             </Form>
           </CardContent>
           <CardFooter className="justify-center">
-            <Link href="/login" className={buttonVariants({ variant: "outline" })} >
-            <ChevronLeft/>
-              {t("backtologin")}
-            </Link>
+            <Button variant="outline" asChild>
+              <Link href="/login">
+                <ChevronLeft />
+                {t("backButton")}
+              </Link>
+            </Button>
           </CardFooter>
         </Card>
       </div>
@@ -100,4 +107,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default ForgotPasswordForm;

@@ -5,14 +5,14 @@
   "private": true,
   "devDependencies": {
     "@types/bun": "latest",
-    "react-email": "3.0.7"
+    "react-email": "4.0.7"
   },
   "peerDependencies": {
-    "typescript": "^5"
+    "typescript": "^5.8.3"
   },
   "dependencies": {
-    "@react-email/components": "0.0.33",
-    "react": "19.0.0",
-    "react-dom": "19.0.0"
+    "@react-email/components": "0.0.36",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
   }
 }

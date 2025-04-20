@@ -11,9 +11,9 @@
     "@packages/data-access": "workspace:*",
     "@packages/email-templates": "workspace:*",
     "@packages/utils": "workspace:*",
-    "better-auth": "^1.2.4",
+    "better-auth": "^1.2.7",
     "elysia": "latest",
-    "resend": "^4.1.2"
+    "resend": "^4.3.0"
   },
   "devDependencies": {
     "bun-types": "latest"

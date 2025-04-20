@@ -8,13 +8,13 @@
   "description": "",
   "dependencies": {
     "@packages/utils": "workspace:*",
-    "dotenv": "^16.4.7",
-    "drizzle-orm": "^0.40.0",
-    "pg": "^8.13.3"
+    "dotenv": "^16.5.0",
+    "drizzle-orm": "^0.42.0",
+    "pg": "^8.14.1"
   },
   "devDependencies": {
-    "@types/pg": "^8.11.11",
-    "drizzle-kit": "^0.30.5",
+    "@types/pg": "^8.11.13",
+    "drizzle-kit": "^0.31.0",
     "tsx": "^4.19.3"
   }
 }
