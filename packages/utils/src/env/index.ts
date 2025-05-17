@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { config } from '@dotenvx/dotenvx';
 
-config();
+config({ ignore: ["MISSING_ENV_FILE"] });
 
 export function generateEnv<T extends z.AnyZodObject>(
 	schema: T,
