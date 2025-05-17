@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+psycopg2-binary
+qdrant-client
+langchain-ollama
+ollama
+pydantic
+python-multipart
