@@ -1,8 +1,8 @@
 {
   "openapi": "3.1.1",
   "info": {
-    "title": "Laudos Auth",
-    "description": "API Reference for your Laudos Auth Instance",
+    "title": "Better Auth",
+    "description": "API Reference for your Better Auth Instance",
     "version": "1.1.0"
   },
   "components": {
@@ -170,8 +170,11 @@
   "paths": {
     "/sign-in/social": {
       "post": {
-        "tags": ["Default"],
+        "tags": [
+          "Default"
+        ],
         "description": "Sign in with a social provider",
+        "operationId": "socialSignIn",
         "security": [
           {
             "bearerAuth": []
@@ -215,35 +218,85 @@
                   "requestSignUp": {
                     "type": "string",
                     "description": "Explicitly request sign-up. Useful when disableImplicitSignUp is true for this provider"
+                  },
+                  "loginHint": {
+                    "type": "string",
+                    "description": "The login hint to use for the authorization code request"
                   }
                 },
-                "required": ["provider"]
+                "required": [
+                  "provider"
+                ]
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Success - Returns either session details or redirect URL",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
+                  "description": "Session response when idToken is provided",
                   "properties": {
-                    "session": {
-                      "type": "string"
-                    },
-                    "user": {
-                      "type": "object"
-                    },
-                    "url": {
-                      "type": "string"
-                    },
                     "redirect": {
-                      "type": "boolean"
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    },
+                    "token": {
+                      "type": "string",
+                      "description": "Session token",
+                      "url": {
+                        "type": "null",
+                        "nullable": true
+                      },
+                      "user": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "email": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "image": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "emailVerified": {
+                            "type": "boolean"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "email",
+                          "emailVerified",
+                          "createdAt",
+                          "updatedAt"
+                        ]
+                      }
                     }
                   },
-                  "required": ["session", "user", "url", "redirect"]
+                  "required": [
+                    "redirect",
+                    "token",
+                    "user"
+                  ]
                 }
               }
             }
@@ -258,7 +311,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -274,7 +329,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -345,7 +402,9 @@
     },
     "/get-session": {
       "get": {
-        "tags": ["Default"],
+        "tags": [
+          "Default"
+        ],
         "description": "Get the current session",
         "security": [
           {
@@ -362,24 +421,16 @@
                   "type": "object",
                   "properties": {
                     "session": {
-                      "type": "object",
-                      "properties": {
-                        "token": {
-                          "type": "string"
-                        },
-                        "userId": {
-                          "type": "string"
-                        },
-                        "expiresAt": {
-                          "type": "string"
-                        }
-                      }
+                      "$ref": "#/components/schemas/Session"
                     },
                     "user": {
-                      "type": "object",
                       "$ref": "#/components/schemas/User"
                     }
-                  }
+                  },
+                  "required": [
+                    "session",
+                    "user"
+                  ]
                 }
               }
             }
@@ -394,7 +445,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -410,7 +463,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -481,7 +536,9 @@
     },
     "/sign-out": {
       "post": {
-        "tags": ["Default"],
+        "tags": [
+          "Default"
+        ],
         "description": "Sign out the current user",
         "security": [
           {
@@ -525,7 +582,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -541,7 +600,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -612,7 +673,9 @@
     },
     "/sign-up/email": {
       "post": {
-        "tags": ["Default"],
+        "tags": [
+          "Default"
+        ],
         "description": "Sign up a user using email and password",
         "security": [
           {
@@ -626,13 +689,9 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "firstName": {
+                  "name": {
                     "type": "string",
-                    "description": "The first name of the user"
-                  },
-                  "lastName": {
-                    "type": "string",
-                    "description": "The last name of the user"
+                    "description": "The name of the user"
                   },
                   "email": {
                     "type": "string",
@@ -647,40 +706,78 @@
                     "description": "The URL to use for email verification callback"
                   }
                 },
-                "required": ["name", "email", "password"]
+                "required": [
+                  "name",
+                  "email",
+                  "password"
+                ]
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Successfully created user",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
+                    "token": {
                       "type": "string",
-                      "description": "The id of the user"
+                      "nullable": true,
+                      "description": "Authentication token for the session"
                     },
-                    "email": {
-                      "type": "string",
-                      "description": "The email of the user"
-                    },
-                    "name": {
-                      "type": "string",
-                      "description": "The name of the user"
-                    },
-                    "image": {
-                      "type": "string",
-                      "description": "The image of the user"
-                    },
-                    "emailVerified": {
-                      "type": "boolean",
-                      "description": "If the email is verified"
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "The unique identifier of the user"
+                        },
+                        "email": {
+                          "type": "string",
+                          "format": "email",
+                          "description": "The email address of the user"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "The name of the user"
+                        },
+                        "image": {
+                          "type": "string",
+                          "format": "uri",
+                          "nullable": true,
+                          "description": "The profile image URL of the user"
+                        },
+                        "emailVerified": {
+                          "type": "boolean",
+                          "description": "Whether the email has been verified"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "When the user was created"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "When the user was last updated"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "email",
+                        "name",
+                        "emailVerified",
+                        "createdAt",
+                        "updatedAt"
+                      ]
                     }
-                  }
+                  },
+                  "required": [
+                    "user"
+                  ]
                 }
               }
             }
@@ -695,7 +792,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -711,7 +810,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -782,7 +883,9 @@
     },
     "/sign-in/email": {
       "post": {
-        "tags": ["Default"],
+        "tags": [
+          "Default"
+        ],
         "description": "Sign in with email and password",
         "security": [
           {
@@ -814,30 +917,80 @@
                     "description": "If this is false, the session will not be remembered. Default is `true`."
                   }
                 },
-                "required": ["email", "password"]
+                "required": [
+                  "email",
+                  "password"
+                ]
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Success - Returns either session details or redirect URL",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
+                  "description": "Session response when idToken is provided",
                   "properties": {
-                    "user": {
-                      "type": "object"
+                    "redirect": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    },
+                    "token": {
+                      "type": "string",
+                      "description": "Session token"
                     },
                     "url": {
-                      "type": "string"
+                      "type": "null",
+                      "nullable": true
                     },
-                    "redirect": {
-                      "type": "boolean"
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "image": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "emailVerified": {
+                          "type": "boolean"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "email",
+                        "emailVerified",
+                        "createdAt",
+                        "updatedAt"
+                      ]
                     }
                   },
-                  "required": ["session", "user", "url", "redirect"]
+                  "required": [
+                    "redirect",
+                    "token",
+                    "user"
+                  ]
                 }
               }
             }
@@ -852,7 +1005,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -868,7 +1023,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -939,7 +1096,9 @@
     },
     "/forget-password": {
       "post": {
-        "tags": ["Default"],
+        "tags": [
+          "Default"
+        ],
         "description": "Send a password reset email to the user",
         "security": [
           {
@@ -963,7 +1122,9 @@
                     "description": "The URL to redirect the user to reset their password. If the token isn't valid or expired, it'll be redirected with a query parameter `?error=INVALID_TOKEN`. If the token is valid, it'll be redirected with a query parameter `?token=VALID_TOKEN"
                   }
                 },
-                "required": ["email"]
+                "required": [
+                  "email"
+                ]
               }
             }
           }
@@ -994,7 +1155,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -1010,7 +1173,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -1081,7 +1246,9 @@
     },
     "/reset-password": {
       "post": {
-        "tags": ["Default"],
+        "tags": [
+          "Default"
+        ],
         "description": "Reset the password for a user",
         "security": [
           {
@@ -1105,7 +1272,9 @@
                     "description": "The token to reset the password"
                   }
                 },
-                "required": ["newPassword"]
+                "required": [
+                  "newPassword"
+                ]
               }
             }
           }
@@ -1136,7 +1305,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -1152,7 +1323,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -1223,7 +1396,9 @@
     },
     "/verify-email": {
       "get": {
-        "tags": ["Default"],
+        "tags": [
+          "Default"
+        ],
         "description": "Verify the email of the user",
         "security": [
           {
@@ -1234,17 +1409,19 @@
           {
             "name": "token",
             "in": "query",
+            "description": "The token to verify the email",
+            "required": true,
             "schema": {
-              "type": "string",
-              "description": "The token to verify the email"
+              "type": "string"
             }
           },
           {
             "name": "callbackURL",
             "in": "query",
+            "description": "The URL to redirect to after email verification",
+            "required": false,
             "schema": {
-              "type": "string",
-              "description": "The URL to redirect to after email verification"
+              "type": "string"
             }
           }
         ],
@@ -1257,13 +1434,56 @@
                   "type": "object",
                   "properties": {
                     "user": {
-                      "type": "object"
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "User ID"
+                        },
+                        "email": {
+                          "type": "string",
+                          "description": "User email"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "User name"
+                        },
+                        "image": {
+                          "type": "string",
+                          "description": "User image URL"
+                        },
+                        "emailVerified": {
+                          "type": "boolean",
+                          "description": "Indicates if the user email is verified"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "description": "User creation date"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "description": "User update date"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "email",
+                        "name",
+                        "image",
+                        "emailVerified",
+                        "createdAt",
+                        "updatedAt"
+                      ]
                     },
                     "status": {
-                      "type": "boolean"
+                      "type": "boolean",
+                      "description": "Indicates if the email was verified successfully"
                     }
                   },
-                  "required": ["user", "status"]
+                  "required": [
+                    "user",
+                    "status"
+                  ]
                 }
               }
             }
@@ -1278,7 +1498,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -1294,7 +1516,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -1365,7 +1589,9 @@
     },
     "/send-verification-email": {
       "post": {
-        "tags": ["Default"],
+        "tags": [
+          "Default"
+        ],
         "description": "Send a verification email to the user",
         "security": [
           {
@@ -1381,14 +1607,19 @@
                 "properties": {
                   "email": {
                     "type": "string",
-                    "description": "The email to send the verification email to"
+                    "description": "The email to send the verification email to",
+                    "example": "user@example.com"
                   },
                   "callbackURL": {
                     "type": "string",
-                    "description": "The URL to use for email verification callback"
+                    "description": "The URL to use for email verification callback",
+                    "example": "https://example.com/callback",
+                    "nullable": true
                   }
                 },
-                "required": ["email"]
+                "required": [
+                  "email"
+                ]
               }
             }
           }
@@ -1402,7 +1633,9 @@
                   "type": "object",
                   "properties": {
                     "status": {
-                      "type": "boolean"
+                      "type": "boolean",
+                      "description": "Indicates if the email was sent successfully",
+                      "example": true
                     }
                   }
                 }
@@ -1410,20 +1643,21 @@
             }
           },
           "400": {
+            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
                     "message": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Verification email isn't enabled"
                     }
-                  },
-                  "required": ["message"]
+                  }
                 }
               }
-            },
-            "description": "Bad Request. Usually due to missing parameters, or invalid parameters."
+            }
           },
           "401": {
             "content": {
@@ -1435,7 +1669,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -1506,7 +1742,9 @@
     },
     "/change-email": {
       "post": {
-        "tags": ["Default"],
+        "tags": [
+          "Default"
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -1529,26 +1767,38 @@
                     "description": "The URL to redirect to after email verification"
                   }
                 },
-                "required": ["newEmail"]
+                "required": [
+                  "newEmail"
+                ]
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Email change request processed successfully",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "user": {
-                      "type": "object"
-                    },
                     "status": {
-                      "type": "boolean"
+                      "type": "boolean",
+                      "description": "Indicates if the request was successful"
+                    },
+                    "message": {
+                      "type": "string",
+                      "enum": [
+                        "Email updated",
+                        "Verification email sent"
+                      ],
+                      "description": "Status message of the email change process",
+                      "nullable": true
                     }
-                  }
+                  },
+                  "required": [
+                    "status"
+                  ]
                 }
               }
             }
@@ -1563,7 +1813,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -1579,7 +1831,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -1650,7 +1904,9 @@
     },
     "/change-password": {
       "post": {
-        "tags": ["Default"],
+        "tags": [
+          "Default"
+        ],
         "description": "Change the password of the user",
         "security": [
           {
@@ -1678,24 +1934,77 @@
                     "description": "Revoke all other sessions"
                   }
                 },
-                "required": ["newPassword", "currentPassword"]
+                "required": [
+                  "newPassword",
+                  "currentPassword"
+                ]
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Password successfully changed",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
+                    "token": {
+                      "type": "string",
+                      "nullable": true,
+                      "description": "New session token if other sessions were revoked"
+                    },
                     "user": {
-                      "description": "The user object",
-                      "$ref": "#/components/schemas/User"
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "The unique identifier of the user"
+                        },
+                        "email": {
+                          "type": "string",
+                          "format": "email",
+                          "description": "The email address of the user"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "The name of the user"
+                        },
+                        "image": {
+                          "type": "string",
+                          "format": "uri",
+                          "nullable": true,
+                          "description": "The profile image URL of the user"
+                        },
+                        "emailVerified": {
+                          "type": "boolean",
+                          "description": "Whether the email has been verified"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "When the user was created"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "When the user was last updated"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "email",
+                        "name",
+                        "emailVerified",
+                        "createdAt",
+                        "updatedAt"
+                      ]
                     }
-                  }
+                  },
+                  "required": [
+                    "user"
+                  ]
                 }
               }
             }
@@ -1710,7 +2019,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -1726,7 +2037,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -1797,7 +2110,9 @@
     },
     "/update-user": {
       "post": {
-        "tags": ["Default"],
+        "tags": [
+          "Default"
+        ],
         "description": "Update the current user",
         "security": [
           {
@@ -1832,8 +2147,9 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "user": {
-                      "type": "object"
+                    "status": {
+                      "type": "boolean",
+                      "description": "Indicates if the update was successful"
                     }
                   }
                 }
@@ -1850,7 +2166,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -1866,7 +2184,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -1937,7 +2257,9 @@
     },
     "/delete-user": {
       "post": {
-        "tags": ["Default"],
+        "tags": [
+          "Default"
+        ],
         "description": "Delete the user",
         "security": [
           {
@@ -1969,11 +2291,29 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "User deletion processed successfully",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Indicates if the operation was successful"
+                    },
+                    "message": {
+                      "type": "string",
+                      "enum": [
+                        "User deleted",
+                        "Verification email sent"
+                      ],
+                      "description": "Status message of the deletion process"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message"
+                  ]
                 }
               }
             }
@@ -1988,7 +2328,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -2004,7 +2346,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -2075,7 +2419,9 @@
     },
     "/reset-password/{token}": {
       "get": {
-        "tags": ["Default"],
+        "tags": [
+          "Default"
+        ],
         "description": "Redirects the user to the callback URL with the token",
         "security": [
           {
@@ -2118,7 +2464,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -2134,7 +2482,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -2205,7 +2555,9 @@
     },
     "/list-sessions": {
       "get": {
-        "tags": ["Default"],
+        "tags": [
+          "Default"
+        ],
         "description": "List all active sessions for the user",
         "security": [
           {
@@ -2221,18 +2573,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "object",
-                    "properties": {
-                      "token": {
-                        "type": "string"
-                      },
-                      "userId": {
-                        "type": "string"
-                      },
-                      "expiresAt": {
-                        "type": "string"
-                      }
-                    }
+                    "$ref": "#/components/schemas/Session"
                   }
                 }
               }
@@ -2248,7 +2589,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -2264,7 +2607,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -2335,7 +2680,9 @@
     },
     "/revoke-session": {
       "post": {
-        "tags": ["Default"],
+        "tags": [
+          "Default"
+        ],
         "description": "Revoke a single session",
         "security": [
           {
@@ -2350,15 +2697,37 @@
                 "type": "object",
                 "properties": {
                   "token": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The token to revoke"
                   }
                 },
-                "required": ["token"]
+                "required": [
+                  "token"
+                ]
               }
             }
           }
         },
         "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean",
+                      "description": "Indicates if the session was revoked successfully"
+                    }
+                  },
+                  "required": [
+                    "status"
+                  ]
+                }
+              }
+            }
+          },
           "400": {
             "content": {
               "application/json": {
@@ -2369,7 +2738,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -2385,7 +2756,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -2456,7 +2829,9 @@
     },
     "/revoke-sessions": {
       "post": {
-        "tags": ["Default"],
+        "tags": [
+          "Default"
+        ],
         "description": "Revoke all sessions for the user",
         "security": [
           {
@@ -2483,10 +2858,13 @@
                   "type": "object",
                   "properties": {
                     "status": {
-                      "type": "boolean"
+                      "type": "boolean",
+                      "description": "Indicates if all sessions were revoked successfully"
                     }
                   },
-                  "required": ["status"]
+                  "required": [
+                    "status"
+                  ]
                 }
               }
             }
@@ -2501,7 +2879,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -2517,7 +2897,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -2588,7 +2970,9 @@
     },
     "/revoke-other-sessions": {
       "post": {
-        "tags": ["Default"],
+        "tags": [
+          "Default"
+        ],
         "description": "Revoke all other sessions for the user except the current one",
         "security": [
           {
@@ -2615,9 +2999,13 @@
                   "type": "object",
                   "properties": {
                     "status": {
-                      "type": "boolean"
+                      "type": "boolean",
+                      "description": "Indicates if all other sessions were revoked successfully"
                     }
-                  }
+                  },
+                  "required": [
+                    "status"
+                  ]
                 }
               }
             }
@@ -2632,7 +3020,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -2648,7 +3038,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -2719,7 +3111,9 @@
     },
     "/link-social": {
       "post": {
-        "tags": ["Default"],
+        "tags": [
+          "Default"
+        ],
         "description": "Link a social account to the user",
         "security": [
           {
@@ -2741,9 +3135,15 @@
                   "provider": {
                     "type": "string",
                     "description": "The OAuth2 provider to use"
+                  },
+                  "scopes": {
+                    "type": "string",
+                    "description": "Additional scopes to request from the provider"
                   }
                 },
-                "required": ["provider"]
+                "required": [
+                  "provider"
+                ]
               }
             }
           }
@@ -2757,13 +3157,18 @@
                   "type": "object",
                   "properties": {
                     "url": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "The authorization URL to redirect the user to"
                     },
                     "redirect": {
-                      "type": "boolean"
+                      "type": "boolean",
+                      "description": "Indicates if the user should be redirected to the authorization URL"
                     }
                   },
-                  "required": ["url", "redirect"]
+                  "required": [
+                    "url",
+                    "redirect"
+                  ]
                 }
               }
             }
@@ -2778,7 +3183,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -2794,7 +3201,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -2865,7 +3274,9 @@
     },
     "/list-accounts": {
       "get": {
-        "tags": ["Default"],
+        "tags": [
+          "Default"
+        ],
         "description": "List all accounts linked to the user",
         "security": [
           {
@@ -2890,22 +3301,32 @@
                         "type": "string"
                       },
                       "createdAt": {
-                        "type": "string"
+                        "type": "string",
+                        "format": "date-time"
                       },
                       "updatedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    },
+                    "accountId": {
+                      "type": "string"
+                    },
+                    "scopes": {
+                      "type": "array",
+                      "items": {
                         "type": "string"
-                      },
-                      "accountId": {
-                        "type": "string"
-                      },
-                      "scopes": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
                       }
                     }
-                  }
+                  },
+                  "required": [
+                    "id",
+                    "provider",
+                    "createdAt",
+                    "updatedAt",
+                    "accountId",
+                    "scopes"
+                  ]
                 }
               }
             }
@@ -2920,7 +3341,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -2936,7 +3359,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -3007,7 +3432,10 @@
     },
     "/delete-user/callback": {
       "get": {
-        "tags": ["Default"],
+        "tags": [
+          "Default"
+        ],
+        "description": "Callback to complete user deletion with verification token",
         "security": [
           {
             "bearerAuth": []
@@ -3030,6 +3458,33 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "User successfully deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Indicates if the deletion was successful"
+                    },
+                    "message": {
+                      "type": "string",
+                      "enum": [
+                        "User deleted"
+                      ],
+                      "description": "Confirmation message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
           "400": {
             "content": {
               "application/json": {
@@ -3040,7 +3495,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -3056,7 +3513,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -3127,7 +3586,10 @@
     },
     "/unlink-account": {
       "post": {
-        "tags": ["Default"],
+        "tags": [
+          "Default"
+        ],
+        "description": "Unlink an account",
         "security": [
           {
             "bearerAuth": []
@@ -3148,12 +3610,29 @@
                     "type": "string"
                   }
                 },
-                "required": ["providerId", "accountId"]
+                "required": [
+                  "providerId"
+                ]
               }
             }
           }
         },
         "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
           "400": {
             "content": {
               "application/json": {
@@ -3164,7 +3643,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -3180,7 +3661,321 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            },
+            "description": "Unauthorized. Due to missing or invalid authentication."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Forbidden. You do not have permission to access this resource or to perform this action."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Not Found. The requested resource was not found."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Too Many Requests. You have exceeded the rate limit. Try again later."
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Internal Server Error. This is a problem with the server that you cannot fix."
+          }
+        }
+      }
+    },
+    "/refresh-token": {
+      "post": {
+        "tags": [
+          "Default"
+        ],
+        "description": "Refresh the access token using a refresh token",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "providerId": {
+                    "type": "string",
+                    "description": "The provider ID for the OAuth provider"
+                  },
+                  "accountId": {
+                    "type": "string",
+                    "description": "The account ID associated with the refresh token"
+                  },
+                  "userId": {
+                    "type": "string",
+                    "description": "The user ID associated with the account"
+                  }
+                },
+                "required": [
+                  "providerId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Access token refreshed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "tokenType": {
+                      "type": "string"
+                    },
+                    "idToken": {
+                      "type": "string"
+                    },
+                    "accessToken": {
+                      "type": "string"
+                    },
+                    "refreshToken": {
+                      "type": "string"
+                    },
+                    "accessTokenExpiresAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "refreshTokenExpiresAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid refresh token or provider configuration"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                }
+              }
+            },
+            "description": "Unauthorized. Due to missing or invalid authentication."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Forbidden. You do not have permission to access this resource or to perform this action."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Not Found. The requested resource was not found."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Too Many Requests. You have exceeded the rate limit. Try again later."
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Internal Server Error. This is a problem with the server that you cannot fix."
+          }
+        }
+      }
+    },
+    "/get-access-token": {
+      "post": {
+        "tags": [
+          "Default"
+        ],
+        "description": "Get a valid access token, doing a refresh if needed",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "providerId": {
+                    "type": "string",
+                    "description": "The provider ID for the OAuth provider"
+                  },
+                  "accountId": {
+                    "type": "string",
+                    "description": "The account ID associated with the refresh token"
+                  },
+                  "userId": {
+                    "type": "string",
+                    "description": "The user ID associated with the account"
+                  }
+                },
+                "required": [
+                  "providerId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "A Valid access token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "tokenType": {
+                      "type": "string"
+                    },
+                    "idToken": {
+                      "type": "string"
+                    },
+                    "accessToken": {
+                      "type": "string"
+                    },
+                    "refreshToken": {
+                      "type": "string"
+                    },
+                    "accessTokenExpiresAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "refreshTokenExpiresAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid refresh token or provider configuration"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -3251,7 +4046,9 @@
     },
     "/ok": {
       "get": {
-        "tags": ["Default"],
+        "tags": [
+          "Default"
+        ],
         "description": "Check if the API is working",
         "security": [
           {
@@ -3261,16 +4058,20 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "API is working",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
                     "ok": {
-                      "type": "boolean"
+                      "type": "boolean",
+                      "description": "Indicates if the API is working"
                     }
-                  }
+                  },
+                  "required": [
+                    "ok"
+                  ]
                 }
               }
             }
@@ -3285,7 +4086,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -3301,7 +4104,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -3372,7 +4177,9 @@
     },
     "/error": {
       "get": {
-        "tags": ["Default"],
+        "tags": [
+          "Default"
+        ],
         "description": "Displays an error page",
         "security": [
           {
@@ -3386,7 +4193,8 @@
             "content": {
               "text/html": {
                 "schema": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "The HTML content of the error page"
                 }
               }
             }
@@ -3401,7 +4209,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },
@@ -3417,7 +4227,9 @@
                       "type": "string"
                     }
                   },
-                  "required": ["message"]
+                  "required": [
+                    "message"
+                  ]
                 }
               }
             },

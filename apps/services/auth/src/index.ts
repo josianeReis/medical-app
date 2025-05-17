@@ -6,9 +6,7 @@ import { auth } from "./auth";
 import { cors } from "@elysiajs/cors";
 import { env } from "./config/env";
 import { swagger } from "@elysiajs/swagger";
-
-const authReference = JSON.parse(fs.readFileSync("./openapi.json", "utf-8"));
-
+import openApi from "../openapi.json";
 
 const betterAuthView = (context: Context) => {
   const BETTER_AUTH_ACCEPT_METHODS = ["POST", "GET"];
@@ -16,15 +14,16 @@ const betterAuthView = (context: Context) => {
   if (BETTER_AUTH_ACCEPT_METHODS.includes(context.request.method)) {
     return auth.handler(context.request);
   } else {
-    context.error(405);
+    context.status(405);
   }
 };
 
 const app = new Elysia()
   .use(cors())
+  .get("/health", ({ status }) => status(200))
   .use(
     swagger({
-      documentation: authReference,
+      documentation: JSON.parse(JSON.stringify(openApi)),
       path: "/api/auth/reference",
     })
   )

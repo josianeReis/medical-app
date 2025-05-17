@@ -2,14 +2,15 @@
   "name": "laudos-mono",
   "private": true,
   "devDependencies": {
-    "@moonrepo/cli": "^1.33.2",
+    "@moonrepo/cli": "^1.35.7",
     "@types/bun": "latest",
-    "eslint-config-next": "^15.2.2",
+    "eslint-config-next": "^15.3.2",
     "querystring": "^0.2.1",
-    "tsconfig-moon": "^1.4.0"
+    "tsconfig-moon": "^1.4.0",
+    "bun-types": "latest"
   },
   "peerDependencies": {
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.3"
   },
   "workspaces": [
     "apps/web/*",
@@ -20,21 +21,25 @@
     "node": "22.14.0"
   },
   "dependencies": {
-    "@dotenvx/dotenvx": "^1.40.0",
-    "@elysiajs/swagger": "^1.2.2",
-    "@radix-ui/react-slot": "^1.2.0",
-    "@tailwindcss/postcss": "^4.1.4",
-    "@tailwindcss/vite": "^4.0.14",
+    "@dotenvx/dotenvx": "^1.44.0",
+    "@elysiajs/swagger": "^1.3.0",
+    "@radix-ui/react-slot": "^1.2.2",
+    "@tailwindcss/postcss": "^4.1.7",
+    "@tailwindcss/vite": "^4.1.7",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "input-otp": "^1.4.2",
-    "lucide-react": "^0.488.0",
-    "next-intl": "^4.0.2",
+    "lucide-react": "^0.511.0",
+    "next-intl": "^4.1.0",
     "postcss": "^8.5.3",
-    "tailwind-merge": "^3.2.0",
-    "tailwindcss": "^4.1.4",
+    "tailwind-merge": "^3.3.0",
+    "tailwindcss": "^4.1.7",
     "tailwindcss-animate": "^1.0.7",
-    "tw-animate-css": "^1.2.4",
-    "zod": "^3.24.2"
+    "tw-animate-css": "^1.2.9",
+    "zod": "^3.24.4",
+    "@elysiajs/cors": "^1.3.3",
+    "better-auth": "^1.2.8",
+    "elysia": "latest",
+    "resend": "^4.5.1"
   }
 }

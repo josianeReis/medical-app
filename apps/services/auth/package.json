@@ -5,18 +5,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "bun run --watch src/index.ts"
   },
-  "dependencies": {
-    "@elysiajs/cors": "^1.2.0",
-    "@elysiajs/swagger": "^1.2.2",
-    "@packages/data-access": "workspace:*",
-    "@packages/email-templates": "workspace:*",
-    "@packages/utils": "workspace:*",
-    "better-auth": "^1.2.7",
-    "elysia": "latest",
-    "resend": "^4.3.0"
-  },
-  "devDependencies": {
-    "bun-types": "latest"
-  },
+  "dependencies": {},
+  "devDependencies": {},
   "module": "src/index.js"
 }

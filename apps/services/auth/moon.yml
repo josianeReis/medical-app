@@ -8,9 +8,9 @@ tags:
   - app
 
 project:
-  name: 'laudos-services/auth'
-  description: 'Auth'
-  channel: '#auth'
+  name: "laudos-services/auth"
+  description: "Auth"
+  channel: "#auth"
 
 tasks:
   dev:
@@ -18,10 +18,23 @@ tasks:
     # args:
     #   - '--inspect'
     local: true
+    deps:
+      - "data-access:migration-up"
   build:
     command: bun build
+    args:
+      - "--compile"
+      - "--minify-whitespace"
+      - "--minify-syntax"
+      - "--target=bun"
+      - "--outfile=server"
+      - "./src/index.ts"
+    outputs:
+      - "server"
   start:
-    command: bun run src/index.ts
+    command: ./server
+    inputs:
+      - "server"
   migration-create:
     command: bunx @better-auth/cli@latest generate
   openapi-generate:
