@@ -1,7 +1,6 @@
 {
   "name": "laudos-mono",
   "private": true,
-
   "devDependencies": {},
   "peerDependencies": {
     "typescript": "^5.8.3"
@@ -15,7 +14,7 @@
     "node": "22.14.0"
   },
   "dependencies": {
-   "tsconfig-moon": "^1.4.0",
+    "tsconfig-moon": "^1.4.0",
     "@moonrepo/cli": "^1.35.7",
     "@types/bun": "^1.2.13",
     "eslint-config-next": "^15.3.2",
