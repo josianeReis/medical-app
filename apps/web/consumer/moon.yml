@@ -28,3 +28,4 @@ tasks:
 
 dependsOn:
   - ui-components
+  - utils

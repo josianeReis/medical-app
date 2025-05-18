@@ -3,6 +3,12 @@
 
 FROM oven/bun:latest AS base
 WORKDIR /app
+
+# Install infisical for secrets management
+RUN apt-get update && apt-get install -y bash curl && curl -1sLf \
+    'https://artifacts-cli.infisical.com/setup.deb.sh' | bash \
+    && apt-get update && apt-get install -y infisical
+
 # Install moon binary
 RUN apt-get update && apt-get install -y curl && \
     curl -fsSL https://moonrepo.dev/install/moon.sh | bash && \
@@ -66,6 +72,6 @@ ARG API_PORT
 ENV API_PORT=$API_PORT
 ENV NODE_ENV=production
 
-CMD [ "./server" ]
+CMD ["infisical", "run", "--projectId", "8411663e-b8b4-41c6-ad95-a6852cc7853c", "--",  "./server" ]
 EXPOSE $API_PORT
 

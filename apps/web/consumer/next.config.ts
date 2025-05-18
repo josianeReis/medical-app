@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  output: "standalone",
 };
 
 const withNextIntl = createNextIntlPlugin();
