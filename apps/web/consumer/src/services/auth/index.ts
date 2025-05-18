@@ -222,7 +222,7 @@ export async function resetPassword(
   return { success: true };
 }
 
-export async function getCurrentUser(): Promise<User | null> {
+export async function getCurrentUser(): Promise<User | undefined> {
   const { data, error } = await authClient.getSession({
     fetchOptions: {
       headers: {
@@ -233,7 +233,7 @@ export async function getCurrentUser(): Promise<User | null> {
 
   if (error?.code || !data?.user.email) {
     console.log("Failed to get user data");
-    return null;
+    return;
   }
 
   return data.user;

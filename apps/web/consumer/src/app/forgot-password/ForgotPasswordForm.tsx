@@ -25,17 +25,22 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-const ForgotPasswordForm = () => {
-  const t = useTranslations("forgot-password");
-  const tCommon = useTranslations("common.formFields");
-  const forgotPasswordSchema = z.object({
+const createForgotPasswordSchema = (tCommon: (key: string) => string) =>
+  z.object({
     email: z
       .string()
       .min(1, tCommon("email.fieldErrors.required"))
       .email(tCommon("email.fieldErrors.invalid")),
   });
 
-  type ForgotPasswordInputs = z.infer<typeof forgotPasswordSchema>;
+export type ForgotPasswordInputs = z.infer<ReturnType<typeof createForgotPasswordSchema>>;
+
+const ForgotPasswordForm = () => {
+  const t = useTranslations("forgot-password");
+  const tCommon = useTranslations("common.formFields");
+  
+  const forgotPasswordSchema = createForgotPasswordSchema(tCommon);
+
   const form = useForm<ForgotPasswordInputs>({
     resolver: zodResolver(forgotPasswordSchema),
     defaultValues: {

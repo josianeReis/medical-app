@@ -25,11 +25,8 @@ interface ResetPasswordFormProps {
   code: string;
 }
 
-const ResetPasswordForm = ({ code = "" }: ResetPasswordFormProps) => {
-  const t = useTranslations("reset-password");
-  const tCommon = useTranslations("common.formFields");
-  const resetPasswordSchema = z
-    .object({
+const createResetPasswordSchema = (tCommon: (key: string) => string) =>
+  z.object({
       newPassword: z
         .string()
         .nonempty(tCommon("newPassword.fieldErrors.required"))
@@ -44,7 +41,14 @@ const ResetPasswordForm = ({ code = "" }: ResetPasswordFormProps) => {
       path: ["confirmNewPassword"],
     });
 
-  type ResetPasswordInputs = z.infer<typeof resetPasswordSchema>;
+export type ResetPasswordInputs = z.infer<ReturnType<typeof createResetPasswordSchema>>;
+
+const ResetPasswordForm = ({ code = "" }: ResetPasswordFormProps) => {
+  const t = useTranslations("reset-password");
+  const tCommon = useTranslations("common.formFields");
+  
+  const resetPasswordSchema = createResetPasswordSchema(tCommon);
+
   const form = useForm<ResetPasswordInputs>({
     resolver: zodResolver(resetPasswordSchema),
     defaultValues: {

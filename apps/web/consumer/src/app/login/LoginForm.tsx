@@ -26,10 +26,8 @@ import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-export const LoginForm = () => {
-  const t = useTranslations("login");
-  const tCommon = useTranslations("common.formFields");
-  const signinSchema = z.object({
+const createSigninSchema = (tCommon: (key: string) => string) =>
+  z.object({
     email: z
       .string()
       .min(1, tCommon("email.fieldErrors.required"))
@@ -37,7 +35,13 @@ export const LoginForm = () => {
     password: z.string().min(1, tCommon("password.fieldErrors.required")),
   });
 
-  type SigninInputs = z.infer<typeof signinSchema>;
+export type SigninInputs = z.infer<ReturnType<typeof createSigninSchema>>;
+
+export const LoginForm = () => {
+  const t = useTranslations("login");
+  const tCommon = useTranslations("common.formFields");
+  
+  const signinSchema = createSigninSchema(tCommon);
 
   const form = useForm<SigninInputs>({
     resolver: zodResolver(signinSchema),

@@ -176,5 +176,25 @@
       "EMAIL_NOT_VERIFIED": "Account created but not verified",
       "EMAIL_REQUIRED": "We couldn't find an email address associated with your account, please login with your password or signup"
     }
+  },
+
+  "create-report": {
+    "examDate": "Exam Date",
+    "examName": "Exam name",
+    "patientName": "Patient name",
+    "dateOfBirth": "Date of birth",
+    "age": "Age",
+    "sex": "Sex",
+    "male": "Male",
+    "female": "Female",
+    "salveButton": "Salve",
+    "printButton": "Print",
+    "cancelButton": "Cancel",
+    "myTemplates": "My Templates",
+    "examNamePlaceholder": "Exam Name",
+    "patientNamePlaceholder": "Patient Name",
+    "agePlaceholder": "Age",
+    "sexPlaceholder": "Sex",
+    "reportTextPlaceholder": "Start your report"
   }
 }

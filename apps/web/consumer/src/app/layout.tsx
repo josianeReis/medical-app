@@ -3,11 +3,9 @@ import "./main.css";
 
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "sonner";
-import { Navbar } from "../components/Navbar";
-import { getCurrentUser } from "@/services/auth";
-import { getTranslations } from "next-intl/server";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,15 +30,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const user = await getCurrentUser();
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <NextIntlClientProvider>
-          <Navbar user={user} />
-          <main className="container mx-auto p-4">{children}</main>
+          <div className="flex flex-1 flex-col gap-4 p-4 pt-0">{children}</div>
           <Toaster position="bottom-center" richColors />
         </NextIntlClientProvider>
       </body>

@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  images: {
+    domains: ['images.unsplash.com', "newprofilepic.photo-cdn.net", "google.com"], // ✅ Adicionado domínio do Unsplash
+  },
   output: "standalone",
 };
 

@@ -5,7 +5,7 @@ export default async function Dashboard() {
   const user = await getCurrentUser();
 
   return (
-    <ProtectedRoute>
+    <ProtectedRoute >
       <div className="container mx-auto p-8 max-w-4xl">
         <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
 

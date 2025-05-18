@@ -1,9 +1,14 @@
 import { getCurrentUser } from "@/services/auth";
 import { Button } from "@packages/ui-components";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
   const user = await getCurrentUser();
+
+  if(user?.email) {
+    redirect('/dashboard')
+  }
   
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh] py-2">

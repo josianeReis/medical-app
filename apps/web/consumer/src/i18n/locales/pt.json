@@ -176,5 +176,21 @@
       "EMAIL_NOT_VERIFIED": "Conta criada mas email não verificado",
       "EMAIL_REQUIRED": "Não encontramos um endereço de e-mail associado à sua conta, por favor, entre com sua senha ou cadastre-se"
     }
-  }
+  },
+
+  "create-report": {
+  "examDate": "Data do exame",
+  "examName": "Nome do exame",
+  "patientName": "Nome do paciente",
+  "dateOfBirth": "Data de nascimento",
+  "age": "Idade",
+  "sex": "Sexo",
+  "male": "Masculino",
+    "female": "Feminino",
+  "salveButton": "Salvar",
+  "printButton": "Imprimir",
+  "cancelButton": "Cancelar",
+   "myTemplates": "Meus Templetes"
+}
+
 }
