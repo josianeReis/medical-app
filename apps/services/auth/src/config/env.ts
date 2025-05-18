@@ -18,6 +18,7 @@ const envSchema = z.object({
   GOOGLE_CLIENT_SECRET: z.string().min(1),
   APPLE_CLIENT_ID: z.string().optional(),
   APPLE_CLIENT_SECRET: z.string().optional(),
+  TRUSTED_CALLBACK_URLS: z.string().optional(),
 });
 
 export const env = generateEnv(envSchema);

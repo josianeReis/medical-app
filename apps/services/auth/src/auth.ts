@@ -11,6 +11,7 @@ export const auth = betterAuth({
   trustedOrigins: [
     "http://localhost:3000",
     "http://localhost:3000/email-verification/success",
+    ...(env.TRUSTED_CALLBACK_URLS ? env.TRUSTED_CALLBACK_URLS.split(",") : []),
   ],
 
   user: {
