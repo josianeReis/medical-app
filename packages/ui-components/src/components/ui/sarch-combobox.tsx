@@ -43,15 +43,15 @@ export const SearchCombobox = ({
 
   const isSearching = searchValue.length > 0;
 
-  useHotkeys([
-    [
-      "p",
-      () => {
-        setOpenTooltip(false);
-        setOpenPopover(true);
-      },
-    ],
-  ]);
+  // useHotkeys([
+  //   [
+  //     "p",
+  //     () => {
+  //       setOpenTooltip(false);
+  //       setOpenPopover(true);
+  //     },
+  //   ],
+  // ]);
 
   return (
     <Popover open={openPopover} onOpenChange={setOpenPopover}>

@@ -55,7 +55,7 @@ const data = {
     
   ],
   navMain: [
-    {
+   {/* {
       title: "Templates",
       url: "#",
       icon: SquareTerminal,
@@ -81,24 +81,24 @@ const data = {
           url: "patient-list",
         },
       ],
-    },
+    }, */},
     {
       title: "Laudos",
       url: "#",
       icon: Bot,
       items: [
-        {
+        {/*
           title: "Consulta",
           url: "#",
-        },
+        */},
         {
           title: "Gerar novo laudo",
           url: "dashboard2",
         },
-        {
+        {/*
           title: "Deleção de laudo",
           url: "#",
-        },
+        */},
       ],
     },
    
