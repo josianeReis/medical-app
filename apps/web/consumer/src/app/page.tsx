@@ -14,7 +14,7 @@ export default async function Home() {
     <div className="flex flex-col items-center justify-center min-h-[80vh] py-2">
       <main className="flex flex-col items-center justify-center w-full flex-1 px-8 text-center max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold mt-4 mb-2">
-          Welcome to Laudos
+          Welcome to Nexdoc.clinic
         </h1>
         <p className="text-xl max-w-2xl mx-auto my-4">
           Our secure platform helps you manage your medical reports

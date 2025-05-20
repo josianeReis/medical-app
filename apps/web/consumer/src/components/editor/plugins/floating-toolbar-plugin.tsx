@@ -10,7 +10,7 @@ export const FloatingToolbarPlugin = createPlatePlugin({
   render: {
     afterEditable: () => (
       <FloatingToolbar>
-        <FloatingToolbarButtons />
+        <FloatingToolbarButtons/>
       </FloatingToolbar>
     ),
   },

@@ -3,15 +3,15 @@
 import * as React from "react";
 import {
   //AudioWaveform,
-  BookOpen,
+  //BookOpen,
   Bot,
  // Command,
-  Frame,
+  //Frame,
   GalleryVerticalEnd,
-  Map,
-  PieChart,
+  //Map,
+  //PieChart,
   //Settings2,
-  SquareTerminal,
+  //SquareTerminal,
 } from "lucide-react";
 
 import { NavMain } from "../components/nav-main";
@@ -36,7 +36,7 @@ const data = {
   },
   teams: [
     {
-      name: "Nexareport",
+      name: "Nexdoc.clinic",
       logo: GalleryVerticalEnd,
       plan: "",
       },
@@ -55,7 +55,7 @@ const data = {
     
   ],
   navMain: [
-   {/* {
+   /* {
       title: "Templates",
       url: "#",
       icon: SquareTerminal,
@@ -81,24 +81,24 @@ const data = {
           url: "patient-list",
         },
       ],
-    }, */},
+    }, */
     {
       title: "Laudos",
       url: "#",
       icon: Bot,
       items: [
-        {/*
+       /* {
           title: "Consulta",
           url: "#",
-        */},
+       },  */
         {
           title: "Gerar novo laudo",
           url: "dashboard2",
-        },
-        {/*
+        }
+        /*{
           title: "Deleção de laudo",
           url: "#",
-        */},
+        },*/
       ],
     },
    
@@ -124,7 +124,7 @@ const data = {
           url: "#",
         },
       ],
-    },*/
+    },
   ],
   projects: [
     {
@@ -141,7 +141,7 @@ const data = {
       name: "Travel",
       url: "#",
       icon: Map,
-    },
+    }, */
   ],
 };
 

@@ -7,7 +7,7 @@ export default function Editor() {
   return (
     <div className="">
       <SettingsProvider>
-        <PlateEditor />
+        <PlateEditor/>
       </SettingsProvider>
 
       <Toaster />

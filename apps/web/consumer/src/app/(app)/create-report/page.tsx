@@ -1,26 +1,27 @@
 "use client";
-import {
-  SearchComboboxData,
-  SearchCombobox,
-} from "@packages/ui-components/src/components/ui/sarch-combobox";
+//import {
+//SearchComboboxData,
+//SearchCombobox,
+//} from "@packages/ui-components/src/components/ui/sarch-combobox";
 
-import { getPatients } from "@/services/patients";
+//import { getPatients } from "@/services/patients";
 import {
-  Button,
+  //Button,
   Card,
   CardContent,
-  DatePicker,
-  NoOptionIcon,
+  //DatePicker,
+  //NoOptionIcon,
   ScrollArea,
 } from "@packages/ui-components";
-import { useTranslations } from "next-intl";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+//import { useTranslations } from "next-intl";
+//import Image from "next/image";
+//import { useEffect, useState } from "react";
 import Editor from "../../../components/editor";
-import { Bitcoin } from "lucide-react";
+//import { Bitcoin } from "lucide-react";
 
 const CreateReport = () => {
-  const t = useTranslations("create-report");
+  {
+    /* const t = useTranslations("create-report");
   const [patientsList, setPatientsList] = useState<SearchComboboxData[]>([]);
 
   const [form, setForm] = useState({
@@ -72,25 +73,24 @@ const CreateReport = () => {
 
   useEffect(() => {
     handleGetPatients();
-  }, []);
+  }, []); */
+  }
 
   return (
     <div className="w-full ">
       <Card>
         <div className="flex flex-col md:flex-row gap-4 px-4 pb-4">
           {/* EDITOR */}
-          <ScrollArea className="flex-[2] border rounded-md p-2 bg-white shadow h-[500px]">
-            <CardContent className="w-[210mm] h-[247.5mm] scale-[auto] origin-top-left print:scale-100 print:w-full print:h-full print:border-none">
-              {/* <textarea
-              className="w-full h-full resize-none outline-none p-4"
-              placeholder={t("reportTextPlaceholder")}
-              value={form.reportText}
-              onChange={(e) => setForm({ ...form, reportText: e.target.value })}
-            /> */}
+
+          <ScrollArea
+            className="whitespace-nowrap flex-[2] border rounded-md p-2 bg-white shadow overflow-y-auto"
+            style={{ height: "calc(100vh - 100px)" }} 
+          >
+            <CardContent className="w-full max-w-full">
               <Editor />
             </CardContent>
           </ScrollArea>
-          <ScrollArea className="flex-[1] border rounded-md p-2 bg-white shadow h-[500px]">
+          {/* <ScrollArea className="flex-[1] border rounded-md p-2 bg-white shadow h-[500px]">
             <CardContent className="w-[210mm] h-[247.5mm] scale-[0.5] origin-top-left print:scale-100 print:w-full print:h-full print:border-none">
               <div className="prose">
                 <h2 className="text-xl font-semibold mb-2">
@@ -121,9 +121,9 @@ const CreateReport = () => {
                 <p>{form.reportText || t("reportTextPlaceholder")}</p>
               </div>
             </CardContent>
-          </ScrollArea>
+          </ScrollArea> */}
         </div>
-        <div className="flex flex-row gap-2 flex-wrap px-4 pb-4">
+        {/* <div className="flex flex-row gap-2 flex-wrap px-4 pb-4">
           <DatePicker
             onValueChange={(date) => setForm({ ...form, examDate: date })}
           />
@@ -148,7 +148,7 @@ const CreateReport = () => {
           >
             {t("printButton")}
           </Button>
-        </div>
+        </div> */}
 
         {/* <CardFooter>
           <UploadImage></UploadImage>  
