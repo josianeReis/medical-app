@@ -27,3 +27,31 @@ const CreateReport = () => {
 };
 
 export default CreateReport;
+
+
+
+
+// 'use client';
+
+// import { useEffect, useState } from "react";
+// import { PlateEditor } from "@/components/editor/plate-editor";
+
+// export default function CreateReportPage() {
+//   const [initialValue, setInitialValue] = useState("");
+
+//   useEffect(() => {
+//     const stored = localStorage.getItem("selectedTemplate");
+//     if (stored) {
+//       const parsed = JSON.parse(stored);
+//       setInitialValue(parsed.content);
+//       localStorage.removeItem("selectedTemplate"); // Limpa para não carregar sempre
+//     }
+//   }, []);
+
+//   return (
+//     <div className="p-6">
+//       <h1 className="text-2xl font-bold mb-4">Gerar novo laudo</h1>
+//       <PlateEditor initialValue={initialValue} />
+//     </div>
+//   );
+// }
