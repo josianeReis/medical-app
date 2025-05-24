@@ -58,11 +58,17 @@ tasks:
     command: drizzle-kit migrate
     options:
       persistent: false
-      runInCI: always
-  migration-check:
-    command: drizzle-kit check
+  migration-up-dev:
+    command: infisical run --env dev -- drizzle-kit migrate
     options:
-      runInCI: true
+      persistent: false
+  migration-up-prod:
+    command: infisical run --env prod -- drizzle-kit migrate
+    options:
+      persistent: false
+
+  migration-check:
+    command: infisical run --env dev -- drizzle-kit check
 
 dependsOn:
   - utils

@@ -16,8 +16,13 @@ project:
 tasks:
   install:
     command: bun install
+  local:
+    command: infisical run --env local --command "next dev"
+    # args:
+    #   - '--turbopack'
+    local: true
   dev:
-    command: next dev
+    command: infisical run --env dev --command "next dev"
     # args:
     #   - '--turbopack'
     local: true

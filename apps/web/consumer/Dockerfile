@@ -1,5 +1,3 @@
-# syntax=docker.io/docker/dockerfile:1
-
 FROM oven/bun:latest AS base
 WORKDIR /app
 

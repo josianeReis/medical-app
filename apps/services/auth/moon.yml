@@ -13,13 +13,20 @@ project:
   channel: "#auth"
 
 tasks:
-  dev:
-    command: bun run --watch --inspect=4011/auth src/index.ts
+  local:
+    command: infisical run --env local -- bun run --watch --inspect=4011/auth src/index.ts
     # args:
     #   - '--inspect'
     local: true
     deps:
       - "data-access:migration-up"
+  dev:
+    command: infisical run --env dev -- bun run --watch --inspect=4011/auth src/index.ts
+    # args:
+    #   - '--inspect'
+    local: true
+    deps:
+      - "data-access:migration-up-dev"
   build:
     command: bun build
     args:
@@ -32,7 +39,7 @@ tasks:
     outputs:
       - "server"
   start:
-    command: ./server
+    command: infisical run --env prod -- ./server
     inputs:
       - "server"
   migration-create:

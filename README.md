@@ -12,6 +12,11 @@ Download and install https://nodejs.org/en
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
+### 2.1 Infisical to injet envs
+```bash
+brew install infisical/get-cli/infisical
+```
+
 ### 3. Install Bun
 
 [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime. Install it using:

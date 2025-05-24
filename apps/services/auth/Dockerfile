@@ -1,6 +1,3 @@
-#### BASE STAGE
-#### Installs moon.
-
 FROM oven/bun:latest AS base
 WORKDIR /app
 
