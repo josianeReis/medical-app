@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import type { Value } from '@udecode/plate';
@@ -199,16 +200,19 @@ export const useCreateEditor = (
       ],
       value: [
         {
-          children: [{ text: 'Playground' }],
+          children: [
+            { text: 'teste' },
+            // { text: 'Playground' }
+          ],
           type: 'h1',
         },
         {
           children: [
-            { text: 'A rich-text editor with AI capabilities. Try the ' },
-            { bold: true, text: 'AI commands' },
-            { text: ' or use ' },
-            { kbd: true, text: 'Cmd+J' },
-            { text: ' to open the AI menu.' },
+            // { text: 'A rich-text editor with AI capabilities. Try the ' },
+            // { bold: true, text: 'AI commands' },
+            // { text: ' or use ' },
+            // { kbd: true, text: 'Cmd+J' },
+            // { text: ' to open the AI menu.' },
           ],
           type: ParagraphPlugin.key,
         },

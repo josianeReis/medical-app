@@ -9,8 +9,13 @@ import { Editor, EditorContainer } from "@/components/ui/editor";
 import { useSettings } from "@/components/editor/settings";
 import { generateText } from "@/services/api/openai-service";
 
-export function PlateEditor() {
+interface PlateEditorProps {
+  initialValue?: string;
+}
+
+export function PlateEditor({ initialValue = "" }: PlateEditorProps) {
   const editor = useCreateEditor();
+  const [value, setValue] = React.useState(initialValue);
   const [loading, setLoading] = React.useState(false);
   const [generatedText, setGeneratedText] = React.useState<string>("");
   const { keys, model } = useSettings();
@@ -48,7 +53,7 @@ export function PlateEditor() {
     <DndProvider backend={HTML5Backend}>
       <Plate editor={editor}>
         <EditorContainer>
-          <Editor variant="demo" />
+          <Editor variant="demo" value={value} onChange={setValue} />
         </EditorContainer>
 
         <div className="absolute right-4 top-4 flex gap-2">

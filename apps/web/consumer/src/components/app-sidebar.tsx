@@ -92,8 +92,12 @@ const data = {
           url: "#",
        },  */
         {
+          title: "Templates",
+          url: "templates",
+        },
+        {
           title: "Gerar novo laudo",
-          url: "dashboard2",
+          url: "create-report",
         }
         /*{
           title: "Deleção de laudo",
