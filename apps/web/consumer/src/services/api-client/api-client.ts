@@ -11,7 +11,6 @@ const getCookieHeader = async () => {
       .getAll()
       .map((c) => `${c.name}=${c.value}`)
       .join("; "),
-    Origin: "http://localhost:3000",
   };
 };
 

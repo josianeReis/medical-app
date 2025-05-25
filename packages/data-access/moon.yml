@@ -55,7 +55,7 @@ tasks:
     args:
       - --config=./drizzle.config.ts
   migration-up:
-    command: drizzle-kit migrate
+    command: infisical run --env local -- drizzle-kit migrate
     options:
       persistent: false
   migration-up-dev:
