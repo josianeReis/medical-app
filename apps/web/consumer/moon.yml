@@ -9,11 +9,15 @@ tags:
   - app
 
 project:
-  name: 'laudos-frontend/consumer'
-  description: 'Consumer'
-  channel: '#consumer'
-  
+  name: "laudos-frontend/consumer"
+  description: "Consumer"
+  channel: "#consumer"
+
 tasks:
+  lint:
+    command: next lint
+    options:
+      runInCI: true
   install:
     command: bun install
   local:
@@ -28,6 +32,51 @@ tasks:
     local: true
   build:
     command: next build
+    options:
+      runInCI: true
+    outputs:
+      - ".next"
+  docker-release-pr:
+    command: sh
+    args:
+      - -c
+      - |
+        # Build the image
+        docker build \
+          -t "$REGISTRY/$MOON_PROJECT_ID:$TAG" \
+          -f apps/web/consumer/Dockerfile .
+
+        echo "→ pushing $MOON_PROJECT_ID with tag $TAG"
+        # Push the image to your private registry
+        docker push "$REGISTRY/$MOON_PROJECT_ID:$TAG"
+    # deps: ["build"] # ensures the app is already compiled
+    inputs:
+      # Pass-through the two variables your GitHub Action injects
+      - "$REGISTRY"
+      - "$TAG"
+    options:
+      runFromWorkspaceRoot: true
+  docker-release-prod:
+    command: sh
+    args:
+      - -c
+      - |
+        # Build the image
+        docker build \
+          -t "$REGISTRY/$MOON_PROJECT_ID:latest" \
+          -t "$REGISTRY/$MOON_PROJECT_ID:$TAG" \
+          -f apps/web/consumer/Dockerfile .
+
+        echo "→ pushing $MOON_PROJECT_ID with tag latest & $TAG"
+        # Push the image to your private registry
+        docker push "$REGISTRY/$MOON_PROJECT_ID"
+    # deps: ["build"] # ensures the app is already compiled
+    inputs:
+      # Pass-through the two variables your GitHub Action injects
+      - "$REGISTRY"
+      - "$TAG"
+    options:
+      runFromWorkspaceRoot: true
   start:
     command: next start
 

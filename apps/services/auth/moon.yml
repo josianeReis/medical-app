@@ -1,3 +1,5 @@
+$schema: "https://moonrepo.dev/schemas/project.json"
+
 id: auth
 type: application
 language: typescript
@@ -13,6 +15,10 @@ project:
   channel: "#auth"
 
 tasks:
+  lint:
+    command: eslint
+    options:
+      runInCI: true
   local:
     command: infisical run --env local -- bun run --watch --inspect=4011/auth src/index.ts
     # args:
@@ -38,6 +44,46 @@ tasks:
       - "./src/index.ts"
     outputs:
       - "server"
+    options:
+      runInCI: true
+  docker-release-pr:
+    command: sh
+    args:
+      - -c
+      - |
+        # Build the image
+        docker build \
+          -t "$REGISTRY/$MOON_PROJECT_ID:$TAG" \
+          -f apps/services/auth/Dockerfile .
+
+        echo "→ pushing $MOON_PROJECT_ID with tag $TAG"
+        # Push the image to your private registry
+        docker push "$REGISTRY/$MOON_PROJECT_ID:$TAG"
+    inputs:
+      - "$REGISTRY"
+      - "$TAG"
+    options:
+      runFromWorkspaceRoot: true
+  docker-release-prod:
+    command: sh
+    args:
+      - -c
+      - |
+        # Build the image
+        docker build \
+          -t "$REGISTRY/$MOON_PROJECT_ID:latest" \
+          -t "$REGISTRY/$MOON_PROJECT_ID:$TAG" \
+          -f apps/services/auth/Dockerfile .
+
+        echo "→ pushing $MOON_PROJECT_ID with tag latest & $TAG"
+        # Push the image to your private registry
+        docker push "$REGISTRY/$MOON_PROJECT_ID"
+    inputs:
+      # Pass-through the two variables your GitHub Action injects
+      - "$REGISTRY"
+      - "$TAG"
+    options:
+      runFromWorkspaceRoot: true
   start:
     command: infisical run --env prod -- ./server
     inputs:

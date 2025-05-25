@@ -1,7 +1,12 @@
 {
   "name": "laudos-mono",
   "private": true,
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint-plugin-prettier": "^5.4.0",
+    "eslint-plugin-security": "^3.0.1",
+    "eslint-plugin-unicorn": "^59.0.1",
+    "typescript-eslint": "^8.32.1"
+  },
   "peerDependencies": {
     "typescript": "^5.8.3"
   },
