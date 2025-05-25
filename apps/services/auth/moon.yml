@@ -19,6 +19,10 @@ tasks:
     command: eslint
     options:
       runInCI: true
+  lint-fix:
+    command: eslint --fix
+    options:
+      runInCI: true
   local:
     command: infisical run --env local -- bun run --watch --inspect=4011/auth src/index.ts
     # args:

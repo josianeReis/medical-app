@@ -1,51 +1,37 @@
-import { schema } from "@packages/data-access";
-import { betterAuth } from "better-auth";
-import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { openAPI } from "better-auth/plugins";
-import { dbClient } from "./config/db";
-import { env } from "./config/env";
-import { sendEmailVerification } from "./services/email/sendEmailVerification";
-import { sendRecoveryPasswordEmail } from "./services/email/sendRecoveryPasswordEmail";
+import { schema } from '@packages/data-access';
+import { betterAuth } from 'better-auth';
+import { drizzleAdapter } from 'better-auth/adapters/drizzle';
+import { openAPI } from 'better-auth/plugins';
+import { dbClient } from './config/db';
+import { env } from './config/env';
+import { sendEmailVerification } from './services/email/sendEmailVerification';
+import { sendRecoveryPasswordEmail } from './services/email/sendRecoveryPasswordEmail';
 
 export const auth = betterAuth({
-  trustedOrigins: [
-    "http://localhost:3000",
-    "http://localhost:3000/email-verification/success",
-    ...(env.TRUSTED_CALLBACK_URLS ? env.TRUSTED_CALLBACK_URLS.split(",") : []),
-  ],
+  trustedOrigins: ['http://localhost:3000', 'http://localhost:3000/email-verification/success', ...(env.TRUSTED_CALLBACK_URLS ? env.TRUSTED_CALLBACK_URLS.split(',') : [])],
   advanced: {
-    useSecureCookies: process.env.NODE_ENV === "production",
+    useSecureCookies: process.env.NODE_ENV === 'production',
   },
   user: {
-    fields: { name: "firstName" },
+    fields: { name: 'firstName' },
     additionalFields: {
-      firstName: { type: "string", required: true },
-      lastName: { type: "string", required: true },
+      firstName: { type: 'string', required: true },
+      lastName: { type: 'string', required: true },
     },
   },
-  database: drizzleAdapter(dbClient, { provider: "pg", schema }),
+  database: drizzleAdapter(dbClient, { provider: 'pg', schema }),
   emailAndPassword: {
     enabled: true,
     requireEmailVerification: true,
 
     sendResetPassword: async ({ user, url, token }) => {
-      sendRecoveryPasswordEmail(
-        user.email,
-        token,
-        url,
-        (user as Session["user"]).firstName
-      );
+      sendRecoveryPasswordEmail(user.email, token, url, (user as Session['user']).firstName);
     },
   },
   emailVerification: {
     sendOnSignUp: true,
     sendVerificationEmail: async ({ user, url, token }) => {
-      sendEmailVerification(
-        user.email,
-        token,
-        url,
-        (user as Session["user"]).firstName
-      );
+      sendEmailVerification(user.email, token, url, (user as Session['user']).firstName);
     },
   },
   socialProviders: {
