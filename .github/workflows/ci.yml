@@ -67,7 +67,7 @@ jobs:
 
   build:
     name: Build + push Docker images
-    needs: [checks, affected] # don’t start if lint/build failed
+    needs: [checks, affected] # don't start if lint/build failed
     if: needs.checks.result == 'success'
     runs-on: ubuntu-latest
     strategy:
@@ -111,11 +111,26 @@ jobs:
             moon run --affected --remote ${{ matrix.project }}:docker-release-prod
           fi
 
+  build_report:
+    name: Report Build Outcomes
+    runs-on: ubuntu-latest
+    needs: [affected, build]
+    if: >-
+      always() &&
+      github.event_name == 'pull_request' &&
+      needs.build.result != 'skipped' &&
+      needs.affected.outputs.matrix != '{"project":[]}'
+    steps:
+      - name: Post Moon run-report after build
+        uses: moonrepo/run-report-action@v1
+        with:
+          access-token: ${{ secrets.GITHUB_TOKEN }}
+
   #--- 4. DEPLOY WITH COOLIFY --------------------------------------------------
 
   deploy:
     name: Trigger Coolify deploy
-    needs: build
+    needs: [build, affected]
     if: needs.build.result == 'success'
     runs-on: ubuntu-latest
     steps:
@@ -132,3 +147,11 @@ jobs:
               "${{ vars.COOLIFY_DEPLOY_WEBHOOK }}&tag=${{ github.sha }}" \
               -H "Authorization: Bearer $COOLIFY_TOKEN"
           fi
+      - name: Post Moon run-report after deploy
+        if: >-
+          always() &&
+          github.event_name == 'pull_request' &&
+          needs.affected.outputs.matrix != '{"project":[]}'
+        uses: moonrepo/run-report-action@v1
+        with:
+          access-token: ${{ secrets.GITHUB_TOKEN }}
