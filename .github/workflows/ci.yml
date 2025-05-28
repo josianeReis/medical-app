@@ -68,7 +68,7 @@ jobs:
   build:
     name: Build + push Docker images
     needs: [checks, affected] # don't start if lint/build failed
-    if: needs.checks.result == 'success'
+    if: needs.checks.result == 'success' && needs.affected.outputs.matrix != '{"project":[]}'
     runs-on: ubuntu-latest
     strategy:
       matrix: ${{ fromJSON(needs.affected.outputs.matrix) }}
