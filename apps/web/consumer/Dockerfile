@@ -3,7 +3,7 @@ WORKDIR /app
 
 # Install infisical for secrets management
 RUN apt-get update && apt-get install -y bash curl && curl -1sLf \
-    'https://artifacts-cli.infisical.com/setup.deb.sh' | bash \
+    'https://dl.cloudsmith.io/public/infisical/infisical-cli/setup.deb.sh' | bash \
     && apt-get update && apt-get install -y infisical
 
 # Install moon binary
@@ -77,7 +77,7 @@ ENV HOSTNAME="0.0.0.0"
 EXPOSE $PORT
 # CMD moon run consumer:start
 # CMD ["infisical", "run", "--projectId", "17af259a-1d6d-4ed2-8aac-c1dfb63478f8", "--command", "HOSTNAME=0.0.0.0 bun apps/web/consumer/server.js"]
-CMD ["infisical", "run", "--projectId", "17af259a-1d6d-4ed2-8aac-c1dfb63478f8", "--env", "prod", "--command", "bun ./apps/web/consumer/server.js"]
+CMD ["./start.sh"]
 
 
 
