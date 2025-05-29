@@ -56,7 +56,6 @@ ENV NODE_ENV=production
 
 COPY --from=build /app/apps/web/consumer/public ./apps/web/consumer/public
 
-# Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 # COPY --from=build --chown=nextjs:nodejs /app/apps/web/consumer/.next/standalone ./
 # COPY --from=build --chown=nextjs:nodejs /app/apps/web/consumer/.next/static ./.next/static
@@ -65,6 +64,7 @@ COPY --from=build /app/apps/web/consumer/public ./apps/web/consumer/public
 # COPY --from=build /app/apps/web/consumer/.next/standalone/node_modules ./node_modules
 COPY --from=build /app/apps/web/consumer/.next/standalone ./
 COPY --from=build /app/apps/web/consumer/.next/static ./apps/web/consumer/.next/static
+COPY --from=build /app/apps/web/consumer/start.sh start.sh
 
 
 # USER nextjs
@@ -75,10 +75,6 @@ ARG PORT
 ENV PORT=$PORT
 ENV HOSTNAME="0.0.0.0"
 EXPOSE $PORT
-# CMD moon run consumer:start
+
 # CMD ["infisical", "run", "--projectId", "17af259a-1d6d-4ed2-8aac-c1dfb63478f8", "--command", "HOSTNAME=0.0.0.0 bun apps/web/consumer/server.js"]
 CMD ["./start.sh"]
-
-
-
-

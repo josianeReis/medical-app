@@ -56,21 +56,20 @@ RUN moon run auth:build
 RUN moon docker prune
 
 #### START STAGE
-#### Runs the project.
 
 # FROM gcr.io/distroless/base AS start
 FROM base AS start
 
 WORKDIR /app
-# Copy built sources
+
 # COPY --from=build /root/.proto /root/.proto
 COPY --from=build /app/apps/services/auth/server server
+COPY --from=build /app/apps/services/auth/start.sh start.sh
 
 ARG API_PORT
 ENV API_PORT=$API_PORT
 ENV NODE_ENV=production
 
-# CMD ["infisical", "run", "--projectId", "8411663e-b8b4-41c6-ad95-a6852cc7853c","--env", "prod", "--",  "./server" ]
-CMD ["./start.sh"]
+CMD ["infisical", "run", "--projectId", "8411663e-b8b4-41c6-ad95-a6852cc7853c","--env", "prod", "--",  "./server" ]
+# CMD ["./start.sh"]
 EXPOSE $API_PORT
-

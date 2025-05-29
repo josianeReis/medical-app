@@ -139,13 +139,9 @@ jobs:
           COOLIFY_TOKEN: ${{ secrets.COOLIFY_API_TOKEN }}
         run: |
           if [ "${{ github.event_name }}" = "pull_request" ]; then
-            curl -s -X POST \
-              "${{ vars.COOLIFY_DEPLOY_WEBHOOK }}&pr=${{ github.event.pull_request.number }}" \
-              -H "Authorization: Bearer $COOLIFY_TOKEN"
+            curl -s -X POST "${{ vars.COOLIFY_DEPLOY_WEBHOOK }}&pr=${{ github.event.pull_request.number }}" -H "Authorization: Bearer $COOLIFY_TOKEN"
           else
-            curl -s -X POST \
-              "${{ vars.COOLIFY_DEPLOY_WEBHOOK }}&tag=${{ github.sha }}" \
-              -H "Authorization: Bearer $COOLIFY_TOKEN"
+            curl -s -X POST "${{ vars.COOLIFY_DEPLOY_WEBHOOK }}" -H "Authorization: Bearer $COOLIFY_TOKEN"
           fi
       - name: Post Moon run-report after deploy
         if: >-
