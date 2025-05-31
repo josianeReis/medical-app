@@ -25,6 +25,8 @@ else
   echo "${YELLOW}tput not found, proceeding without colored output.${RESET}"
 fi
 
+SETUP_PERFORMED_ACTIONS=false # Track if any setup actions are performed
+
 echo "${BLUE}${BOLD}Starting development environment setup...${RESET}"
 
 # Function to detect OS
@@ -61,6 +63,7 @@ install_prerequisites_macos() {
   if ! command -v brew &> /dev/null; then
     echo "${YELLOW}Homebrew not found. Installing Homebrew...${RESET}"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    SETUP_PERFORMED_ACTIONS=true # Indicate an action was performed
     # Add Homebrew to PATH - for Apple Silicon
     if [ -d "/opt/homebrew/bin" ]; then
         echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
@@ -86,6 +89,7 @@ install_prerequisites_macos() {
     else
       echo "${CYAN}Installing $pkg using Homebrew...${RESET}"
       brew install "$pkg"
+      SETUP_PERFORMED_ACTIONS=true # Indicate an action was performed
     fi
   done
   echo "${GREEN}macOS prerequisites managed.${RESET}"
@@ -103,6 +107,7 @@ install_prerequisites_ubuntu() {
     else
       echo "${CYAN}Installing $pkg using APT...${RESET}"
       sudo apt-get install -y "$pkg"
+      SETUP_PERFORMED_ACTIONS=true # Indicate an action was performed
     fi
   done
   echo "${GREEN}Ubuntu prerequisites managed.${RESET}"
@@ -137,6 +142,7 @@ install_infisical() {
         brew tap infisical/get-cli
     fi
     brew install infisical/get-cli/infisical
+    SETUP_PERFORMED_ACTIONS=true # Indicate an action was performed
   elif [ "$OS" = "ubuntu" ]; then
     curl -1sLf \
       'https://artifacts-cli.infisical.com/setup.deb.sh' \
@@ -144,11 +150,16 @@ install_infisical() {
     # APT update was called in prerequisites, but good to ensure for the new repo
     sudo apt-get update 
     sudo apt-get install -y infisical
+    SETUP_PERFORMED_ACTIONS=true # Indicate an action was performed
   else
     echo "${YELLOW}Infisical installation not configured for $OS. Attempting npm fallback or manual install.${RESET}"
     if command -v npm &> /dev/null; then
         echo "${CYAN}Attempting to install Infisical CLI via npm as a fallback...${RESET}"
-        npm install -g @infisical/cli || echo "${YELLOW}npm install of Infisical CLI failed. Please check npm/Node.js or install manually.${RESET}"
+        if npm install -g @infisical/cli; then
+            SETUP_PERFORMED_ACTIONS=true # Indicate an action was performed
+        else
+            echo "${YELLOW}npm install of Infisical CLI failed. Please check npm/Node.js or install manually.${RESET}"
+        fi
     else
         echo "${YELLOW}npm not found. Cannot attempt fallback Infisical installation. Please install manually: https://infisical.com/docs/cli/overview ${RESET}"
     fi
@@ -175,6 +186,7 @@ install_bun() {
 
   echo "${CYAN}Installing Bun...${RESET}"
   curl -fsSL https://bun.sh/install | bash
+  SETUP_PERFORMED_ACTIONS=true # Indicate an action was performed
   # Add bun to PATH - this is usually handled by bun's installer, but ensure shell is configured
   export BUN_INSTALL="$HOME/.bun" # Default bun installation directory
   export PATH="$BUN_INSTALL/bin:$PATH"
@@ -195,11 +207,12 @@ install_proto_moon() {
 
   if [ -n "$proto_executable" ]; then
     echo "${GREEN}Proto already installed. Upgrading Proto itself...${RESET}"
-    "$proto_executable" upgrade self
+    "$proto_executable" upgrade
     echo "${GREEN}Proto is now at: $($proto_executable --version)${RESET}"
   else
     echo "${CYAN}Installing Proto...${RESET}"
     bash <(curl -fsSL https://moonrepo.dev/install/proto.sh) --yes
+    SETUP_PERFORMED_ACTIONS=true # Indicate an action was performed for new Proto install
     export PATH="$HOME/.proto/bin:$PATH" # Add proto to PATH for current session
     proto_executable="$HOME/.proto/bin/proto" # Set for current session
     
@@ -234,15 +247,30 @@ install_proto_moon() {
   fi
 
   echo "${CYAN}Managing Moon installation using Proto...${RESET}"
-  if "$proto_executable" has moon; then
+  if command -v moon &> /dev/null; then
       echo "${GREEN}Moon already installed via Proto. Upgrading Moon...${RESET}"
-      "$proto_executable" upgrade moon
-      echo "${GREEN}Moon is now at: $($proto_executable run moon --version)${RESET}"
+      "$proto_executable" install moon --pin
   else
       echo "${CYAN}Installing Moon using Proto...${RESET}"
-      "$proto_executable" install moon
-      echo "${GREEN}Moon installed successfully via Proto: $($proto_executable run moon --version)${RESET}"
+      "$proto_executable" install moon --pin
+      SETUP_PERFORMED_ACTIONS=true # Indicate an action was performed for new Moon install
+      echo "${GREEN}Moon installed successfully via Proto: $(moon --version)${RESET}"
   fi
+
+  echo "${CYAN}Managing Bun installation using Proto...${RESET}"
+  if command -v bun &> /dev/null; then
+      echo "${GREEN}Bun already installed via Proto. Upgrading Bun...${RESET}"
+      "$proto_executable" install bun --pin
+  else
+      echo "${CYAN}Installing Bun using Proto...${RESET}"
+      "$proto_executable" install bun --pin
+      SETUP_PERFORMED_ACTIONS=true # Indicate an action was performed for new Bun install
+      echo "${GREEN}Bun installed successfully via Proto: $(bun --version)${RESET}"
+  fi
+
+  echo "${CYAN}Installing project dependencies...${RESET}"
+  bun install
+  echo "${GREEN}Project dependencies installed successfully 🎉${RESET}"
 }
 
 # Main script execution
@@ -263,39 +291,40 @@ if ! install_proto_moon; then # Check if proto/moon installation failed
   # Decide if you want to exit or let the script continue to print next steps
 fi
 
-
-echo ""
-echo "${MAGENTA}${BOLD}---------------------------------------------------------------------${RESET}"
-echo "${MAGENTA}${BOLD}Development environment setup script finished.${RESET}"
-echo "${MAGENTA}${BOLD}---------------------------------------------------------------------${RESET}"
-echo ""
-echo "${YELLOW}${BOLD}Next Steps (Manual):${RESET}"
-echo "${YELLOW}1. Configure SSH Key for GitHub:${RESET}"
-echo "   Follow instructions at: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account"
-echo "   If you haven't already, run: ssh-keygen -t ed25519 -C \"your_email@example.com\""
-echo "   Then add the public key to GitHub: pbcopy < ~/.ssh/id_ed25519.pub (macOS) or xclip -selection clipboard < ~/.ssh/id_ed25519.pub (Linux, if xclip is installed)"
-echo ""
-echo "${YELLOW}2. Clone the repository if you haven't already (if this script is not run from within it):${RESET}"
-echo "   ${CYAN}git clone https://github.com/laudosinfra/laudos-mono.git${RESET}"
-echo "   ${CYAN}cd laudos-mono${RESET}"
-echo ""
-echo "${YELLOW}3. Setup .env file:${RESET}"
-echo "   Create a copy of '.env-example' and rename it to '.env'."
-echo "   Fill out the DB_URL and other necessary variables."
-echo ""
-echo "${YELLOW}4. Install project dependencies (if not done automatically by another process):${RESET}"
-echo "   ${CYAN}bun install${RESET}"
-echo ""
-echo "${YELLOW}5. To start development services (after Infisical login and .env setup):${RESET}"
-echo "   Infisical login: ${CYAN}infisical login${RESET}"
-echo "   Initialize Infisical for the project (if not done): ${CYAN}infisical init${RESET}"
-echo "   Inject secrets and run (example for consumer:dev): ${CYAN}infisical run -- moon run consumer:dev${RESET}"
-echo "   ${YELLOW}Or, export secrets to .env and then run:${RESET}"
-echo "     ${CYAN}infisical export -e dev --format dotenv > .env${RESET}"
-echo "     ${CYAN}moon run data-access:db-start${RESET}"
-echo "     ${CYAN}moon run data-access:migration-up${RESET}"
-echo "     ${CYAN}moon run auth:dev${RESET}"
-echo "     ${CYAN}moon run consumer:dev${RESET}"
-echo ""
-echo "${MAGENTA}Remember to ${BOLD}open a new terminal session${RESET} or ${BOLD}source your .bashrc/.zshrc${RESET} if some commands like 'proto' or 'bun' are not found immediately.${RESET}"
-echo "${MAGENTA}${BOLD}---------------------------------------------------------------------${RESET}" 
+if [ "$SETUP_PERFORMED_ACTIONS" = true ]; then
+  echo ""
+  echo "${MAGENTA}${BOLD}---------------------------------------------------------------------${RESET}"
+  echo "${MAGENTA}${BOLD}✨🎉 Hooray! Development environment setup script finished.${RESET}"
+  echo "${MAGENTA}${BOLD}All requested checks and installations have been processed.${RESET}"
+  echo "${MAGENTA}${BOLD}---------------------------------------------------------------------${RESET}"
+  echo ""
+  echo "${YELLOW}${BOLD}Next Steps (Manual):${RESET}"
+  echo ""
+  echo "${YELLOW}1. Login to Nexdoc infisical environement variables management system (if not done before):${RESET}"
+  echo "   Run this command on terminal: ${CYAN}infisical login --domain=https://infisical.nexdoc.clinic${RESET}"
+  echo ""
+  echo "${YELLOW}2. To start development services (after Infisical login):${RESET}"
+  echo "   Now the secrets will be automatically injected, just run the project commands such as:"
+  echo "     ${CYAN}moon run data-access:db-start${RESET}"
+  echo "     ${CYAN}moon run data-access:migration-up${RESET}"
+  echo "     ${CYAN}moon run auth:dev${RESET}"
+  echo "     ${CYAN}moon run consumer:dev${RESET}"
+  echo ""
+  echo "${MAGENTA}Remember to ${BOLD}open a new terminal session${RESET} or ${BOLD}source your .bashrc/.zshrc${RESET} if some commands like 'proto' or 'bun' are not found immediately.${RESET}"
+  echo "${MAGENTA}${BOLD}---------------------------------------------------------------------${RESET}"
+else
+  echo ""
+  echo "${GREEN}${BOLD}✨🎉 Hooray! Your development environment is already in tip-top shape! 🎉✨${RESET}"
+  echo "${GREEN}All tools are accounted for and seem to be up-to-date.${RESET}"
+  echo "${GREEN}No new installations were performed during this run.${RESET}"
+  echo ""
+  echo "${YELLOW}${BOLD}Suggested next commands to get you coding:${RESET}"
+  echo "   ${CYAN}moon run data-access:db-start${RESET}"
+  echo "   ${CYAN}moon run data-access:migration-up${RESET}"
+  echo "   ${CYAN}moon run auth:dev${RESET}"
+  echo "   ${CYAN}moon run consumer:dev${RESET}"
+  echo ""
+  echo "${MAGENTA}If you intended to force updates or reinstall, please check the script or tool-specific commands.${RESET}"
+  echo "${MAGENTA}Remember to ${BOLD}open a new terminal session${RESET} or ${BOLD}source your .bashrc/.zshrc${RESET} if you've made manual changes or expect recent PATH updates to take effect.${RESET}"
+  echo "${MAGENTA}${BOLD}---------------------------------------------------------------------${RESET}"
+fi 

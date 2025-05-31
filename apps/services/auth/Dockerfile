@@ -2,7 +2,7 @@ FROM oven/bun:latest AS base
 WORKDIR /app
 
 # Install infisical for secrets management
-RUN apt-get update && apt-get install -y bash curl && curl -1sLf \
+RUN apt-get update && apt-get install -y bash curl wget && curl -1sLf \
     'https://artifacts-cli.infisical.com/setup.deb.sh' | bash \
     && apt-get update && apt-get install -y infisical
 
@@ -15,9 +15,8 @@ RUN apt-get update && apt-get install -y curl && \
 ENV PATH="/root/.moon/bin:$PATH"
 
 # Verify moon is installed
-RUN moon --version 
+RUN moon --version
 RUN echo "moon installed"
-
 
 #### SKELETON STAGE
 #### Scaffolds repository skeleton structures.
@@ -64,12 +63,12 @@ WORKDIR /app
 
 # COPY --from=build /root/.proto /root/.proto
 COPY --from=build /app/apps/services/auth/server server
-COPY --from=build /app/apps/services/auth/start.sh start.sh
 
 ARG API_PORT
 ENV API_PORT=$API_PORT
 ENV NODE_ENV=production
 
-CMD ["infisical", "run", "--projectId", "8411663e-b8b4-41c6-ad95-a6852cc7853c","--env", "prod", "--",  "./server" ]
+CMD ["sh", "-c", "infisical run --token $INFISICAL_TOKEN --projectId $INFISICAL_PROJECT_ID --env $INFISICAL_ENV --path $INFISICAL_PATH -- ./server"]
+# CMD ["infisical", "run", "--token", "$INFISICAL_TOKEN", "--projectId", "$INFISICAL_PROJECT_ID", "--env", "$INFISICAL_ENV", "--path", "$INFISICAL_PATH", "--", "./server" ]
 # CMD ["./start.sh"]
 EXPOSE $API_PORT

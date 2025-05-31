@@ -10,7 +10,7 @@ tags:
   - app
 
 project:
-  name: "laudos-services/auth"
+  name: "nexdoc/auth"
   description: "Auth"
   channel: "#auth"
 
@@ -20,23 +20,21 @@ tasks:
     options:
       runInCI: true
   lint-fix:
-    command: eslint --fix
-    options:
-      runInCI: true
-  local:
-    command: infisical run --env local -- bun run --watch --inspect=4011/auth src/index.ts
+    extends: "lint"
+    args: "--fix"
+    local: true
+  dev:
+    command: infisical run --env dev --path /auth-api -- bun run --watch --inspect=4011/auth src/index.ts
     # args:
     #   - '--inspect'
     local: true
     deps:
       - "data-access:migration-up"
-  dev:
-    command: infisical run --env dev -- bun run --watch --inspect=4011/auth src/index.ts
+  stg:
+    command: infisical run --env stg --path /auth-api -- bun run --watch --inspect=4011/auth src/index.ts
     # args:
     #   - '--inspect'
     local: true
-    deps:
-      - "data-access:migration-up-dev"
   build:
     command: bun build
     args:
@@ -89,9 +87,11 @@ tasks:
     options:
       runFromWorkspaceRoot: true
   start:
-    command: infisical run --env prod -- ./server
+    command: infisical run --env prod --path /auth-api -- ./server
     inputs:
       - "server"
+    deps:
+      - "build"
   migration-create:
     command: bunx @better-auth/cli@latest generate
   openapi-generate:

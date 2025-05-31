@@ -23,7 +23,7 @@ tasks:
     options:
       internal: true
   db-studio:
-    command: dotenvx run -- drizzle-kit studio
+    command: infisical run --env dev --path /data-access -- drizzle-kit studio
     args:
       - "--port=5455"
       - --config=./drizzle.config.ts
@@ -35,15 +35,15 @@ tasks:
       # Defaults to .env
       envFile: true
   db-start:
-    command: docker compose up
+    command: infisical run --env dev --path /data-access -- docker compose up
     local: true
   db-stop:
-    command: docker compose down --remove-orphans
+    command: infisical run --env dev --path /data-access -- docker compose down --remove-orphans
     local: true
     options:
       persistent: false
   db-clean:
-    command: docker compose down --remove-orphans -v
+    command: infisical run --env dev --path /data-access -- docker compose down --remove-orphans -v
     local: true
     options:
       persistent: false
@@ -55,20 +55,23 @@ tasks:
     args:
       - --config=./drizzle.config.ts
   migration-up:
-    command: drizzle-kit migrate
+    command: infisical run --env dev --path /data-access -- drizzle-kit migrate
     options:
       persistent: false
-  migration-up-dev:
-    command: infisical run --env dev -- drizzle-kit migrate
+  migration-up-stg:
+    command: infisical run --env stg --path /data-access -- drizzle-kit migrate
     options:
       persistent: false
   migration-up-prod:
-    command: infisical run --env prod -- drizzle-kit migrate
+    command: infisical run --env prod --path /data-access -- drizzle-kit migrate
     options:
       persistent: false
-
   migration-check:
-    command: infisical run --env dev -- drizzle-kit check
+    command: infisical run --env dev --path /data-access -- drizzle-kit check
+  migration-check-stg:
+    command: infisical run --env stg --path /data-access -- drizzle-kit check
+  migration-check-prod:
+    command: infisical run --env prod --path /data-access -- drizzle-kit check
 
 dependsOn:
   - utils

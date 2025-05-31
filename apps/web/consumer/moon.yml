@@ -9,7 +9,7 @@ tags:
   - app
 
 project:
-  name: "laudos-frontend/consumer"
+  name: "nexdoc/consumer"
   description: "Consumer"
   channel: "#consumer"
 
@@ -18,15 +18,19 @@ tasks:
     command: next lint
     options:
       runInCI: true
+  lint-fix:
+    extends: "lint"
+    args: "--fix"
+    local: true
   install:
     command: bun install
-  local:
-    command: infisical run --env local --command "next dev"
+  dev:
+    command: infisical run --env dev --path /consumer --command "next dev"
     # args:
     #   - '--turbopack'
     local: true
-  dev:
-    command: infisical run --env dev --command "next dev"
+  stg:
+    command: infisical run --env stg --path /consumer --command "next dev"
     # args:
     #   - '--turbopack'
     local: true
@@ -78,7 +82,9 @@ tasks:
     options:
       runFromWorkspaceRoot: true
   start:
-    command: next start
+    command: infisical run --env prod --path /consumer -- next start
+    deps:
+      - "build"
 
 dependsOn:
   - ui-components

@@ -26,6 +26,10 @@ const app = new Elysia()
     })
   )
   .all('/api/auth/*', betterAuthView)
+  .onError(({ error }) => {
+    // eslint-disable-next-line no-console
+    console.error(error);
+  })
   .listen(env.API_PORT);
 
 // eslint-disable-next-line no-console

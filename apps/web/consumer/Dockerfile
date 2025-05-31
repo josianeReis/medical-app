@@ -2,7 +2,7 @@ FROM oven/bun:latest AS base
 WORKDIR /app
 
 # Install infisical for secrets management
-RUN apt-get update && apt-get install -y bash curl && curl -1sLf \
+RUN apt-get update && apt-get install -y bash curl wget && curl -1sLf \
     'https://dl.cloudsmith.io/public/infisical/infisical-cli/setup.deb.sh' | bash \
     && apt-get update && apt-get install -y infisical
 
@@ -15,14 +15,13 @@ RUN apt-get update && apt-get install -y curl  && \
 ENV PATH="/root/.moon/bin:$PATH"
 
 # Verify moon is installed
-RUN moon --version 
+RUN moon --version
 RUN echo "moon installed"
 
 FROM base AS skeleton
 # Copy entire repository and scaffold
 COPY . .
 RUN moon docker scaffold consumer
-
 
 FROM base AS build
 
@@ -44,7 +43,6 @@ RUN moon run consumer:build
 # Prune extraneous dependencies
 RUN moon docker prune
 
-
 # 3. Production image, copy all the files and run next
 FROM base AS runner
 WORKDIR /app
@@ -64,11 +62,9 @@ COPY --from=build /app/apps/web/consumer/public ./apps/web/consumer/public
 # COPY --from=build /app/apps/web/consumer/.next/standalone/node_modules ./node_modules
 COPY --from=build /app/apps/web/consumer/.next/standalone ./
 COPY --from=build /app/apps/web/consumer/.next/static ./apps/web/consumer/.next/static
-COPY --from=build /app/apps/web/consumer/start.sh start.sh
 
 
 # USER nextjs
-
 
 ARG PORT
 
@@ -76,5 +72,5 @@ ENV PORT=$PORT
 ENV HOSTNAME="0.0.0.0"
 EXPOSE $PORT
 
-# CMD ["infisical", "run", "--projectId", "17af259a-1d6d-4ed2-8aac-c1dfb63478f8", "--command", "HOSTNAME=0.0.0.0 bun apps/web/consumer/server.js"]
-CMD ["./start.sh"]
+CMD ["sh", "-c", "infisical run --token $INFISICAL_TOKEN --projectId $INFISICAL_PROJECT_ID --env $INFISICAL_ENV --path $INFISICAL_PATH -- bun apps/web/consumer/server.js"]
+# CMD ["infisical", "run", "--token", "$INFISICAL_TOKEN", "--projectId", "$INFISICAL_PROJECT_ID", "--env", "$INFISICAL_ENV", "--path", "$INFISICAL_PATH", "--command", "bun apps/web/consumer/server.js"]

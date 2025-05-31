@@ -24,6 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set.outputs.matrix }}
+      docker_matrix: ${{ steps.docker.outputs.matrix }}
     steps:
       - uses: actions/checkout@v4
         with: { fetch-depth: 0 }
@@ -33,9 +34,31 @@ jobs:
       - id: set
         name: Build project matrix (changed only)
         run: |
-          LIST=$(moon query projects --affected --json | \
+          LIST=$(moon query touched-files | moon query projects --affected --json | \
                  jq -r '.projects[].id'            | \
                  jq -R -s -c 'split("\n")[:-1]')
+          echo "matrix={\"project\":$LIST}" >>"$GITHUB_OUTPUT"
+
+      - id: docker
+        name: Build Docker project matrix (projects with Docker tasks only)
+        run: |
+          # Get all affected projects
+          AFFECTED=$(moon query touched-files | moon query projects --affected --json | jq -r '.projects[].id')
+          
+          # Filter projects that have docker-release-pr or docker-release-prod tasks
+          DOCKER_PROJECTS=()
+          while IFS= read -r project; do
+            if moon query tasks --project "$project" --json | jq -e ".tasks.$project | has(\"docker-release-pr\") or has(\"docker-release-prod\")" > /dev/null 2>&1; then
+              DOCKER_PROJECTS+=("$project")
+            fi
+          done <<< "$AFFECTED"
+          
+          # Convert to JSON array
+          if [ ${#DOCKER_PROJECTS[@]} -eq 0 ]; then
+            LIST="[]"
+          else
+            LIST=$(printf '%s\n' "${DOCKER_PROJECTS[@]}" | jq -R -s -c 'split("\n")[:-1]')
+          fi
           echo "matrix={\"project\":$LIST}" >>"$GITHUB_OUTPUT"
 
   #--- 2. QUALITY GATES (lint + build) ----------------------------------------
@@ -68,13 +91,14 @@ jobs:
   build:
     name: Build + push Docker images
     needs: [checks, affected] # don't start if lint/build failed
-    if: needs.checks.result == 'success' && needs.affected.outputs.matrix != '{"project":[]}'
+    if: needs.checks.result == 'success' && needs.affected.outputs.docker_matrix != '{"project":[]}'
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{ fromJSON(needs.affected.outputs.matrix) }}
+      matrix: ${{ fromJSON(needs.affected.outputs.docker_matrix) }}
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
 
       - uses: docker/login-action@v3
         with:
@@ -89,10 +113,10 @@ jobs:
           REGISTRY: ${{ env.REGISTRY }}
         run: |
           ##################################################################
-          # 1. Decide which tag to use (pr-N for previews, SHA for main)
+          # 1. Decide which tag to use (pr-Numbers for previews, SHA for main)
           ##################################################################
           if [ "${{ github.event_name }}" = "pull_request" ]; then
-            export TAG="pr-${{ github.event.pull_request.number }}"
+            export TAG="${{ github.event.pull_request.number }}"
           else
             export TAG="${{ github.sha }}"
           fi
@@ -118,8 +142,7 @@ jobs:
     if: >-
       always() &&
       github.event_name == 'pull_request' &&
-      needs.build.result != 'skipped' &&
-      needs.affected.outputs.matrix != '{"project":[]}'
+      needs.affected.outputs.docker_matrix != '{"project":[]}'
     steps:
       - name: Post Moon run-report after build
         uses: moonrepo/run-report-action@v1
@@ -131,7 +154,7 @@ jobs:
   deploy:
     name: Trigger Coolify deploy
     needs: [build, affected]
-    if: needs.build.result == 'success'
+    if: needs.build.result == 'success' || (needs.build.result == 'skipped' && needs.affected.outputs.docker_matrix == '{"project":[]}')
     runs-on: ubuntu-latest
     steps:
       - name: Call Coolify API
@@ -147,7 +170,7 @@ jobs:
         if: >-
           always() &&
           github.event_name == 'pull_request' &&
-          needs.affected.outputs.matrix != '{"project":[]}'
+          needs.affected.outputs.docker_matrix != '{"project":[]}'
         uses: moonrepo/run-report-action@v1
         with:
           access-token: ${{ secrets.GITHUB_TOKEN }}

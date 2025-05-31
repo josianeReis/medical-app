@@ -230,6 +230,7 @@ export async function getCurrentUser(): Promise<User | undefined> {
       },
     },
   });
+  console.log("🚀 ~ auth getCurrentUser ~ error:", error);
 
   if (error?.code || !data?.user.email) {
     console.log("Failed to get user data");
