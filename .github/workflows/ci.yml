@@ -2,7 +2,7 @@ name: CI / CD with Moon ↔ Docker ↔ Coolify
 
 on:
   push:
-    branches: [main] # production deploys
+    branches: [main,production] # production deploys
   pull_request: # preview deploys
     types: [opened, synchronize, reopened]
 
