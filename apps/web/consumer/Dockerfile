@@ -41,7 +41,7 @@ COPY --from=skeleton /app/.moon/docker/sources .
 RUN moon run consumer:build
 
 # Prune extraneous dependencies
-RUN moon docker prune
+# RUN moon docker prune
 
 # 3. Production image, copy all the files and run next
 FROM base AS runner

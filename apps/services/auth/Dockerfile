@@ -52,7 +52,7 @@ COPY --from=skeleton /app/.moon/docker/sources .
 RUN moon run auth:build
 
 # Prune extraneous dependencies
-RUN moon docker prune
+# RUN moon docker prune
 
 #### START STAGE
 
