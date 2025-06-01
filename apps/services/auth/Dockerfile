@@ -43,7 +43,7 @@ COPY --from=skeleton /root/.proto /root/.proto
 COPY --from=skeleton /app/.moon/docker/workspace .
 
 # Install dependencies
-RUN moon docker setup
+# RUN moon docker setup
 
 # Copy project sources
 COPY --from=skeleton /app/.moon/docker/sources .

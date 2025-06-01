@@ -48,7 +48,22 @@ tasks:
       - "server"
     options:
       runInCI: true
-  docker-release-pr:
+  docker-build:
+    command: sh
+    args:
+      - -c
+      - |
+        # Build the image
+        docker build \
+          -t "$REGISTRY/$MOON_PROJECT_ID:$TAG" \
+          -f apps/services/auth/Dockerfile .
+    inputs:
+      - "$REGISTRY"
+      - "$TAG"
+    options:
+      runInCI: true
+      runFromWorkspaceRoot: true
+  docker-release:
     command: sh
     args:
       - -c
