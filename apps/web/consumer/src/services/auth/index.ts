@@ -173,7 +173,7 @@ export async function signup(signupData: SignupData): Promise<{
 }> {
 	'use server';
 
-	const { firstName, lastName, password, terms } = signupData;
+	const { email, firstName, lastName, password, terms } = signupData;
 
 	const { error, data } = await authClient.signUp.email(
 		{
