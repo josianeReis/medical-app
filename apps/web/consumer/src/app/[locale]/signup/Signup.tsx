@@ -18,9 +18,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { signup } from "@/services/auth";
 import { toast } from "sonner";
 import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft, Eye, EyeOff } from "lucide-react";
-import { redirect } from "next/navigation";
 
 const createSignupSchema = (tCommon: (key: string) => string) =>
   z
@@ -50,6 +50,7 @@ export type SignupInputs = z.infer<ReturnType<typeof createSignupSchema>>;
 
 export const SignupForm = () => {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const t = useTranslations("common.signup");
   const tCommon = useTranslations("fields");
   const [showPassword, setShowPassword] = useState(false);
@@ -79,7 +80,8 @@ export const SignupForm = () => {
     }
 
     // TODO: Re-enable email verification redirect when OTP flow is restored.
-    return redirect("/organizations");
+    router.push("/organizations");
+    return;
   };
 
   return (
