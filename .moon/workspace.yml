@@ -18,5 +18,5 @@ projects:
   - 'infrastructure/*'
 
 vcs:
-  manager: 'git'
+  client: 'git'
   defaultBranch: 'main'
