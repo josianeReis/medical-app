@@ -1,9 +1,22 @@
 import { generateEnv } from '@packages/utils';
 import { z } from 'zod';
 
+const booleanFromEnv = z.preprocess((value) => {
+	if (typeof value !== 'string') return value;
+	const normalized = value.trim().toLowerCase();
+	if (normalized === 'true') return true;
+	if (normalized === 'false') return false;
+	return value;
+}, z.boolean());
+
+const nonEmptyStringOrDefault = z.preprocess(
+	(value) => (typeof value === 'string' && value.trim() === '' ? undefined : value),
+	z.string().min(1),
+);
+
 const envSchema = z.object({
 	DB_URL: z.string().min(1),
-	API_PORT: z.string().min(1).default('4010'),
+	API_PORT: nonEmptyStringOrDefault.default('4010'),
 	BETTER_AUTH_SECRET: z
 		.string()
 		.min(1)
@@ -21,7 +34,8 @@ const envSchema = z.object({
 	TRUSTED_CALLBACK_URLS: z.string().optional(),
 	NODE_ENV: z.string().optional(),
 	NEXT_PUBLIC_APP_URL: z.string().optional().default('http://localhost:3000'),
-	ENABLE_CROSS_SUB_DOMAIN_COOKIES: z.boolean().optional().default(false),
+	ENABLE_CROSS_SUB_DOMAIN_COOKIES: booleanFromEnv.optional().default(false),
+	DISABLE_OUTBOUND_EMAIL: booleanFromEnv.optional().default(true),
 });
 
 export const env = generateEnv(envSchema);
