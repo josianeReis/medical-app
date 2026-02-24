@@ -1,5 +1,5 @@
 {
-  "name": "nexdoc-mono",
+  "name": "medical-app-mono",
   "image": "oven/bun:1.1.0",
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {}
@@ -12,10 +12,5 @@
   "postCreateCommand": "bun i && bunx proto install && bunx moon setup",
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
   "workspaceFolder": "/workspace",
-  "env": {
-    "INFISICAL_API_URL": "https://infisical.nexdoc.clinic",
-    "INFISICAL_PROJECT_ID": "0b85e5d5-f94a-4460-9033-a669d8875cb4",
-    "INFISICAL_TOKEN": "st.841cf9a1-c049-4d3a-bda5-84d21fd64aa6.b89a0a373e3678bbf21a586879b6d987.9ee8ce8935052864f2db84d1a4fb8e57"
-  },
   "remoteUser": "root"
 }

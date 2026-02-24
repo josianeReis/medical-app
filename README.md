@@ -74,7 +74,7 @@ pbcopy < ~/.ssh/id_ed25519.pub
 ### 7. Clone Repository
 
 ```bash
-git clone https://github.com/laudosinfra/laudos-mono.git
+git clone https://github.com/josianeReis/medical-app.git
 ```
 ### 8. Change .env-example
 Create a copy of .env-example and rename to .env, then, fill out the DB_URL using the parameters in the same file.
@@ -148,7 +148,6 @@ This project is best used with VSCode/Cursor and the following extensions:
 - ✅ Checksum verification for security
 - 🔌 Pluggable architecture for custom tooling
 - 🔧 Seamless integration with Moon's toolchain
-
 
 
 

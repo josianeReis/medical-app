@@ -7,6 +7,18 @@ import { auth } from './auth';
 import { env } from './config/env';
 import { UnauthorizedError } from './utils/errors/unauthorized-error';
 
+const corsOrigins = Array.from(
+	new Set(
+		[
+			'http://localhost:3000',
+			env.NEXT_PUBLIC_APP_URL,
+			...(env.TRUSTED_CALLBACK_URLS
+				? env.TRUSTED_CALLBACK_URLS.split(',').map((origin) => origin.trim())
+				: []),
+		].filter(Boolean),
+	),
+);
+
 const betterAuthView = (context: Context) => {
 	const BETTER_AUTH_ACCEPT_METHODS = ['POST', 'GET'];
 
@@ -18,7 +30,12 @@ const betterAuthView = (context: Context) => {
 };
 
 const app = new Elysia()
-	.use(cors())
+	.use(
+		cors({
+			origin: corsOrigins,
+			credentials: true,
+		}),
+	)
 	.get('/health', ({ status }) => status(200))
 	.use(
 		swagger({

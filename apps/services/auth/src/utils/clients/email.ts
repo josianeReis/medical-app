@@ -14,8 +14,16 @@ export const sendEmail = ({
 	to,
 	subject,
 	react,
-	from = env.DEFAULT_EMAIl_FROM,
+	from = env.DEFAULT_EMAIL_FROM,
 }: SendEmailProps) => {
+	if (env.DISABLE_OUTBOUND_EMAIL) {
+		// Hard stop for test environments to avoid notifying real users.
+		console.log('[email] Outbound email disabled by DISABLE_OUTBOUND_EMAIL=true');
+		return Promise.resolve({
+			id: 'disabled-outbound-email',
+		} as never);
+	}
+
 	return resend.emails.send({
 		from,
 		to,
