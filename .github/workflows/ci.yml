@@ -1,4 +1,4 @@
-name: CI / CD with Moon ↔ Docker ↔ Coolify
+name: CI / CD with Moon and Docker
 
 on:
   push:
@@ -145,32 +145,6 @@ jobs:
   #     needs.affected.outputs.docker_matrix != '{"project":[]}'
   #   steps:
   #     - name: Post Moon run-report after build
-  #       uses: moonrepo/run-report-action@v1
-  #       with:
-  #         access-token: ${{ secrets.GITHUB_TOKEN }}
-
-  # #--- 4. DEPLOY WITH COOLIFY --------------------------------------------------
-
-  # deploy:
-  #   name: Trigger Coolify deploy
-  #   needs: [build, affected]
-  #   if: needs.build.result == 'success' || (needs.build.result == 'skipped' && needs.affected.outputs.docker_matrix == '{"project":[]}')
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Call Coolify API
-  #       env:
-  #         COOLIFY_TOKEN: ${{ secrets.COOLIFY_API_TOKEN }}
-  #       run: |
-  #         if [ "${{ github.event_name }}" = "pull_request" ]; then
-  #           curl -s -X POST "${{ vars.COOLIFY_DEPLOY_WEBHOOK }}&pr=${{ github.event.pull_request.number }}" -H "Authorization: Bearer $COOLIFY_TOKEN"
-  #         else
-  #           curl -s -X POST "${{ vars.COOLIFY_DEPLOY_WEBHOOK }}" -H "Authorization: Bearer $COOLIFY_TOKEN"
-  #         fi
-  #     - name: Post Moon run-report after deploy
-  #       if: >-
-  #         always() &&
-  #         github.event_name == 'pull_request' &&
-  #         needs.affected.outputs.docker_matrix != '{"project":[]}'
   #       uses: moonrepo/run-report-action@v1
   #       with:
   #         access-token: ${{ secrets.GITHUB_TOKEN }}

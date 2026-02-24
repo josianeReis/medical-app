@@ -126,7 +126,7 @@ export const PATIENTS_MOCK: any[] = [
   },
   {
     id: "06cc4234-e51c-4846-b874-b41e7fef916f",
-    name: "Dr. João Lucas Fernandes",
+    name: "Dr. João Ferreira",
     email: "João@gmail.com",
     document: undefined,
     document_type: undefined,

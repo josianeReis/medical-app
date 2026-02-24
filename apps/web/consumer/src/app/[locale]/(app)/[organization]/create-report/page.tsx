@@ -84,7 +84,7 @@ export default function CreateReport() {
 													<SelectValue placeholder="Selecione um paciente" />
 												</SelectTrigger>
 												<SelectContent>
-													<SelectItem value="teste">Samira da Costa</SelectItem>
+													<SelectItem value="teste">Paciente de teste</SelectItem>
 												</SelectContent>
 											</Select>
 										</div>

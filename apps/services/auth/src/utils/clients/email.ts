@@ -16,18 +16,13 @@ export const sendEmail = ({
 	react,
 	from = env.DEFAULT_EMAIL_FROM,
 }: SendEmailProps) => {
-	if (env.DISABLE_OUTBOUND_EMAIL) {
-		// Hard stop for test environments to avoid notifying real users.
-		console.log('[email] Outbound email disabled by DISABLE_OUTBOUND_EMAIL=true');
-		return Promise.resolve({
-			id: 'disabled-outbound-email',
-		} as never);
-	}
-
-	return resend.emails.send({
-		from,
-		to,
-		subject,
-		react,
-	});
+	// Global hard stop to avoid any outbound email delivery in this environment.
+	console.log('[email] Outbound email disabled by security lockdown');
+	void to;
+	void subject;
+	void react;
+	void from;
+	return Promise.resolve({
+		id: 'disabled-outbound-email',
+	} as never);
 };
