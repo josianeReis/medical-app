@@ -14,5 +14,7 @@ project:
 
 tasks:
   add-shadcn:
-    command: "bunx shadcn@latest add"
+    command: ./src/scripts/add-components.sh $@
     local: true
+    options:
+      interactive: true

@@ -1,0 +1,243 @@
+{
+	"email": {
+		"label": "E-mail",
+		"placeholder": "Enter your email address...",
+		"errors": {
+			"required": "Email is required.",
+			"invalid": "Email is invalid."
+		}
+	},
+	"email_or_username": {
+		"label": "E-mail ou Username",
+		"placeholder": "",
+		"errors": {
+			"required": "Email é obrigatório.",
+			"invalid": "Email é inválido."
+		}
+	},
+	"password": {
+		"label": "Password",
+		"placeholder": "Ex.: 123@.#fdscvAPamfg1234",
+		"errors": {
+			"required": "Password is required.",
+			"minlength": "The password must be at least 6 characters long."
+		}
+	},
+	"confirm-password": {
+		"label": "Confirm password",
+		"placeholder": "Ex.: 123@.#fdscvAPamfg1234",
+		"errors": {
+			"required": "Confirm password is required.",
+			"match": "Passwords do not match, they must be the same."
+		}
+	},
+	"first-name": {
+		"label": "First Name",
+		"placeholder": "Ex.: John, Mary...",
+		"errors": {
+			"required": "First Name is required."
+		}
+	},
+	"last-name": {
+		"label": "Last Name",
+		"placeholder": "Ex.: Smith, Johnson, Williams...",
+		"errors": {
+			"required": "Last Name is required."
+		}
+	},
+	"role": {
+		"label": "Role",
+		"doctor": "Doctor",
+		"secretary": "Secretary",
+		"placeholder": "Select a position",
+		"errors": {
+			"required": "Role is required."
+		}
+	},
+	"username": {
+		"label": "Username",
+		"placeholder": "Ex.: john.smith, mary.johnson...",
+		"errors": {
+			"required": "Username is required.",
+			"invalid": "Invalid username."
+		}
+	},
+	"profile-picture": {
+		"label": "Profile picture",
+		"placeholder": "Select a picture",
+		"errors": {
+			"required": "Profile picture is required.",
+			"invalid": "Invalid image format. Use JPG, PNG, or GIF."
+		}
+	},
+	"logo": {
+		"label": "Organization logo",
+		"placeholder": "Select a logo",
+		"errors": {
+			"required": "Logo is required.",
+			"invalid": "Invalid image format. Use JPG, PNG, or GIF."
+		}
+	},
+	"slug": {
+		"label": "Organization URL",
+		"errors": {
+			"required": "URL is required.",
+			"invalid": "Invalid URL. Use only lowercase letters, numbers, and hyphens."
+		}
+	},
+	"name": {
+		"label": "Name",
+		"errors": {
+			"required": "Name is required."
+		}
+	},
+	"code": {
+		"label": "Code",
+		"placeholder": "Enter the verification code",
+		"errors": {
+			"required": "Code is required.",
+			"invalid": "Invalid code."
+		}
+	},
+	"address": {
+		"label": "Address",
+		"placeholder": "Enter your full address",
+		"errors": {
+			"required": "Address is required.",
+			"invalid": "Invalid address."
+		}
+	},
+	"number": {
+		"label": "Number",
+		"placeholder": "Enter your house or apartment number",
+		"errors": {
+			"required": "Number is required.",
+			"invalid": "Invalid number."
+		}
+	},
+	"cep": {
+		"label": "ZIP Code",
+		"placeholder": "Enter your ZIP code",
+		"errors": {
+			"required": "ZIP Code is required.",
+			"invalid": "Invalid ZIP Code."
+		}
+	},
+	"cpf": {
+		"label": "CPF",
+		"placeholder": "Enter your CPF",
+		"errors": {
+			"required": "CPF is required.",
+			"invalid": "Invalid CPF."
+		}
+	},
+	"cnpj": {
+		"label": "CNPJ",
+		"placeholder": "Enter your CNPJ",
+		"errors": {
+			"required": "CNPJ is required.",
+			"invalid": "Invalid CNPJ."
+		}
+	},
+	"state": {
+		"label": "State",
+		"placeholder": "Select your state",
+		"errors": {
+			"required": "State is required."
+		}
+	},
+	"city": {
+		"label": "City",
+		"placeholder": "Enter your city",
+		"errors": {
+			"required": "City is required."
+		}
+	},
+	"terms": {
+		"label": "I accept the terms of use and privacy policy",
+		"errors": {
+			"required": "You must accept the terms to continue."
+		}
+	},
+
+	"created_at": {
+		"label": "Created at",
+		"placeholder": "Creation date",
+		"errors": {
+			"required": "Creation date is required."
+		}
+	},
+	"age": {
+		"label": "Age",
+		"placeholder": "Age"
+	},
+	"gender": {
+		"label": "Sex",
+		"placeholder": "Sex"
+	},
+	"document-type": {
+		"label": "Document Type",
+		"placeholder": "Document Type"
+	},
+	"document-number": {
+		"label": "Document Number",
+		"placeholder": "Document Number"
+	},
+	"active": {
+		"label": "Active",
+		"placeholder": "Select if active",
+		"errors": {
+			"required": "Active status is required."
+		}
+	},
+	"updated_at": {
+		"label": "Updated at",
+		"placeholder": "Update date",
+		"errors": {
+			"required": "Update date is required."
+		}
+	},
+	"joined": {
+		"label": "Joined in"
+	},
+	"owner": {
+		"label": "Owner",
+		"placeholder": "Select if you are the owner",
+		"errors": {
+			"required": "Owner status is required."
+		}
+	},
+	"doctor": {
+		"label": "Doctor",
+		"placeholder": "Select if you are a doctor",
+		"errors": {
+			"required": "Doctor status is required."
+		}
+	},
+	"secretary": {
+		"label": "Secretary",
+		"placeholder": "Select if you are a secretary",
+		"errors": {
+			"required": "Secretary status is required."
+		}
+	},
+	"patient": {
+		"label": "Patient",
+		"placeholder": "Select if you are a patient",
+		"errors": {
+			"required": "Patient status is required."
+		}
+	},
+	"columnsPatient": {
+		"name": "Name",
+		"birth-date": "Date of birth",
+		"sex": "Sex",
+		"document-type": "Document type",
+		"identifier": "Identity card (RG)",
+		"physical-personnel": "CPF (Tax ID)",
+		"passport": "Passport",
+		"document": "Document number",
+		"phone": "Phone",
+		"email": "Email"
+	}
+}

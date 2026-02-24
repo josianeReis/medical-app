@@ -6,7 +6,16 @@
       "path": "apps/services/auth"
     },
     {
+      "path": "apps/services/general"
+    },
+    {
+      "path": "apps/services/management"
+    },
+    {
       "path": "apps/web/consumer"
+    },
+    {
+      "path": "packages/auth-config"
     },
     {
       "path": "packages/data-access"

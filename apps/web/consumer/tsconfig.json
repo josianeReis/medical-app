@@ -38,11 +38,18 @@
       ],
       "@packages/utils/*": [
         "../../../packages/utils/src/*"
+      ],
+      "@packages/auth-config": [
+        "../../../packages/auth-config/src/index.ts"
+      ],
+      "@packages/auth-config/*": [
+        "../../../packages/auth-config/src/*"
       ]
     }
   },
   "include": [
     "next-env.d.ts",
+    "../../../packages/auth-config/**/*",
     "../../../packages/ui-components/**/*",
     "../../../packages/ui-components2/**/*",
     "../../../packages/utils/**/*",
@@ -54,6 +61,9 @@
     "node_modules"
   ],
   "references": [
+    {
+      "path": "../../../packages/auth-config"
+    },
     {
       "path": "../../../packages/ui-components"
     },

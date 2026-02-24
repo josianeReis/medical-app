@@ -1,0 +1,258 @@
+{
+	"email": {
+		"label": "E-mail",
+		"placeholder": "Digite seu endereço de e-mail...",
+		"errors": {
+			"required": "Email é obrigatório.",
+			"invalid": "Email é inválido."
+		}
+	},
+	"email_or_username": {
+		"label": "E-mail ou Username",
+		"placeholder": "",
+		"errors": {
+			"required": "Email é obrigatório.",
+			"invalid": "Email é inválido."
+		}
+	},
+	"password": {
+		"label": "Senha",
+		"placeholder": "Ex.: 123@.#fdscvAPamfg1234",
+		"errors": {
+			"required": "Senha é obrigatória.",
+			"minlength": "A senha deve ter pelo menos 6 caracteres."
+		}
+	},
+	"confirm-password": {
+		"label": "Confirmar senha",
+		"placeholder": "Ex.: 123@.#fdscvAPamfg1234",
+		"errors": {
+			"required": "Confirmar senha é obrigatório.",
+			"match": "As senhas não coincidem, precisam ser iguais."
+		}
+	},
+	"first-name": {
+		"label": "Nome",
+		"placeholder": "Ex.: João, Maria Eduarda...",
+		"errors": {
+			"required": "Nome é obrigatório."
+		}
+	},
+	"birthday": {
+		"label": "Data de nascimento",
+		"placeholder": "Ex.: 00/00/0000",
+		"errors": {
+			"required": "Data de nascimento é obrigatório."
+		}
+	},
+	"phoneNumber": {
+		"label": "Número de telefone",
+		"placeholder": "Ex.: +55 000 000 00",
+		"errors": {
+			"required": "Número de telefone inválido. Por favor inclua o código do pais (ex. +55 para o Brasil, +1 para EUA, etc..)"
+		}
+	},
+	"role": {
+		"label": "Cargo",
+		"doctor": "Médico",
+		"secretary": "Secretária",
+		"placeholder": "Selecione uma posição",
+		"errors": {
+			"required": "Cargo é obrigatório."
+		}
+	},
+	"username": {
+		"label": "Nome de usuário",
+		"placeholder": "Ex.: joao.silva, maria.oliveira...",
+		"errors": {
+			"required": "Nome de usuário é obrigatório.",
+			"invalid": "Nome de usuário inválido."
+		}
+	},
+	"profile-picture": {
+		"label": "Foto de perfil",
+		"placeholder": "Selecione uma foto",
+		"errors": {
+			"required": "Foto de perfil é obrigatória.",
+			"invalid": "Formato de imagem inválido. Use JPG, PNG ou GIF."
+		}
+	},
+	"logo": {
+		"label": "Logo da organização",
+		"placeholder": "Selecione uma logo",
+		"errors": {
+			"required": "Logo é obrigatória.",
+			"invalid": "Formato de imagem inválido. Use JPG, PNG ou GIF."
+		}
+	},
+	"slug": {
+		"label": "URL da organização",
+		"errors": {
+			"required": "URL é obrigatória.",
+			"invalid": "URL inválida. Use apenas letras minúsculas, números e hifens."
+		}
+	},
+	"name": {
+		"label": "Nome",
+		"errors": {
+			"required": "Nome é obrigatório."
+		}
+	},
+	"code": {
+		"label": "Código",
+		"placeholder": "Digite o código de verificação",
+		"errors": {
+			"required": "Código é obrigatório.",
+			"invalid": "Código inválido."
+		}
+	},
+	"address": {
+		"label": "Endereço",
+		"placeholder": "Digite seu endereço completo",
+		"errors": {
+			"required": "Endereço é obrigatório.",
+			"invalid": "Endereço inválido."
+		}
+	},
+	"number": {
+		"label": "Número",
+		"placeholder": "Digite o número da sua casa ou apartamento",
+		"errors": {
+			"required": "Número é obrigatório.",
+			"invalid": "Número inválido."
+		}
+	},
+	"cep": {
+		"label": "CEP",
+		"placeholder": "Digite seu CEP",
+		"errors": {
+			"required": "CEP é obrigatório.",
+			"invalid": "CEP inválido."
+		}
+	},
+	"cpf": {
+		"label": "CPF",
+		"placeholder": "Digite seu CPF",
+		"errors": {
+			"required": "CPF é obrigatório.",
+			"invalid": "CPF inválido."
+		}
+	},
+	"cnpj": {
+		"label": "CNPJ",
+		"placeholder": "Digite seu CNPJ",
+		"errors": {
+			"required": "CNPJ é obrigatório.",
+			"invalid": "CNPJ inválido."
+		}
+	},
+	"state": {
+		"label": "Estado",
+		"placeholder": "Selecione seu estado",
+		"errors": {
+			"required": "Estado é obrigatório."
+		}
+	},
+	"city": {
+		"label": "Cidade",
+		"placeholder": "Digite sua cidade",
+		"errors": {
+			"required": "Cidade é obrigatória."
+		}
+	},
+	"terms": {
+		"label": "Aceito os termos de uso e política de privacidade",
+		"errors": {
+			"required": "Você deve aceitar os termos para continuar."
+		}
+	},
+	"created-at": {
+		"label": "Criado em",
+		"placeholder": "Data de criação",
+		"errors": {
+			"required": "Data de criação é obrigatória."
+		}
+	},
+	"age": {
+		"label": "Idade",
+		"placeholder": "Idade"
+	},
+	"gender": {
+		"label": "Sexo",
+		"placeholder": "Sexo"
+	},
+	"document-type": {
+		"label": "Tipo de documento",
+		"placeholder": "Tipo de documento"
+	},
+	"document-number": {
+		"label": "Número de documento",
+		"placeholder": "Número de documento"
+	},
+	"active": {
+		"label": "Ativo",
+		"placeholder": "Selecione se está ativo",
+		"errors": {
+			"required": "Status ativo é obrigatório."
+		}
+	},
+	"updated_at": {
+		"label": "Atualizado em",
+		"placeholder": "Data de atualização",
+		"errors": {
+			"required": "Data de atualização é obrigatória."
+		}
+	},
+	"active_template": {
+		"label": "Disponibilizar modelo",
+		"placeholder": "Selecione se o modelo está ativo",
+		"errors": {
+			"required": "Status ativo do modelo é obrigatório."
+		}
+	},
+	"procedure": {
+		"label": "Procedimento",
+		"placeholder": "Selecione um procedimento",
+		"errors": {
+			"required": "Procedimento é obrigatório."
+		}
+	},
+	"disabled": {
+		"label": "Desativado",
+		"placeholder": "Selecione se está desativado",
+		"errors": {
+			"required": "Status desativado é obrigatório."
+		}
+	},
+	"joined": {
+		"label": "Entrou em"
+	},
+	"owner": {
+		"label": "Dono",
+		"placeholder": "Selecione se é o dono",
+		"errors": {
+			"required": "Status de dono é obrigatório."
+		}
+	},
+	"doctor": {
+		"label": "Médico",
+		"placeholder": "Selecione se é médico",
+		"errors": {
+			"required": "Status de médico é obrigatório."
+		}
+	},
+	"secretary": {
+		"label": "Secretária",
+		"placeholder": "Selecione se é secretária",
+		"errors": {
+			"required": "Status de secretária é obrigatório."
+		}
+	},
+	"patient": {
+		"label": "Paciente",
+		"placeholder": "Selecione se é paciente",
+		"errors": {
+			"required": "Status de paciente é obrigatório."
+		}
+	}
+}

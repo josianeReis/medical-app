@@ -1,0 +1,53 @@
+{
+	"extends": "../../../tsconfig.options.json",
+	"compilerOptions": {
+		"target": "ES2021",
+		"module": "ES2022",
+		"baseUrl": "./",
+		// "noImplicitAny": false,
+		"moduleResolution": "bundler",
+		"types": ["bun-types"],
+		"resolveJsonModule": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"strict": true,
+		"skipLibCheck": true,
+		"paths": {
+			"@/*": ["./src/*"],
+
+			"@packages/data-access": ["../../../packages/data-access/src/index.ts"],
+			"@packages/data-access/*": ["../../../packages/data-access/src/*"],
+			"@packages/email-templates": [
+				"../../../packages/email-templates/src/index.ts"
+			],
+			"@packages/email-templates/*": [
+				"../../../packages/email-templates/src/*"
+			],
+			"@packages/utils": ["../../../packages/utils/src/index.ts"],
+			"@packages/utils/*": ["../../../packages/utils/src/*"],
+			"@packages/auth-config": ["../../../packages/auth-config/src/index.ts"],
+			"@packages/auth-config/*": ["../../../packages/auth-config/src/*"]
+		}
+	},
+	"references": [
+		{
+			"path": "../../../packages/auth-config"
+		},
+		{
+			"path": "../../../packages/data-access"
+		},
+		{
+			"path": "../../../packages/email-templates"
+		},
+		{
+			"path": "../../../packages/utils"
+		}
+	],
+	"include": [
+		"./src/**/*",
+		"../../../packages/auth-config/**/*",
+		"../../../packages/data-access/**/*",
+		"../../../packages/email-templates/**/*",
+		"../../../packages/utils/**/*"
+	]
+}

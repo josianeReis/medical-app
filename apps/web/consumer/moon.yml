@@ -104,3 +104,4 @@ tasks:
 dependsOn:
   - ui-components
   - utils
+  - auth-config

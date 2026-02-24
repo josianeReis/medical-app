@@ -1,0 +1,2 @@
+ALTER TABLE "category" ADD COLUMN "parentId" text DEFAULT NULL;--> statement-breakpoint
+ALTER TABLE "category" ADD CONSTRAINT "category_parentId_category_id_fk" FOREIGN KEY ("parentId") REFERENCES "public"."category"("id") ON DELETE cascade ON UPDATE no action;

@@ -2,9 +2,9 @@ FROM oven/bun:latest AS base
 WORKDIR /app
 
 # Install infisical for secrets management
-RUN apt-get update && apt-get install -y bash curl wget && curl -1sLf \
-    'https://dl.cloudsmith.io/public/infisical/infisical-cli/setup.deb.sh' | bash \
-    && apt-get update && apt-get install -y infisical
+RUN apt-get update && apt-get install -y bash curl wget sudo && curl -1sLf \
+    'https://artifacts-cli.infisical.com/setup.deb.sh' | sudo -E bash \
+    && sudo apt-get update && sudo apt-get install -y infisical
 
 # Install moon binary
 RUN apt-get update && apt-get install -y curl  && \
@@ -72,5 +72,8 @@ ENV PORT=$PORT
 ENV HOSTNAME="0.0.0.0"
 EXPOSE $PORT
 
+# Set environment variables to work around Bun networking issues
+ENV BUN_FORCE_HTTP1=1
+ENV BUN_TIMEOUT=30000
+
 CMD ["sh", "-c", "infisical run --token $INFISICAL_TOKEN --projectId $INFISICAL_PROJECT_ID --env $INFISICAL_ENV --path $INFISICAL_PATH -- bun apps/web/consumer/server.js"]
-# CMD ["infisical", "run", "--token", "$INFISICAL_TOKEN", "--projectId", "$INFISICAL_PROJECT_ID", "--env", "$INFISICAL_ENV", "--path", "$INFISICAL_PATH", "--command", "bun apps/web/consumer/server.js"]

@@ -1,0 +1,20 @@
+{
+	"mcpServers": {
+		"plate": {
+			"description": "Plate editors, plugins, components and documentation",
+			"type": "stdio",
+			"command": "npx",
+			"args": ["-y", "shadcn@canary", "registry:mcp"],
+			"env": {
+				"REGISTRY_URL": "https://platejs.org/r/registry.json"
+			}
+		},
+		"moon": {
+			"command": "moon",
+			"args": ["mcp"],
+			"env": {
+				"MOON_WORKSPACE_ROOT": "${workspaceFolder}"
+			}
+		}
+	}
+}

@@ -1,0 +1,80 @@
+{
+	"members": {
+		"metadata": {
+			"title": "Miembros",
+			"description": "Gestiona los miembros de tu organización y sus permisos"
+		},
+		"title": "Miembros",
+		"invite": "Invitar",
+		"cancel": "Cancelar",
+		"update": "Actualizar",
+		"roles": {
+			"all": "Todos",
+			"secretary": "Secretaria",
+			"doctor": "Doctor",
+			"owner": "Propietario"
+		},
+		"data-table": {
+			"search": "Buscar por nombre o correo electrónico",
+			"no-results": "No se encontraron miembros",
+			"name": "Nombre",
+			"email": "Correo electrónico",
+			"role": "Cargo",
+			"actions": "Acciones"
+		},
+		"edit-member": "Editar miembro",
+		"edit-member-title": "Editar miembro de la organización",
+		"invite-member": {
+			"title": "Invitar a un miembro a la organización",
+			"submit": "Enviar invitación"
+		},
+		"remove-member": "Eliminar miembro",
+		"member-changed-successfully": "¡Miembro cambiado exitosamente!",
+		"invite-sent-successfully": "¡Invitación enviada exitosamente!"
+	},
+	"organization": {
+		"title": "Organización",
+		"dialog": {
+			"title": "Cambiar URL de la organización",
+			"description": "Esto cambiará todas tus URLs y las antiguas serán redirigidas",
+			"label": "Introduce la nueva URL de la organización",
+			"cancel": "Cancelar",
+			"submit": "Actualizar"
+		},
+
+		"dead-zone": {
+			"delete-organization": "Eliminar organización",
+			"title": "Verificar eliminación de la organización",
+			"deletion-warning-1": "Si estás seguro de que quieres proceder con la eliminación de la organización",
+			"deletion-warning-2": "por favor, continúa a continuación.",
+			"irreversible-operation": "Esta operación es irreversible y resultará en la eliminación completa de todos los datos asociados a la organización.",
+			"data-deletion-details": "Datos como usuarios, problemas y comentarios serán eliminados permanentemente.",
+			"enter-code-label": "Introduce el código de eliminación enviado a",
+			"acknowledge-checkbox": "Reconozco que todos los datos de la organización serán eliminados y quiero continuar.",
+			"delete-organization-button": "Eliminar organización"
+		},
+		"metadata": {
+			"title": "Organización",
+			"description": "Gestiona la información de tu organización"
+		}
+	},
+	"profile": {
+		"title": "Perfil",
+		"preferences": {
+			"title": "Preferencias",
+			"languages": {
+				"title": "Idioma",
+				"description": "Puedes elegir tu idioma preferido."
+			}
+		},
+		"languages": {
+			"en": "English",
+			"es": "Español",
+			"pt": "Portugués"
+		},
+		"metadata": {
+			"title": "Perfil",
+			"description": "Gestiona tu información personal y preferencias"
+		}
+	}
+}

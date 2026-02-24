@@ -1,0 +1,36 @@
+{
+  "sign-in": {
+    "title": "Your login code",
+    "hi": "Hi,",
+    "description": "Use the verification code below to sign in to your account. This code is valid for a short time and can only be used once.",
+    "ignore-email": "If you didn't try to log in, you can safely ignore this email.",
+    "automated-message": "This is an automated message — please do not reply to this email."
+  },
+  "email-verification": {
+    "title": "Confirm your email address",
+    "heading": "Confirm your email",
+    "hi": "Hi,",
+    "description": "Thanks for signing up! Please confirm your email address by using the verification code below.",
+    "ignore-email": "If you didn't create an account with us, you can safely ignore this email.",
+    "automated-message": "This is an automated message, please do not reply to this email."
+  },
+  "recovery-password": {
+    "title": "Reset your password",
+    "heading": "Reset Your Password",
+    "hi": "Hi,",
+    "description": "We received a request to reset your password. Use this verification code below to create a new password.",
+    "ignore-email": "If you didn't request a password reset, you can safely ignore this email.",
+    "automated-message": "This is an automated message, please do not reply to this email."
+  },
+  "organization-invitation": {
+      "title": "You've been invited to join {teamName}",
+      "heading": "Team Invitation",
+      "hi": "Hello!",
+      "invited_by": "<strong>{invitedByUsername}</strong> ({invitedByEmail}) has invited you to join the <strong>{teamName}</strong> team.",
+      "accept_invitation": "To accept the invitation and start collaborating with the team, click the button below:",
+      "button_text": "Accept Invitation",
+      "copy_paste_link": "Or copy and paste this link into your browser:",
+      "ignore_email": "If you were not expecting this invitation or do not know the sender, you can safely ignore this email.",
+      "automated_message": "This is an automated message — please do not reply to this email."
+    }
+}

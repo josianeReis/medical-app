@@ -1,0 +1,214 @@
+{
+	"email": {
+		"label": "Correo electrónico",
+		"placeholder": "Ingrese su dirección de correo electrónico...",
+		"errors": {
+			"required": "El correo electrónico es obligatorio.",
+			"invalid": "El correo electrónico es inválido."
+		}
+	},
+	"email_or_username": {
+		"label": "E-mail ou Username",
+		"placeholder": "",
+		"errors": {
+			"required": "Email é obrigatório.",
+			"invalid": "Email é inválido."
+		}
+	},
+	"password": {
+		"label": "Contraseña",
+		"placeholder": "Ej.: 123@.#fdscvAPamfg1234",
+		"errors": {
+			"required": "La contraseña es obligatoria.",
+			"minlength": "La contraseña debe tener al menos 6 caracteres."
+		}
+	},
+	"confirm-password": {
+		"label": "Confirmar contraseña",
+		"placeholder": "Ej.: 123@.#fdscvAPamfg1234",
+		"errors": {
+			"required": "Confirmar contraseña es obligatorio.",
+			"match": "Las contraseñas no coinciden, deben ser iguales."
+		}
+	},
+	"first-name": {
+		"label": "Nombre",
+		"placeholder": "Ej.: Juan, María...",
+		"errors": {
+			"required": "El nombre es obligatorio."
+		}
+	},
+	"last-name": {
+		"label": "Apellido",
+		"placeholder": "Ej.: García, Rodríguez, Pérez...",
+		"errors": {
+			"required": "El apellido es obligatorio."
+		}
+	},
+	"role": {
+		"label": "Cargo",
+		"doctor": "Médico",
+		"secretary": "Secretaria",
+		"placeholder": "Seleccione un cargo",
+		"errors": {
+			"required": "El cargo es obligatorio."
+		}
+	},
+	"username": {
+		"label": "Nombre de usuario",
+		"placeholder": "Ej.: juan.garcia, maria.rodriguez...",
+		"errors": {
+			"required": "El nombre de usuario es obligatorio.",
+			"invalid": "Nombre de usuario inválido."
+		}
+	},
+	"profile-picture": {
+		"label": "Foto de perfil",
+		"placeholder": "Seleccione una foto",
+		"errors": {
+			"required": "La foto de perfil es obligatoria.",
+			"invalid": "Formato de imagen inválido. Use JPG, PNG o GIF."
+		}
+	},
+	"logo": {
+		"label": "Logotipo de la organización",
+		"placeholder": "Seleccione un logotipo",
+		"errors": {
+			"required": "El logotipo es obligatorio.",
+			"invalid": "Formato de imagen inválido. Use JPG, PNG o GIF."
+		}
+	},
+	"slug": {
+		"label": "URL de la organización",
+		"errors": {
+			"required": "La URL es obligatoria.",
+			"invalid": "URL inválida. Use solo letras minúsculas, números y guiones."
+		}
+	},
+	"name": {
+		"label": "Nombre",
+		"errors": {
+			"required": "El nombre es obligatorio."
+		}
+	},
+	"code": {
+		"label": "Código",
+		"placeholder": "Ingrese el código de verificación",
+		"errors": {
+			"required": "El código es obligatorio.",
+			"invalid": "Código inválido."
+		}
+	},
+	"address": {
+		"label": "Dirección",
+		"placeholder": "Ingrese su dirección completa",
+		"errors": {
+			"required": "La dirección es obligatoria.",
+			"invalid": "Dirección inválida."
+		}
+	},
+	"number": {
+		"label": "Número",
+		"placeholder": "Ingrese el número de su casa o apartamento",
+		"errors": {
+			"required": "El número es obligatorio.",
+			"invalid": "Número inválido."
+		}
+	},
+	"cep": {
+		"label": "Código Postal",
+		"placeholder": "Ingrese su código postal",
+		"errors": {
+			"required": "El código postal es obligatorio.",
+			"invalid": "Código postal inválido."
+		}
+	},
+	"cpf": {
+		"label": "CPF",
+		"placeholder": "Ingrese su CPF",
+		"errors": {
+			"required": "El CPF es obligatorio.",
+			"invalid": "CPF inválido."
+		}
+	},
+	"cnpj": {
+		"label": "CNPJ",
+		"placeholder": "Ingrese su CNPJ",
+		"errors": {
+			"required": "El CNPJ es obligatorio.",
+			"invalid": "CNPJ inválido."
+		}
+	},
+	"state": {
+		"label": "Estado",
+		"placeholder": "Seleccione su estado",
+		"errors": {
+			"required": "El estado es obligatorio."
+		}
+	},
+	"city": {
+		"label": "Ciudad",
+		"placeholder": "Ingrese su ciudad",
+		"errors": {
+			"required": "La ciudad es obligatoria."
+		}
+	},
+	"terms": {
+		"label": "Acepto los términos de uso y la política de privacidad",
+		"errors": {
+			"required": "Debe aceptar los términos para continuar."
+		}
+	},
+	"created_at": {
+		"label": "Creado el",
+		"placeholder": "Fecha de creación",
+		"errors": {
+			"required": "La fecha de creación es obligatoria."
+		}
+	},
+	"active": {
+		"label": "Activo",
+		"placeholder": "Seleccionar si está activo",
+		"errors": {
+			"required": "El estado activo es obligatorio."
+		}
+	},
+	"updated_at": {
+		"label": "Actualizado el",
+		"placeholder": "Fecha de actualización",
+		"errors": {
+			"required": "La fecha de actualización es obligatoria."
+		}
+	},
+	"joined": {
+		"label": "Entró en"
+	},
+	"owner": {
+		"label": "Dueño",
+		"placeholder": "Seleccione si es el dueño",
+		"errors": {
+			"required": "El estado de dueño es obligatorio."
+		}
+	},
+	"doctor": {
+		"label": "Médico",
+		"placeholder": "Seleccione si es médico",
+		"errors": {
+			"required": "El estado de médico es obligatorio."
+		}
+	},
+	"secretary": {
+		"label": "Secretaria",
+		"placeholder": "Seleccione si es secretaria",
+		"errors": {
+			"required": "El estado de secretaria es obligatorio."
+		}
+	},
+	"patient": {
+		"label": "Paciente",
+		"placeholder": "Seleccione si es paciente",
+		"errors": {
+			"required": "El estado de paciente es obligatorio."
+		}
+	}
+}

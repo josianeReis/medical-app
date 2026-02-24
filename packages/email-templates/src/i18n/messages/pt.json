@@ -1,0 +1,36 @@
+{
+	"sign-in": {
+		"title": "Seu código de login",
+		"hi": "Olá,",
+		"description": "Use o código de verificação abaixo para acessar sua conta. Este código é válido por um curto período e só pode ser usado uma vez.",
+		"ignore-email": "Se você não tentou fazer login, pode ignorar este e-mail com segurança.",
+		"automated-message": "Esta é uma mensagem automática — por favor, não responda a este e-mail."
+	},
+	"email-verification": {
+		"title": "Confirme seu endereço de e-mail",
+		"heading": "Confirme seu e-mail",
+		"hi": "Olá,",
+		"description": "Obrigado por se inscrever! Por favor, confirme seu endereço de e-mail usando o código de verificação abaixo.",
+		"ignore-email": "Se você não criou uma conta conosco, pode ignorar este e-mail com segurança.",
+		"automated-message": "Esta é uma mensagem automática, por favor não responda a este e-mail."
+	},
+	"recovery-password": {
+		"title": "Redefina sua senha",
+		"heading": "Redefina Sua Senha",
+		"hi": "Olá,",
+		"description": "Recebemos uma solicitação para redefinir sua senha. Use este código de verificação abaixo para criar uma nova senha.",
+		"ignore-email": "Se você não solicitou uma redefinição de senha, pode ignorar este e-mail com segurança.",
+		"automated-message": "Esta é uma mensagem automática, por favor não responda a este e-mail."
+	},
+	"organization-invitation": {
+		"title": "Você foi convidado para se juntar ao {teamName}",
+		"heading": "Convite para o time",
+		"hi": "Olá!",
+		"invited_by": "<strong>{invitedByUsername}</strong> ({invitedByEmail}) convidou você para se juntar ao time <strong>{teamName}</strong>.",
+		"accept_invitation": "Para aceitar o convite e começar a colaborar com o time, clique no botão abaixo:",
+		"button_text": "Aceitar Convite",
+		"copy_paste_link": "Ou copie e cole este link no seu navegador:",
+		"ignore_email": "Se você não esperava este convite ou não conhece quem o enviou, pode ignorar este email com segurança.",
+		"automated_message": "Esta é uma mensagem automática — por favor, não responda a este email."
+	}
+}

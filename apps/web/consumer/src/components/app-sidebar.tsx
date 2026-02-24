@@ -1,171 +1,127 @@
-"use client";
+'use client';
 
-import * as React from "react";
+import * as React from 'react';
 import {
-  //AudioWaveform,
-  //BookOpen,
-  Bot,
- // Command,
-  //Frame,
-  GalleryVerticalEnd,
-  //Map,
-  //PieChart,
-  //Settings2,
-  //SquareTerminal,
-} from "lucide-react";
+	Archive,
+	ClipboardPlus,
+	FileSliders,
+	GalleryVerticalEnd,
+	Users,
+} from 'lucide-react';
 
-import { NavMain } from "../components/nav-main";
-//import { NavProjects } from "../components/nav-projects";
-import { NavUser } from "../components/nav-user";
-import { TeamSwitcher } from "../components/team-switcher";
+import { NavigationMenu } from '../components/navigation-menu';
+import { NavUser } from '../components/nav-user';
 import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarHeader,
-  SidebarRail,
-} from "../../../../../packages/ui-components/src/components/ui/sidebar";
-import { User } from "@/services/auth/auth-client";
+	Sidebar,
+	SidebarContent,
+	SidebarFooter,
+	SidebarHeader,
+	SidebarRail,
+} from '@packages/ui-components';
+import { OrganizationRole } from '@/utils/constants';
+import { UserWithDetails } from '@packages/auth-config/plugins/user-session-details-client';
 
-// This is sample data.
-const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
-  teams: [
-    {
-      name: "Nexdoc.clinic",
-      logo: GalleryVerticalEnd,
-      plan: "",
-      },
-      /*
-    {
-      name: "Acme Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
-    },
-    */
-    
-  ],
-  navMain: [
-   /* {
-      title: "Templates",
-      url: "#",
-      icon: SquareTerminal,
-      isActive: true,
-      items: [
-        {
-          title: "Meus templetes ",
-          url: "my-templates",
-        },
-        {
-          title: "Modelos ",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Cadastros",
-      url: "#",
-      icon: BookOpen,
-      items: [
-        {
-          title: "Paciente",
-          url: "patient-list",
-        },
-      ],
-    }, */
-    {
-      title: "Laudos",
-      url: "#",
-      icon: Bot,
-      items: [
-       /* {
-          title: "Consulta",
-          url: "#",
-       },  */
-        {
-          title: "Templates",
-          url: "templates",
-        },
-        {
-          title: "Gerar novo laudo",
-          url: "create-report",
-        }
-        /*{
-          title: "Deleção de laudo",
-          url: "#",
-        },*/
-      ],
-    },
-   
-    /*{
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
-    },
-  ],
-  projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
-    }, */
-  ],
-};
+const data = [
+	{
+		title: 'Geral',
+		pages: [
+			{
+				title: 'Gerenciar pacientes',
+				url: 'patients',
+				icon: Users,
+				permissions: [
+					OrganizationRole.SECRETARY,
+					OrganizationRole.DOCTOR,
+					OrganizationRole.OWNER,
+				],
+			},
+			{
+				title: 'Laudos aprovados',
+				url: '#',
+				icon: ClipboardPlus,
+				permissions: [
+					OrganizationRole.SECRETARY,
+					OrganizationRole.DOCTOR,
+					OrganizationRole.OWNER,
+				],
+			},
+		],
+	},
+	{
+		title: 'Laudos',
+		pages: [
+			{
+				title: 'Gerar novo laudo',
+				url: 'reports/new',
+				icon: ClipboardPlus,
+				permissions: [OrganizationRole.DOCTOR, OrganizationRole.OWNER],
+			},
+
+			{
+				title: 'Gerenciar laudos',
+				url: 'reports',
+				icon: Archive,
+				permissions: [OrganizationRole.DOCTOR, OrganizationRole.OWNER],
+			},
+		],
+	},
+	{
+		title: 'Templates',
+		pages: [
+			{
+				title: 'Gerenciar templates',
+				url: 'templates',
+				icon: FileSliders,
+				permissions: [OrganizationRole.OWNER],
+			},
+		],
+	},
+	{
+		title: 'Máscaras de impressão',
+		pages: [
+			{
+				title: 'Gerenciar máscaras',
+				url: 'print-masks',
+				icon: FileSliders,
+				permissions: [OrganizationRole.OWNER],
+			},
+		],
+	},
+];
 
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
-  user?: User;
+	user?: UserWithDetails;
 }
 
 export function AppSidebar({ user, ...props }: AppSidebarProps) {
-  return (
-    <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
-      </SidebarHeader>
-      <SidebarContent>
-        <NavMain items={data.navMain} />
-      </SidebarContent>
-      <SidebarFooter>
-        <NavUser user={user} />
-      </SidebarFooter>
-      <SidebarRail />
-    </Sidebar>
-  );
+	const matchedMember = user?.members.find(
+		(member: any) => member.organization?.id === user.lastUsedOrganizationId,
+	);
+	return (
+		<Sidebar collapsible="icon" {...props}>
+			<SidebarHeader>
+				<div className="flex items-center gap-2 mt-3 ml-1">
+					<div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+						<GalleryVerticalEnd className="size-4" />
+					</div>
+					<span className="truncate font-semibold">Nexdoc.clinic</span>
+				</div>
+			</SidebarHeader>
+
+			<SidebarContent className="gap-2">
+				{data.map((item) => (
+					<NavigationMenu
+						key={item.title}
+						navigation={item}
+						role={matchedMember?.role as MemberRole}
+					/>
+				))}
+			</SidebarContent>
+
+			<SidebarFooter>
+				<NavUser user={user} />
+			</SidebarFooter>
+			<SidebarRail />
+		</Sidebar>
+	);
 }

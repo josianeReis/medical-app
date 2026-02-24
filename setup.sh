@@ -246,27 +246,19 @@ install_proto_moon() {
       return 1
   fi
 
-  echo "${CYAN}Managing Moon installation using Proto...${RESET}"
-  if command -v moon &> /dev/null; then
-      echo "${GREEN}Moon already installed via Proto. Upgrading Moon...${RESET}"
-      "$proto_executable" install moon --pin
-  else
-      echo "${CYAN}Installing Moon using Proto...${RESET}"
-      "$proto_executable" install moon --pin
-      SETUP_PERFORMED_ACTIONS=true # Indicate an action was performed for new Moon install
-      echo "${GREEN}Moon installed successfully via Proto: $(moon --version)${RESET}"
-  fi
+  echo "${CYAN}Checking for newer tool versions with proto outdated...${RESET}"
+  "$proto_executable" outdated --update --latest --yes
 
-  echo "${CYAN}Managing Bun installation using Proto...${RESET}"
-  if command -v bun &> /dev/null; then
-      echo "${GREEN}Bun already installed via Proto. Upgrading Bun...${RESET}"
-      "$proto_executable" install bun --pin
-  else
-      echo "${CYAN}Installing Bun using Proto...${RESET}"
-      "$proto_executable" install bun --pin
-      SETUP_PERFORMED_ACTIONS=true # Indicate an action was performed for new Bun install
-      echo "${GREEN}Bun installed successfully via Proto: $(bun --version)${RESET}"
-  fi
+  echo "${CYAN}Installing/Upgrading Moon to latest version...${RESET}"
+  "$proto_executable" install moon || {
+    echo "${RED}Failed to install Moon via Proto.${RESET}";
+    return 1;
+  }
+
+  echo "${GREEN}Moon version: $(moon --version)${RESET}"
+  echo "${GREEN}Bun version: $(bun --version)${RESET}"
+
+  SETUP_PERFORMED_ACTIONS=true # Flag because we may have updated versions
 
   echo "${CYAN}Installing project dependencies...${RESET}"
   bun install

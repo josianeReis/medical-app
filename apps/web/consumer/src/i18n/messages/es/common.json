@@ -1,0 +1,177 @@
+{
+	"home": {
+		"metadata": {
+			"title": "Bienvenido a Nexdoc.clinic",
+			"description": "Nuestra plataforma segura le ayuda a gestionar sus informes médicos"
+		}
+	},
+	"create-organization": {
+		"form": {
+			"errors": {
+				"required": "El nombre es obligatorio.",
+				"requiredUrl": "El nombre de la URL es obligatorio."
+			}
+		},
+		"metadata": {
+			"title": "Crear una nueva organización",
+			"description": "Inicie sesión a continuación para acceder a su cuenta."
+		},
+		"title": "Crear una nueva organización",
+		"description": "Las organizaciones son entornos compartidos donde los equipos pueden trabajar en proyectos, ciclos y tareas.",
+		"name": "Nombre de la organización",
+		"slug": "URL de la organización",
+		"submit": "Crear organización"
+	},
+	"login": {
+		"title": "Iniciar sesión",
+		"description": "Ingrese su correo electrónico a continuación para acceder a su cuenta.",
+		"forgot-password": "¿Olvidó su contraseña?",
+		"submit": "Iniciar sesión",
+		"dont-have-account": "¿No tiene una cuenta?",
+		"signup": "Registrarse",
+		"metadata": {
+			"title": "Iniciar sesión",
+			"description": "Inicie sesión a continuación para acceder a su cuenta."
+		},
+		"send-code": "Enviar código",
+		"code": "Código",
+		"login-with-code": "Iniciar sesión con código de verificación"
+	},
+	"forgot-password": {
+		"title": "Olvidó la contraseña",
+		"description": "No se preocupe, le enviaremos instrucciones para restablecerla.",
+		"reset-password": "Restablecer contraseña",
+		"metadata": {
+			"title": "Olvidó la contraseña",
+			"description": "No se preocupe, le enviaremos instrucciones para restablecerla."
+		},
+		"remembered-password": "¿Recordó su contraseña?",
+		"login": "Iniciar sesión",
+		"send-code": "Enviar código",
+		"code": "Código"
+	},
+	"reset-password": {
+		"title": "Restablecer contraseña",
+		"description": "Por favor, cree y confirme su nueva contraseña.",
+		"reset-password": "Restablecer contraseña",
+		"metadata": {
+			"title": "Restablecer contraseña",
+			"description": "Por favor, cree y confirme su nueva contraseña."
+		}
+	},
+	"signup": {
+		"title": "Crear cuenta",
+		"description": "Ingrese su información para crear una nueva cuenta",
+		"create-account": "Crear cuenta",
+		"already-have-account": "¿Ya tiene una cuenta?",
+		"signin": "Iniciar sesión",
+		"email-not-verified": "Cuenta creada pero correo electrónico no verificado.",
+		"success": "Cuenta creada con éxito.",
+		"user-accept": "Usted acepta nuestros",
+		"term-of-responsability": "términos de servicio",
+		"metadata": {
+			"title": "Crear cuenta",
+			"description": "Ingrese su información para crear una nueva cuenta"
+		}
+	},
+	"email-verification": {
+		"title": "Verificar correo electrónico",
+		"description": "Se le ha enviado un correo electrónico. El código es válido por 10 minutos",
+		"verify": "Verificar",
+		"code": "Código",
+		"metadata": {
+			"title": "Verificar correo electrónico",
+			"description": "Por favor, revise su correo electrónico y haga clic en el enlace."
+		}
+	},
+	"organizations": {
+		"metadata": {
+			"title": "Organizaciones",
+			"description": "Gestiona tus organizaciones y colabora con tu equipo"
+		},
+		"title": "Seleccione una organización",
+		"accept-invitation": "¿Entrar en otra organización?",
+		"enter": "Entrar",
+		"description": "Las organizaciones son entornos compartidos donde los equipos pueden trabajar en proyectos, ciclos y tareas"
+	},
+	"accept-invitation": {
+		"metadata": {
+			"title": "Aceptar invitación",
+			"description": "Ingrese el código enviado por correo electrónico para aceptar la invitación"
+		},
+		"title": "Unirse a una organización",
+		"description": "Ingrese el código enviado por correo electrónico",
+		"submit": "Unirse a la organización",
+		"code": "Código"
+	},
+	"templates": {
+		"metadata": {
+			"title": "Plantillas",
+			"description": ""
+		},
+		"title": "Plantillas",
+		"description": "Introduce el código enviado por email",
+		"submit": "Unirse a la organización",
+		"code": "Código",
+		"edit_template": "Editar plantilla",
+		"delete_template": "Eliminar plantilla",
+		"confirm_delete_title": "¿Realmente quieres eliminar?",
+		"confirm_delete_description": "Esta acción no se puede deshacer. Esto eliminará permanentemente tu plantilla.",
+		"save_changes": "Guardar cambios",
+		"create_template": "Crear plantilla"
+	},
+	"data-table": {
+		"no_data": "No data found",
+		"search": "Search",
+		"filter": "Filter",
+		"all": "All"
+	},
+	"patient": {
+		"title-edit-patient": "Editar paciente",
+		"title-patient-list": "Paciente",
+		"register-patient": "Cadastrar paciente",
+		"age": "Idade",
+		"save": "Salvar",
+		"cancel": "Cancelar",
+		"edit": "Editar",
+		"delete": "Excluir",
+		"common": {
+			"name": "Nome",
+			"birth-date": "Data de nascimento",
+			"sex": "Sexo",
+			"document-type": "Tipo de documento",
+			"identifier": "Carteira de identidade (RG)",
+			"physical-personnel": "CPF (Cadastro de Pessoa Física)",
+			"passport": "Passaporte",
+			"document": "Número do documento",
+			"phone": "Telefone",
+			"email": "E-mail"
+		}
+	},
+	"print_masks": {
+		"metadata": {
+			"title": "Máscaras de impresión",
+			"description": ""
+		},
+		"edit_template": "Editar máscara",
+		"delete_template": "Eliminar máscara",
+		"confirm_delete_title": "¿Realmente desea eliminar?",
+		"confirm_delete_description": "Esta acción no se puede deshacer.",
+		"save_changes": "Guardar cambios",
+		"create_template": "Crear máscara"
+	},
+	"reports": {
+		"metadata": {
+			"title": "Informes",
+			"description": ""
+		},
+		"view": "Ver",
+		"publish": "Publicar",
+		"save_changes": "Guardar cambios",
+		"delete_template": "Eliminar informe",
+		"confirm_delete_title": "¿Realmente desea eliminar?",
+		"confirm_delete_description": "Esta acción no se puede deshacer."
+	}
+}
+
+

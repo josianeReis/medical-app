@@ -1,0 +1,48 @@
+name: Run Drizzle migrations
+
+on:
+  push:
+    branches:
+      - main
+      - production
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  INFISICAL_TOKEN: ${{ secrets.INFISICAL_TOKEN }}
+  INFISICAL_API_URL: ${{ secrets.INFISICAL_API_URL }}
+
+jobs:
+  migrate-stg:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: moonrepo/setup-toolchain@v0
+        with:
+          auto-install: true
+
+      - name: Apply migrations (stg)
+        run: moon data-access:migration-up-stg
+
+      - name: Seed database (stg)
+        run: moon data-access:seed-stg
+
+  migrate-prod:
+    if: github.ref == 'refs/heads/production'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: moonrepo/setup-toolchain@v0
+        with:
+          auto-install: true
+
+      - name: Apply migrations (stg)
+        run: moon data-access:migration-up-stg
+
+      - name: Seed database (stg)
+        run: moon data-access:seed-stg

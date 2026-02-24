@@ -24,14 +24,14 @@ tasks:
     args: "--fix"
     local: true
   dev:
-    command: infisical run --env dev --path /auth-api -- bun run --watch --inspect=4011/auth src/index.ts
+    command: infisical run --env dev --path /auth-api -- bun run --hot --inspect=4020/auth src/index.ts
     # args:
     #   - '--inspect'
     local: true
     deps:
       - "data-access:migration-up"
   stg:
-    command: infisical run --env stg --path /auth-api -- bun run --watch --inspect=4011/auth src/index.ts
+    command: infisical run --env stg --path /auth-api -- bun run --watch --inspect=4020/auth src/index.ts
     # args:
     #   - '--inspect'
     local: true
@@ -108,11 +108,15 @@ tasks:
     deps:
       - "build"
   migration-create:
-    command: bunx @better-auth/cli@latest generate
+    command: infisical run --env dev  --path /auth-api -- bunx @better-auth/cli@latest generate
+    args:
+      - "--output=../../../packages/data-access/src/schema/auth/auth-schema.ts"
+    local: true      
   openapi-generate:
-    command: bun run src/utils/helpers/generateOpenApi.ts
+    command: infisical run --env dev  --path /auth-api -- bun run src/utils/helpers/generateOpenApi.ts
 
 dependsOn:
   - data-access
   - utils
   - email-templates
+  - auth-config

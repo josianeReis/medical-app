@@ -1,0 +1,36 @@
+{
+  "sign-in": {
+    "title": "Tu código de inicio de sesión",
+    "hi": "Hola,",
+    "description": "Usa el código de verificación a continuación para iniciar sesión en tu cuenta. Este código es válido por un corto tiempo y solo se puede usar una vez.",
+    "ignore-email": "Si no intentaste iniciar sesión, puedes ignorar este correo electrónico de forma segura.",
+    "automated-message": "Este es un mensaje automático — por favor, no respondas a este correo electrónico."
+  },
+  "email-verification": {
+    "title": "Confirma tu dirección de correo electrónico",
+    "heading": "Confirma tu correo electrónico",
+    "hi": "Hola,",
+    "description": "¡Gracias por registrarte! Por favor, confirma tu dirección de correo electrónico utilizando el código de verificación a continuación.",
+    "ignore-email": "Si no creaste una cuenta con nosotros, puedes ignorar este correo electrónico de forma segura.",
+    "automated-message": "Este es un mensaje automático, por favor no respondas a este correo electrónico."
+  },
+  "recovery-password": {
+    "title": "Restablece tu contraseña",
+    "heading": "Restablece Tu Contraseña",
+    "hi": "Hola,",
+    "description": "Recibimos una solicitud para restablecer tu contraseña. Utiliza este código de verificación a continuación para crear una nueva contraseña.",
+    "ignore-email": "Si no solicitaste un restablecimiento de contraseña, puedes ignorar este correo electrónico de forma segura.",
+    "automated-message": "Este es un mensaje automático, por favor no respondas a este correo electrónico."
+  },
+  "organization-invitation": {
+    "title": "Has sido invitado a unirte a {teamName}",
+    "heading": "Invitación al equipo",
+    "hi": "¡Hola!",
+    "invited_by": "<strong>{invitedByUsername}</strong> ({invitedByEmail}) te ha invitado a unirte al equipo <strong>{teamName}</strong>.",
+    "accept_invitation": "Para aceptar la invitación y comenzar a colaborar con el equipo, haz clic en el botón de abajo:",
+    "button_text": "Aceptar Invitación",
+    "copy_paste_link": "O copia y pega este enlace en tu navegador:",
+    "ignore_email": "Si no esperabas esta invitación o no conoces al remitente, puedes ignorar este correo electrónico de forma segura.",
+    "automated_message": "Este es un mensaje automático — por favor, no respondas a este correo electrónico."
+  }
+}

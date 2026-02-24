@@ -1,0 +1,175 @@
+{
+	"home": {
+		"metadata": {
+			"title": "Welcome to Nexdoc.clinic",
+			"description": "Our secure platform helps you manage your medical reports"
+		}
+	},
+	"create-organization": {
+		"form": {
+			"errors": {
+				"required": "Name is required.",
+				"requiredUrl": "URL name is required."
+			}
+		},
+		"metadata": {
+			"title": "Create a new organization",
+			"description": "Log in below to access your account."
+		},
+		"title": "Create a new organization",
+		"description": "Organizations are shared environments where teams can work on projects, cycles, and tasks.",
+		"name": "Organization name",
+		"slug": "Organization URL",
+		"submit": "Create organization"
+	},
+	"login": {
+		"title": "Log in",
+		"description": "Enter your email below to access your account.",
+		"forgot-password": "Forgot your password?",
+		"submit": "Log in",
+		"dont-have-account": "Don't have an account?",
+		"signup": "Sign up",
+		"metadata": {
+			"title": "Log in",
+			"description": "Log in below to access your account."
+		},
+		"send-code": "Send code",
+		"code": "Code",
+		"login-with-code": "Log in with verification code"
+	},
+	"forgot-password": {
+		"title": "Forgot password",
+		"description": "Don't worry, we'll send you reset instructions.",
+		"reset-password": "Reset password",
+		"metadata": {
+			"title": "Forgot password",
+			"description": "Don't worry, we'll send you reset instructions."
+		},
+		"remembered-password": "Remembered your password?",
+		"login": "Log in",
+		"send-code": "Send code",
+		"code": "Code"
+	},
+	"reset-password": {
+		"title": "Reset password",
+		"description": "Please create and confirm your new password.",
+		"reset-password": "Reset password",
+		"metadata": {
+			"title": "Reset password",
+			"description": "Please create and confirm your new password."
+		}
+	},
+	"signup": {
+		"title": "Create account",
+		"description": "Enter your information to create a new account",
+		"create-account": "Create account",
+		"already-have-account": "Already have an account?",
+		"signin": "Sign in",
+		"email-not-verified": "Account created but email not verified.",
+		"success": "Account created successfully.",
+		"user-accept": "You accept our",
+		"term-of-responsability": "terms of service",
+		"metadata": {
+			"title": "Create account",
+			"description": "Enter your information to create a new account"
+		}
+	},
+	"email-verification": {
+		"title": "Verify email",
+		"description": "An email has been sent to you. The code is valid for 10 minutes",
+		"verify": "Verify",
+		"code": "Code",
+		"metadata": {
+			"title": "Verify email",
+			"description": "Please check your email and click the link."
+		}
+	},
+	"organizations": {
+		"metadata": {
+			"title": "Organizations",
+			"description": "Manage your organizations and collaborate with your team"
+		},
+		"title": "Select an organization",
+		"accept-invitation": "Join another organization?",
+		"enter": "Join",
+		"description": "Organizations are shared environments where teams can work on projects, cycles, and tasks"
+	},
+	"accept-invitation": {
+		"metadata": {
+			"title": "Accept invitation",
+			"description": "Enter the code sent by email to accept the invitation"
+		},
+		"title": "Join an organization",
+		"description": "Enter the code sent by email",
+		"submit": "Join organization",
+		"code": "Code"
+	},
+	"templates": {
+		"metadata": {
+			"title": "Templates",
+			"description": ""
+		},
+		"title": "Templates",
+		"description": "Enter the code sent by email",
+		"submit": "Join organization",
+		"code": "Code",
+		"edit_template": "Edit template",
+		"delete_template": "Delete template",
+		"confirm_delete_title": "Do you really want to delete?",
+		"confirm_delete_description": "This action cannot be undone. This will permanently delete your template.",
+		"save_changes": "Save changes",
+		"create_template": "Create template"
+	},
+	"data-table": {
+		"no_data": "Ningún dato encontrado",
+		"search": "Buscar",
+		"filter": "Filtrar",
+		"all": "All"
+	},
+  "patient": {
+    "title-edit-patient": "Edit patient",
+    "title-patient-list": "Patient",
+    "register-patient": "Register patient",
+    "age": "Age",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "common": {
+      "name": "Name",
+      "birth-date": "Date of birth",
+      "sex": "Sex",
+      "document-type": "Document type",
+      "identifier": "Identity card (RG)",
+      "physical-personnel": "CPF (Tax ID)",
+      "passport": "Passport",
+      "document": "Document number",
+      "phone": "Phone",
+      "email": "Email"
+    }
+  },
+  "print_masks": {
+    "metadata": {
+      "title": "Print masks",
+      "description": ""
+    },
+    "edit_template": "Edit mask",
+    "delete_template": "Delete mask",
+    "confirm_delete_title": "Do you really want to delete?",
+    "confirm_delete_description": "This action cannot be undone.",
+    "save_changes": "Save changes",
+    "create_template": "Create mask"
+  },
+  "reports": {
+    "metadata": {
+      "title": "Reports",
+      "description": ""
+    },
+    "view": "View",
+    "publish": "Publish",
+    "save_changes": "Save changes",
+    "delete_template": "Delete report",
+    "confirm_delete_title": "Do you really want to delete?",
+    "confirm_delete_description": "This action cannot be undone."
+  }
+}

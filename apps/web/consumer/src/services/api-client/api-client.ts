@@ -1,17 +1,22 @@
+
 import { env } from "@/utils/env";
 import { createFetch, createSchema } from "@better-fetch/fetch";
 import { getTranslations } from "next-intl/server";
 import { cookies } from "next/headers";
 import qs from "querystring";
 
-const getCookieHeader = async () => {
+const getCookieHeader = async (): Promise<Record<string, string>> => {
   const cookieStore = await cookies();
-  return {
-    Cookie: cookieStore
-      .getAll()
-      .map((c) => `${c.name}=${c.value}`)
-      .join("; "),
-  };
+  const cookieList = cookieStore
+    .getAll()
+    .map((c) => `${c.name}=${c.value}`)
+    .join('; ');
+
+  // Avoid sending an empty "Cookie" header – some servers (and reverse proxies)
+  // treat an empty value as malformed and close the socket without a response.
+  // If we have no cookies just return an empty object so `fetch` won’t include
+  // the header at all.
+  return cookieList ? { Cookie: cookieList } : {};
 };
 
 const zodSchema = createSchema({
@@ -70,7 +75,7 @@ interface ApiError {
 }
 
 const getErrorMessage = async (error: ApiError) => {
-  const t = await getTranslations("api.errorCodes");
+  const t = await getTranslations("api");
   if (error?.code && t.has(error?.code)) {
     return t(error?.code);
   }

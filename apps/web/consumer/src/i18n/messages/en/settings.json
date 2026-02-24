@@ -1,0 +1,79 @@
+{
+	"members": {
+		"metadata": {
+			"title": "Members",
+			"description": "Manage your organization's members and their permissions"
+		},
+		"title": "Members",
+		"invite": "Invite",
+		"cancel": "Cancel",
+		"update": "Update",
+		"roles": {
+			"all": "All",
+			"secretary": "Secretary",
+			"doctor": "Doctor",
+			"owner": "Owner"
+		},
+		"data-table": {
+			"search": "Search by name or email",
+			"no-results": "No members found",
+			"name": "Name",
+			"email": "E-mail",
+			"role": "Role",
+			"actions": "Actions"
+		},
+		"edit-member": "Edit member",
+		"edit-member-title": "Edit organization member",
+		"invite-member": {
+			"title": "Invite a member to the organization",
+			"submit": "Send invite"
+		},
+		"remove-member": "Remove member",
+		"member-changed-successfully": "Member changed successfully!",
+		"invite-sent-successfully": "Invite sent successfully!"
+	},
+	"organization": {
+		"title": "Organization",
+		"dialog": {
+			"title": "Change organization URL",
+			"description": "This will change all your URLs and old ones will be redirected",
+			"label": "Enter the new organization URL",
+			"cancel": "Cancel",
+			"submit": "Update"
+		},
+		"dead-zone": {
+			"delete-organization": "Delete organization",
+			"title": "Verify organization deletion",
+			"deletion-warning-1": "If you are sure you want to proceed with deleting the organization",
+			"deletion-warning-2": "please continue below.",
+			"irreversible-operation": "This operation is irreversible and will result in the complete deletion of all data associated with the organization.",
+			"data-deletion-details": "Data such as users, issues, and comments will be permanently deleted.",
+			"enter-code-label": "Enter the deletion code sent to",
+			"acknowledge-checkbox": "I acknowledge that all organization data will be deleted and I want to proceed.",
+			"delete-organization-button": "Delete organization"
+		},
+		"metadata": {
+			"title": "Organization",
+			"description": "Manage your organization's information"
+		}
+	},
+	"profile": {
+		"title": "Profile",
+		"preferences": {
+			"title": "Preferences",
+			"languages": {
+				"title": "Language",
+				"description": "You can choose your preferred language."
+			}
+		},
+		"languages": {
+			"en": "English",
+			"es": "Spanish",
+			"pt": "Portuguese"
+		},
+		"metadata": {
+			"title": "Profile",
+			"description": "Manage your personal information and preferences"
+		}
+	}
+}

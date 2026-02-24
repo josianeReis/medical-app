@@ -1,0 +1,18 @@
+id: infra
+type: tool
+language: bash
+
+project:
+  name: 'infrastructure'
+  description: 'Infrastructure tools to manage our infrastructure'
+  channel: '#infrastructure'
+
+tasks:
+  up:
+    command: infisical run --env dev --path /infrastructure -- docker compose -f ./docker/docker-compose.yml up  -d
+  down:
+    command: infisical run --env dev --path /infrastructure -- docker compose -f ./docker/docker-compose.yml down 
+  clean:
+    command: infisical run --env dev --path /infrastructure -- docker compose -f ./docker/docker-compose.yml down  -v --remove-orphans
+  logs:
+    command: infisical run --env dev --path /infrastructure -- docker compose -f ./docker/docker-compose.yml logs 

@@ -1,0 +1,9 @@
+id: auth-config
+type: library
+language: typescript
+platform: bun
+
+project:
+  name: '@packages/auth-config'
+  description: 'Auth config package'
+  channel: '#auth-config'

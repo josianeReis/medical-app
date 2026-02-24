@@ -5,15 +5,15 @@ stack: backend
 platform: bun
 
 project:
-  name: "@packages/data-access"
-  description: "Data access package to access and manage our database"
-  channel: "#data-access"
+  name: '@packages/data-access'
+  description: 'Data access package to access and manage our database'
+  channel: '#data-access'
 
 tasks:
   remove-build-files:
     command: rm
     args:
-      - "-fr=lib/*"
+      - '-fr=lib/*'
     options:
       internal: true
     local: true
@@ -25,39 +25,27 @@ tasks:
   db-studio:
     command: infisical run --env dev --path /data-access -- drizzle-kit studio
     args:
-      - "--port=5455"
+      - '--port=5455'
       - --config=./drizzle.config.ts
     local: true
-  db-expose:
-    command: ssh -R 4345:localhost:$DB_PORT $DB_EXPOSE_SUBDOMAIN.serveo.net
-    local: true
-    options:
-      # Defaults to .env
-      envFile: true
-  db-start:
-    command: infisical run --env dev --path /data-access -- docker compose up
-    local: true
-  db-stop:
-    command: infisical run --env dev --path /data-access -- docker compose down --remove-orphans
-    local: true
-    options:
-      persistent: false
-  db-clean:
-    command: infisical run --env dev --path /data-access -- docker compose down --remove-orphans -v
-    local: true
-    options:
-      persistent: false
   migration-create:
-    command: drizzle-kit generate
+    command: infisical run --env dev --path /data-access -- drizzle-kit generate
     local: true
     options:
       persistent: false
     args:
       - --config=./drizzle.config.ts
+  migration-drop:
+    command: infisical run --env dev --path /data-access -- drizzle-kit drop
+    local: true
+    options:
+      interactive: true
+      cache: false
   migration-up:
     command: infisical run --env dev --path /data-access -- drizzle-kit migrate
     options:
       persistent: false
+      cache: false
   migration-up-stg:
     command: infisical run --env stg --path /data-access -- drizzle-kit migrate
     options:
@@ -68,10 +56,31 @@ tasks:
       persistent: false
   migration-check:
     command: infisical run --env dev --path /data-access -- drizzle-kit check
+    local: true
   migration-check-stg:
     command: infisical run --env stg --path /data-access -- drizzle-kit check
   migration-check-prod:
     command: infisical run --env prod --path /data-access -- drizzle-kit check
+  seed:
+    command: infisical run --env dev --path /data-access -- bun run src/seeds/index.ts
+    options:
+      persistent: false
+      cache: false
+  seed-stg:
+    command: infisical run --env stg --path /data-access -- bun run src/seeds/index.ts
+    options:
+      persistent: false
+      cache: false
+  seed-prod:
+    command: infisical run --env prod --path /data-access -- bun run src/seeds/index.ts
+    options:
+      persistent: false
+      cache: false
+  test:
+    command: bunx vitest run
+    options:
+      runInCI: true
+    local: true
 
 dependsOn:
   - utils

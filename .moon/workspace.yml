@@ -15,6 +15,7 @@ projects:
   - 'apps/web/*'
   - 'apps/services/*'
   - 'packages/*'
+  - 'infrastructure/*'
 
 vcs:
   manager: 'git'

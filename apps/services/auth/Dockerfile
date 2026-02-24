@@ -2,9 +2,9 @@ FROM oven/bun:latest AS base
 WORKDIR /app
 
 # Install infisical for secrets management
-RUN apt-get update && apt-get install -y bash curl wget && curl -1sLf \
-    'https://artifacts-cli.infisical.com/setup.deb.sh' | bash \
-    && apt-get update && apt-get install -y infisical
+RUN apt-get update && apt-get install -y bash curl wget sudo && curl -1sLf \
+    'https://artifacts-cli.infisical.com/setup.deb.sh' | sudo -E bash \
+    && sudo apt-get update && sudo apt-get install -y infisical
 
 # Install moon binary
 RUN apt-get update && apt-get install -y curl && \

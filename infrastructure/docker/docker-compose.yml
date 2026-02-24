@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:15
+    container_name: nexdoc_db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: nexdoc_dev_db
+    ports:
+      - ${DB_PORT:-5432}:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./pg-dump:/docker-entrypoint-initdb.d
+
+  minio:
+    image: minio/minio:latest
+    container_name: nexdoc_minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY:-minio}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY:-minio123}
+    ports:
+      - '9000:9000'
+      - '9001:9001'
+    volumes:
+      - minio-data:/data
+
+volumes:
+  postgres-data:
+  minio-data:

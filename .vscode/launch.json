@@ -8,8 +8,16 @@
       "type": "bun",
       "internalConsoleOptions": "neverOpen",
       "request": "attach",
-      "name": "Attach Bun",
-      "url": "ws://localhost:4011/auth",
+      "name": "Debug Auth Service",
+      "url": "ws://localhost:4020/auth",
+      "stopOnEntry": false
+    },
+    {
+      "type": "bun",
+      "internalConsoleOptions": "neverOpen",
+      "request": "attach",
+      "name": "Debug Management Service",
+      "url": "ws://localhost:4021/management",
       "stopOnEntry": false
     }
   ]

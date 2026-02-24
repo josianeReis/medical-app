@@ -1,0 +1,128 @@
+$schema: "https://moonrepo.dev/schemas/project.json"
+
+id: management
+type: application
+language: typescript
+stack: backend
+platform: bun
+tags:
+  - backend
+  - app
+
+project:
+  name: "nexdoc/management"
+  description: "Nexdoc Management API"
+  channel: "#management"
+
+tasks:
+  lint:
+    command: eslint
+    options:
+      runInCI: true
+  lint-fix:
+    extends: "lint"
+    args: "--fix"
+    local: true
+  dev:
+    command: infisical run --env dev --path /management-api -- bun run --hot --inspect=4021/management src/index.ts
+    # args:
+    #   - '--inspect'
+    local: true
+    deps:
+      - "data-access:migration-up"
+  stg:
+    command: infisical run --env stg --path /management-api -- bun run --watch --inspect=4021/management src/index.ts
+    # args:
+    #   - '--inspect'
+    local: true
+  build:
+    command: bun build
+    args:
+      - "--compile"
+      - "--minify-whitespace"
+      - "--minify-syntax"
+      - "--target=bun"
+      - "--outfile=server"
+      - "./src/index.ts"
+    outputs:
+      - "server"
+    options:
+      runInCI: true
+  docker-build:
+    command: sh
+    args:
+      - -c
+      - |
+        # Build the image
+        docker build \
+          -t "$REGISTRY/$MOON_PROJECT_ID:$TAG" \
+          -f apps/services/management/Dockerfile .
+    inputs:
+      - "$REGISTRY"
+      - "$TAG"
+    options:
+      runInCI: true
+      runFromWorkspaceRoot: true
+  docker-release:
+    command: sh
+    args:
+      - -c
+      - |
+        # Build the image
+        docker build \
+          -t "$REGISTRY/$MOON_PROJECT_ID:$TAG" \
+          -f apps/services/management/Dockerfile .
+
+        echo "→ pushing $MOON_PROJECT_ID with tag $TAG"
+        # Push the image to your private registry
+        docker push "$REGISTRY/$MOON_PROJECT_ID:$TAG"
+    inputs:
+      - "$REGISTRY"
+      - "$TAG"
+    options:
+      runFromWorkspaceRoot: true
+  docker-release-prod:
+    command: sh
+    args:
+      - -c
+      - |
+        # Build the image
+        docker build \
+          -t "$REGISTRY/$MOON_PROJECT_ID:latest" \
+          -t "$REGISTRY/$MOON_PROJECT_ID:$TAG" \
+          -f apps/services/management/Dockerfile .
+
+        echo "→ pushing $MOON_PROJECT_ID with tag latest & $TAG"
+        # Push the image to your private registry
+        docker push "$REGISTRY/$MOON_PROJECT_ID"
+    inputs:
+      # Pass-through the two variables your GitHub Action injects
+      - "$REGISTRY"
+      - "$TAG"
+    options:
+      runFromWorkspaceRoot: true
+  start:
+    command: infisical run --env prod --path /management-api -- ./server
+    inputs:
+      - "server"
+    deps:
+      - "build"
+  migration-create:
+    command: infisical run --env dev  --path /management-api -- bunx @better-management/cli@latest generate
+    args:
+      - "--output=../../../packages/data-access/src/schema/management/management-schema.ts"
+    local: true      
+  openapi-generate:
+    command: infisical run --env dev  --path /management-api -- bun run src/utils/helpers/generateOpenApi.ts
+  test:
+    command: bunx vitest run
+    options:
+      runInCI: true
+      cache: false
+    local: true
+
+dependsOn:
+  - data-access
+  - utils
+  - email-templates
+  - auth-config

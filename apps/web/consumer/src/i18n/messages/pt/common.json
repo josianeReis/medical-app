@@ -1,0 +1,176 @@
+{
+	"home": {
+		"metadata": {
+			"title": "Bem-vindo ao Nexdoc.clinic",
+			"description": "Nossa plataforma segura ajuda você a gerenciar seus relatórios médicos"
+		}
+	},
+	"create-organization": {
+		"form": {
+			"errors": {
+				"required": "Nome é obrigatório.",
+				"requiredUrl": "Nome da Url é obrigatório."
+			}
+		},
+		"metadata": {
+			"title": "Criar uma nova organização",
+			"description": "Faça login abaixo para acessar à sua conta."
+		},
+		"title": "Criar uma nova organização",
+		"description": "Organizaçoes são ambientes compartilhados onde equipes podem trabalhar em projetos, ciclos e tarefas.",
+		"name": "Nome da organização",
+		"slug": "URL da organização",
+		"submit": "Criar organização"
+	},
+	"login": {
+		"title": "Iniciar sessão",
+		"description": "Introduza o seu e-mail abaixo para acessar à sua conta.",
+		"forgot-password": "Esqueceu sua senha?",
+		"submit": "Iniciar Sessão",
+		"dont-have-account": "Não tem uma conta?",
+		"signup": "Cadastre-se",
+		"metadata": {
+			"title": "Iniciar sessão",
+			"description": "Faça login abaixo para acessar à sua conta."
+		},
+		"send-code": "Enviar código",
+		"code": "Código",
+		"login-with-code": "Fazer login com código de verificação"
+	},
+	"forgot-password": {
+		"title": "Esqueceu a senha",
+		"description": "Não se preocupe, enviaremos instruções para redefinição.",
+		"reset-password": "Redefinir senha",
+		"metadata": {
+			"title": "Esqueceu a senha",
+			"description": "Não se preocupe, enviaremos instruções para redefinição."
+		},
+		"remembered-password": "Lembrou sua senha?",
+		"login": "Entrar",
+		"send-code": "Enviar código",
+		"code": "Código"
+	},
+	"reset-password": {
+		"title": "Redefinir senha",
+		"description": "Por favor, crie e confirme sua nova senha.",
+		"reset-password": "Redefinir senha",
+		"metadata": {
+			"title": "Redefinir senha",
+			"description": "Por favor, crie e confirme sua nova senha."
+		}
+	},
+	"signup": {
+		"title": "Criar conta",
+		"description": "Insira suas informações para criar uma nova conta",
+		"create-account": "Criar conta",
+		"already-have-account": "Já tem uma conta?",
+		"signin": "Entrar",
+		"email-not-verified": "Conta criada mas email não verificado.",
+		"success": "Conta criada com sucesso.",
+		"user-accept": "Você aceita os nossos",
+		"term-of-responsability": "termos de serviço",
+		"metadata": {
+			"title": "Criar conta",
+			"description": "Insira suas informações para criar uma nova conta"
+		}
+	},
+	"email-verification": {
+		"title": "Verificar e-mail",
+		"description": "Um e-mail foi enviado para você. O código possui validade de 10 minutos",
+		"verify": "Verificar",
+		"code": "Código",
+		"metadata": {
+			"title": "Verificar e-mail",
+			"description": "Por favor, verifique seu e-mail e clique no link."
+		}
+	},
+	"organizations": {
+		"metadata": {
+			"title": "Organizações",
+			"description": "Gerencie suas organizações e colabore com sua equipe"
+		},
+		"title": "Selecione uma organização",
+		"accept-invitation": "Entrar em outra organização?",
+		"enter": "Entrar",
+		"description": "Organizaçoes são ambientes compartilhados onde equipes podem trabalhar em projetos, ciclos e tarefas"
+	},
+	"accept-invitation": {
+		"metadata": {
+			"title": "Aceitar convite",
+			"description": "Informe o código enviado por email para aceitar o convite"
+		},
+		"title": "Entrar em uma organização",
+		"description": "Informe o código enviado por email",
+		"submit": "Entrar na organização",
+		"code": "Código"
+	},
+	"templates": {
+		"metadata": {
+			"title": "Templates",
+			"description": ""
+		},
+		"title": "Templates",
+		"description": "Informe o código enviado por email",
+		"submit": "Entrar na organização",
+		"code": "Código",
+		"edit_template": "Editar template",
+		"delete_template": "Excluir template",
+		"confirm_delete_title": "Você realmente quer excluir?",
+		"confirm_delete_description": "Esta ação não pode ser desfeita. Isso excluirá permanentemente o seu modelo.",
+		"save_changes": "Salvar alterações",
+		"create_template": "Criar modelo"
+	},
+	"data-table": {
+		"no_data": "Nenhum dado encontrado",
+		"search": "Pesquisar",
+		"filter": "Filtrar",
+		"all": "Todos"
+	},
+	"patient": {
+		"title-edit-patient": "Editar paciente",
+		"title-patient-list": "Paciente",
+		"register-patient": "Cadastrar paciente",
+		"age": "Idade",
+		"save": "Salvar",
+		"cancel": "Cancelar",
+		"edit": "Editar",
+		"delete": "Excluir",
+		"common": {
+			"name": "Nome",
+			"birth-date": "Data de nascimento",
+			"sex": "Sexo",
+			"document-type": "Tipo de documento",
+			"identifier": "Carteira de identidade (RG)",
+			"physical-personnel": "CPF (Cadastro de Pessoa Física)",
+			"passport": "Passaporte",
+			"document": "Número do documento",
+			"phone": "Telefone",
+			"email": "E-mail"
+		}
+	},
+	"print_masks": {
+		"metadata": {
+			"title": "Máscaras de impressão",
+			"description": ""
+		},
+		"edit_template": "Editar máscara",
+		"delete_template": "Excluir máscara",
+		"confirm_delete_title": "Você realmente quer excluir?",
+		"confirm_delete_description": "Esta ação não pode ser desfeita.",
+		"save_changes": "Salvar alterações",
+		"create_template": "Criar máscara"
+	},
+	"reports": {
+		"metadata": {
+			"title": "Laudos",
+			"description": ""
+		},
+		"view": "Visualizar",
+		"publish": "Publicar",
+		"save_changes": "Salvar alterações",
+		"delete_template": "Excluir laudo",
+		"confirm_delete_title": "Você realmente quer excluir?",
+		"confirm_delete_description": "Esta ação não pode ser desfeita."
+	}
+}
+

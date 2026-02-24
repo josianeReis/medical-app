@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.options.json",
+  "references": [],
+  "compilerOptions": {
+    "rootDir": "./src",
+    "emitDeclarationOnly": false,
+    "outDir": "./lib",
+    "paths": {}
+  },
+  "include": ["src/**/*", "../../tsconfig.eslint.json"],
+  "exclude": ["dist", "lib"]
+}

@@ -1,0 +1,80 @@
+{
+	"members": {
+		"metadata": {
+			"title": "Membros",
+			"description": "Gerencie os membros da sua organização e suas permissões"
+		},
+		"title": "Membros",
+		"invite": "Convidar",
+		"cancel": "Cancelar",
+		"update": "Atualizar",
+		"roles": {
+			"all": "Todos",
+			"secretary": "Secretária",
+			"doctor": "Doutor",
+			"owner": "Propriétario"
+		},
+		"data-table": {
+			"search": "Procurar por nome ou email",
+			"no-results": "Nenhum membro encontrado",
+			"name": "Nome",
+			"email": "E-mail",
+			"role": "Cargo",
+			"actions": "Ações"
+		},
+		"edit-member": "Editar membro",
+		"edit-member-title": "Editar membro da organização",
+		"invite-member": {
+			"title": "Convide um membro para a organização",
+			"submit": "Enviar convite"
+		},
+		"remove-member": "Remover membro",
+		"member-changed-successfully": "Membro alterado com sucesso!",
+		"invite-sent-successfully": "Convite enviado com sucesso!"
+	},
+	"organization": {
+		"title": "Organização",
+		"dialog": {
+			"title": " Alterar URL da organização",
+			"description": "Isso mudará todos os seus URLs e os antigos serão redirecionados",
+			"label": "Insira a nova URL da organização",
+			"cancel": "Cancelar",
+			"submit": "Atualizar"
+		},
+		"dead-zone": {
+			"delete-organization": "Apagar organização",
+			"title": "Verificar exclusão da organização",
+			"deletion-warning-1": "Se você tem certeza de que deseja prosseguir com a exclusão da organização",
+			"deletion-warning-2": "por favor continue abaixo.",
+			"irreversible-operation": "Esta operação é irreversível e resultará na exclusão completa de todos os dados associados a organização.",
+			"data-deletion-details": "Dados como usuários, problemas e comentários serão permanentemente excluídos.",
+			"enter-code-label": "Digite o código de exclusão enviado para",
+			"acknowledge-checkbox": "Eu reconheço que todos os dados da organização serão excluídos e quero prosseguir.",
+			"delete-organization-button": "Apagar organização"
+		},
+		"metadata": {
+			"title": "Organização",
+			"description": "Gerencie as informações da sua organização"
+		}
+	},
+	"profile": {
+		"title": "Perfil",
+
+		"preferences": {
+			"title": "Preferencias",
+			"languages": {
+				"title": "Idioma",
+				"description": "Você pode escolher o idioma de sua preferência."
+			}
+		},
+		"languages": {
+			"en": "English",
+			"es": "Español",
+			"pt": "Português"
+		},
+		"metadata": {
+			"title": "Perfil",
+			"description": "Gerencie suas informações pessoais e preferências"
+		}
+	}
+}
