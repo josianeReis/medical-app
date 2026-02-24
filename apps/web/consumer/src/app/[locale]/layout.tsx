@@ -31,19 +31,16 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 }>) {
-  const locale = (await params).locale
+  await params;
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
-      >
-        <RootProvider>
-          {/* Coloquei o conteúdo em main que permita a rolagem */}
-          <main className="flex-1 flex flex-col">{children}</main>
+    <div
+      className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
+    >
+      <RootProvider>
+        <main className="flex-1 flex flex-col">{children}</main>
 
-          <Toaster position="bottom-center" richColors />
-        </RootProvider>
-      </body>
-    </html>
+        <Toaster position="bottom-center" richColors />
+      </RootProvider>
+    </div>
   );
 }
