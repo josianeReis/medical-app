@@ -20,7 +20,7 @@ import { toast } from "sonner";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft, Eye, EyeOff } from "lucide-react";
-import { redirectWithParams } from "@/utils/params";
+import { redirect } from "next/navigation";
 
 const createSignupSchema = (tCommon: (key: string) => string) =>
   z
@@ -70,7 +70,6 @@ export const SignupForm = () => {
 
   const onSubmit: SubmitHandler<SignupInputs> = async (data) => {
     delete data.confirmPassword;
-    const email = form.getValues("email");
     const { error } = await signup(data);
 
     if (error) {
@@ -79,10 +78,8 @@ export const SignupForm = () => {
       });
     }
 
-    return redirectWithParams("/email-verification", {
-      email,
-      code: searchParams.get("code"),
-    });
+    // TODO: Re-enable email verification redirect when OTP flow is restored.
+    return redirect("/organizations");
   };
 
   return (

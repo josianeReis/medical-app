@@ -66,10 +66,12 @@ export const auth = betterAuth({
 	}),
 	emailAndPassword: {
 		enabled: true,
-		requireEmailVerification: true,
+		// TODO: Re-enable in production after outbound email provider is configured.
+		requireEmailVerification: false,
 	},
 	emailVerification: {
-		sendOnSignUp: true,
+		// TODO: Re-enable in production after outbound email provider is configured.
+		sendOnSignUp: false,
 	},
 	socialProviders: {
 		google: {

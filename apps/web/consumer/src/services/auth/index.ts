@@ -173,7 +173,7 @@ export async function signup(signupData: SignupData): Promise<{
 }> {
 	'use server';
 
-	const { email, firstName, lastName, password, terms } = signupData;
+	const { firstName, lastName, password, terms } = signupData;
 
 	const { error, data } = await authClient.signUp.email(
 		{
@@ -204,8 +204,6 @@ export async function signup(signupData: SignupData): Promise<{
 			error: await getErrorMessage(error),
 			success: false,
 		};
-	} else {
-		await sendVerificationOtp(email, 'email-verification');
 	}
 
 	return { success: true };
